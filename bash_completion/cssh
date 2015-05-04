@@ -1,0 +1,17 @@
+# Get the first word of a non empty line in /etc/clusters and uses it as an available argument.
+_cssh()
+{
+        local cur prev
+
+        COMPREPLY=()
+        cur="${COMP_WORDS[COMP_CWORD]}"
+        prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+        case "${prev}" in
+            *)
+                COMPREPLY=( $(compgen -W "$(egrep -o '^[^ ]+' /etc/clusters | tr '\n' ' ')" -- ${cur}) )
+                return 0
+            ;;
+        esac
+}
+complete -o default -F _cssh cssh
