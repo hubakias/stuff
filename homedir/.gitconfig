@@ -1,0 +1,20 @@
+[color]
+        ui = auto
+        branch = auto
+        diff = auto
+        interactive = auto
+        status = auto
+        decorate = auto
+        grep = auto
+
+[core]
+        editor = vim
+
+[push]
+        default = upstream
+
+[user]
+        name = 
+        email = 
+        mail = 
+
