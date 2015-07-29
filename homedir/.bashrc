@@ -88,4 +88,7 @@ HISTFILESIZE=20000
 HISTTIMEFORMAT="%F %T "
 shopt -s histappend
 
-
+# See who is logged in
+if [[ $EUID != "0"  ]]; then
+echo $(w | tail -n +3 | awk '{print $1}' | sort | uniq -c)
+fi
