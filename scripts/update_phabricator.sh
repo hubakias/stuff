@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Last update on 29 of July 2015
-# Script to automate the process of upgrading Phabricator.
-# Databases are backed up before the upgrade process starts.
+# GRNet - Synnefo/Okeanos development team
+# Script to automate the process of upgrading Phabricator
 
 # Only root can use the script
 if [ "$(id -u)" != "0" ]; then
@@ -10,17 +9,19 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
+umask 0022
+
 set -e
 #set -x
 
-# Set working directory - Path where phabricator,arcanist,libphutil repos are
+# Set working directory
 ROOT="/var/opt"
 
 bkp_date="$(date +%F)"
 
 # Stop daemons - phd and apache
 echo "Stopping phd and apache daemons ..."
-umask 022 && su phab-daemon-user -c "$ROOT/phabricator/bin/phd stop"
+$ROOT/phabricator/bin/phd stop
 sleep 2
 if [ -n "$(pgrep php)" ] ; then
      echo "Cannot stop phabricator daemons."
@@ -37,35 +38,45 @@ echo "Stopping Apache daemon. Done!"
 # If running the notification server, stop it.
 # $ROOT/phabricator/bin/aphlict stop
 
+touch /root/.dbpasswd
+if [ /root/.dbpasswd ]; then
+    dbpasswd="$(cat /root/.dbpasswd)"
+fi
+
 # Backup all databases - needs mysql root user password
 echo -e "\nBacking up all databases. Might take a minute or two."
-echo "Provide the database password : "
-read db_passwd
-echo "Please be patient ..."
-mysqldump -u root -p $db_passwd --all-databases --events > $ROOT/full_database_backup-"$bkp_date".sql
-echo "All databases have been backed up in $ROOT"
+mysqldump -u root -p$dbpasswd --all-databases --events > $ROOT/backup/full_database_backup-"$bkp_date".sql
+echo "All databases have been backed up in $ROOT/backup"
 
 ### UPDATE WORKING COPIES ######################################################
 
-echo "$bkp_date : Updating phabricator - commit state before the update" > $ROOT/"$bkp_date"_phabricator_pre_update_git_hashes.txt
+echo "$bkp_date : Updating phabricator - commit state before the update" > $ROOT/backup/"$bkp_date"_phabricator_pre_update_git_hashes.txt
 
 echo -e "\nUpdating libphutil ..."
 sleep 0.2
 cd $ROOT/libphutil
-echo -n "libphutil : " && git rev-parse HEAD >> $ROOT/"$bkp_date"_phabricator_pre_update_git_hashes.txt
+echo -n "libphutil : " && git rev-parse HEAD >> $ROOT/backup/"$bkp_date"_phabricator_pre_update_git_hashes.txt
 git pull
+chmod -R a+rX $ROOT/libphutil
+chown -R phab-daemon-user:root $ROOT/libphutil
 
 echo -e "\nUpdating arcanist ..."
 sleep 0.2
 cd $ROOT/arcanist
-echo -n "arcanist : " && git rev-parse HEAD >> $ROOT/"$bkp_date"_phabricator_pre_update_git_hashes.txt
+echo -n "arcanist : " && git rev-parse HEAD >> $ROOT/backup/"$bkp_date"_phabricator_pre_update_git_hashes.txt
 git pull
+chmod -R a+rX $ROOT/arcanist
+chown -R phab-daemon-user:root $ROOT/arcanist
 
-echo -e"\nUpdating phabricator ..."
+echo -e "\nUpdating phabricator ..."
 sleep 0.2
 cd $ROOT/phabricator
-echo -n "phabricator : " && git rev-parse HEAD >> $ROOT/"$bkp_date"_phabricator_pre_update_git_hashes.txt
+echo -n "phabricator : " && git rev-parse HEAD >> $ROOT/backup/"$bkp_date"_phabricator_pre_update_git_hashes.txt
+git stash
 git pull
+chown -R phab-daemon-user:root $ROOT/phabricator
+git stash pop
+chmod -R a+rX $ROOT/phabricator
 
 
 echo -e "\nUpgrading the database schema ..."
@@ -92,8 +103,6 @@ echo "Done!"
 
 echo -e "\nUpdate complete!!!\n"
 
-# You may add a comment once the update is complete.
-# Uncomment the line below, set the phabricator_host, api.token and task id.
-#curl https://$phabricator_host/api/maniphest.update -d "api.token=$api_token" -d id=$task_id -d comments="Your faithful update bot: Updated phabricator on $(date +'%A, %d %B %Y, %H:%M:%S')."
+curl https://phab.dev.grnet.gr/api/maniphest.update -d "api.token=api-2ujtwqzw44vroirlvjwbipbncpmq" -d id=66 -d comments="Your faithful update bot: Updated phabricator on $(date +'%A, %d %B %Y, %H:%M:%S')."
 
 exit 0
