@@ -1,7 +1,8 @@
 runtime! debian.vim
 
-syntax on
-
+if has("syntax")
+  syntax on
+endif
 
 if has("autocmd")
   filetype plugin indent on
