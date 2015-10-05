@@ -9,7 +9,7 @@ _cssh()
 
         case "${prev}" in
             *)
-                COMPREPLY=( $(compgen -W "$(egrep -o '^[^ ]+' /etc/clusters | tr '\n' ' ')" -- ${cur}) )
+                COMPREPLY=( $(compgen -W "$(egrep -o '^[^ ]+' /etc/clusters | grep -v ^# | tr '\n' ' ')" -- ${cur}) )
                 return 0
             ;;
         esac
