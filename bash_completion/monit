@@ -1,0 +1,17 @@
+# (Draft) Monit bash autocomplete - Only serves the "Optional action arguments"
+_monit()
+{
+        local cur prev
+
+        COMPREPLY=()
+        cur="${COMP_WORDS[COMP_CWORD]}"
+        prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+        case "${prev}" in
+            *)
+                COMPREPLY=( $(compgen -W "$(monit -h | egrep "^ " | egrep -v "^  |^ -" | awk '{print $1}')" -- ${cur}) )
+                return 0
+            ;;
+        esac
+}
+complete -o default -F _monit monit
