@@ -1,0 +1,5 @@
+# Increase disk readahead - ideally it should be tested for various settings.
+blockdev --setra 32768 /dev/$device
+
+# Increase transmit queue length - a must for all modern cards (now its 2015)
+ifconfig eth0 txqueuelen 15000
