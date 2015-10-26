@@ -14,6 +14,9 @@ umask 0022
 set -e
 #set -x
 
+# Start time
+start_time="$(date)"
+
 # Set working directory
 ROOT="/var/opt"
 
@@ -103,6 +106,18 @@ echo "Done!"
 
 echo -e "\nUpdate complete!!!\n"
 
-curl https://phab.dev.grnet.gr/api/maniphest.update -d "api.token=api-2ujtwqzw44vroirlvjwbipbncpmq" -d id=66 -d comments="Your faithful update bot: Updated phabricator on $(date +'%A, %d %B %Y, %H:%M:%S')."
+touch /root/.update_bot_api_token
+update_bot_api_token="$(cat /root/.update_bot_api_token)"
+if [ "$update_bot_api_token" ]; then
+    curl https://phab.dev.grnet.gr/api/maniphest.update -d "api.token="$update_bot_api_token"" -d id=66 -d comments="Your faithful update bot: Updated phabricator on $(date +'%A, %d %B %Y, %H:%M:%S')."
+else
+    echo "Updated phabricator on $(date +'%A, %d %B %Y, %H:%M:%S')."
+fi
+
+# End time
+end_time="$(date)"
+
+echo -e "\n\e[0;32mStarted on\e[0;37m : $start_time"
+echo -e "\e[0;31mEnded on\e[0;37m   : $end_time"
 
 exit 0
