@@ -2,7 +2,7 @@
 
 # Dosage is used to download Comics (e.g. xkcd)
 
-if [ ! $(which dosage)  ]; then
+if [ ! "$(which dosage)"  ]; then
     echo "This script needs package dosage."
     exit 1
 fi
