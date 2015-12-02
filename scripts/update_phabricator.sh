@@ -104,7 +104,7 @@ echo "Done!"
 # If running the notification server, start it.
 # $ROOT/phabricator/bin/aphlict start
 
-echo -e "\nUpdate complete!!!\n"
+echo -e '\nUpdate complete!!!\n'
 
 touch /root/.update_bot_api_token
 update_bot_api_token="$(cat /root/.update_bot_api_token)"
