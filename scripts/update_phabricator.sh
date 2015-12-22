@@ -42,13 +42,13 @@ echo "Stopping Apache daemon. Done!"
 # $ROOT/phabricator/bin/aphlict stop
 
 touch /root/.dbpasswd
-if [ /root/.dbpasswd ]; then
+if [ -e /root/.dbpasswd ]; then
     dbpasswd="$(cat /root/.dbpasswd)"
 fi
 
 # Backup all databases - needs mysql root user password
 echo -e "\nBacking up all databases. Might take a minute or two."
-mysqldump -u root -p$dbpasswd --all-databases --events > $ROOT/backup/full_database_backup-"$bkp_date".sql
+mysqldump -u root -p"$dbpasswd" --all-databases --events > $ROOT/backup/full_database_backup-"$bkp_date".sql
 echo "All databases have been backed up in $ROOT/backup"
 
 ### UPDATE WORKING COPIES ######################################################
@@ -109,7 +109,7 @@ echo -e '\nUpdate complete!!!\n'
 touch /root/.update_bot_api_token
 update_bot_api_token="$(cat /root/.update_bot_api_token)"
 if [ "$update_bot_api_token" ]; then
-    curl https://phab.dev.grnet.gr/api/maniphest.update -d "api.token="$update_bot_api_token"" -d id=66 -d comments="Your faithful update bot: Updated phabricator on $(date +'%A, %d %B %Y, %H:%M:%S')."
+    curl https://phab.dev.grnet.gr/api/maniphest.update -d "api.token=$update_bot_api_token" -d id=66 -d comments="Your faithful update bot: Updated phabricator on $(date +'%A, %d %B %Y, %H:%M:%S')."
 else
     echo "Updated phabricator on $(date +'%A, %d %B %Y, %H:%M:%S')."
 fi
