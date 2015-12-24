@@ -1,0 +1,22 @@
+# Jessie
+echo "
+deb http://ftp.debian.org/debian/ jessie-updates main
+deb-src http://ftp.debian.org/debian/ jessie-updates main
+
+deb http://ftp.debian.org/debian/ jessie main contrib non-free
+deb-src http://ftp.debian.org/debian/ jessie main contrib non-free
+
+deb http://security.debian.org/ jessie/updates main contrib non-free
+deb-src http://security.debian.org/ jessie/updates main contrib non-free
+" > /etc/apt/sources.list
+
+# Jessie backports
+echo"
+deb http://http.debian.net/debian jessie-backports main
+" > /etc/apt/sources.list.d/jessie-backports.list
+
+# Add grnet repo and the respective key
+echo "deb http://apt.dev.grnet.gr jessie/" > /etc/apt/sources.list.d/apt.dev.grnet.gr.list
+wget --no-check-certificate  -qO-  http://dev.grnet.gr/files/apt-grnetdev.pub | apt-key add -
+
+
