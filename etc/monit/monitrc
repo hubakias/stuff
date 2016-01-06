@@ -1,0 +1,13 @@
+
+# Include the below in monit configuration
+# Place the cpu temperature script in /etc/monit/scripts - or change the
+# path below.
+#
+# Please check the script dependecies.
+#
+# The status number depends on the hardware/sensors that are available.
+# The exit code of the script should be the temperature (number) that we want
+# to set as the alert threshold.
+
+check program CPU with path "/etc/monit/scripts/cpu_temp.sh"
+    if status > 57 then alert
