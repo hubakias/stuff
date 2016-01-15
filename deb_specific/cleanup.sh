@@ -38,6 +38,6 @@ done
 # Erase the existing information about what packages are available.
 dpkg --clear-avail
 # Repopulate the the information cleared above from the system repositories.
-apt-get udpate
+apt-get update
 
 exit 0
