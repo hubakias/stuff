@@ -4,11 +4,13 @@
 # GPL v2
 
 # Meant to be used on Debian hosts.
-# Should keep the system fairly clean by apt/dpkg controlled packages.
+# Should keep the system fairly clean from apt/dpkg controlled packages.
 
 # Usage:
-# un the script as root - input will be needed if/when a commands demands it.
+# Run the script as root - input will be needed if/when a commands demands it.
 # No force flags are implemented. The script should run interactively.
+# Check the friendly manual of each command for details.
+
 # For thorough understating of the actions you should the man of each command.
 
 
