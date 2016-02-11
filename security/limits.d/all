@@ -1,0 +1,5 @@
+*           hard            nofile          32764
+*           hard            nproc           8192
+
+*           soft            nofile          16384
+*           soft            nproc           4096
