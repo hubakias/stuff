@@ -119,3 +119,12 @@ extract () {
          echo "'$1' is not a valid file"
      fi
 }
+
+# Check if ssh-agent is running.
+# If so, make sure the respective vars are set.
+if [ "$(pgrep ssh-agent)" ]; then
+    if [ ! $SSH_AGENT_PID ] || [ ! $SSH_AUTH_SOCK ]; then
+        eval $(ssh-agent)
+    fi
+fi
+
