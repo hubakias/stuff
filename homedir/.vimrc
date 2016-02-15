@@ -45,3 +45,8 @@ endif
 set encoding=utf-8
 
 "set number " show line numbers
+
+" Show trailing whitespace:
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
