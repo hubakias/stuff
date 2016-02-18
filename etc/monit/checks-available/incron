@@ -1,0 +1,3 @@
+check process incron with pidfile /var/run/incrond.pid
+  start program = "/usr/sbin/service incron start"
+  stop  program = "/usr/sbin/service incron stop"

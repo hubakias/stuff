@@ -1,0 +1,3 @@
+check process atd with pidfile /var/run/atd.pid
+  start program = "/usr/sbin/service atd start"
+  stop  program = "/usr/sbin/service atd stop"
