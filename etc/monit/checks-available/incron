@@ -1,3 +1,11 @@
 check process incron with pidfile /var/run/incrond.pid
   start program = "/usr/sbin/service incron start"
   stop  program = "/usr/sbin/service incron stop"
+
+check file incrond_bin with path "/usr/sbin/incrond"
+  group system
+  include /etc/monit/templates/rootbin
+
+check file incron_rc with path "/etc/init.d/incron"
+  group system
+  include /etc/monit/templates/rootbin

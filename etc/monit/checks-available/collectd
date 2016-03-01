@@ -1,3 +1,11 @@
 check process collectd with pidfile /var/run/collectd.pid
   start program = "/usr/sbin/service collectd start"
   stop  program = "/usr/sbin/service collectd stop"
+
+check file collectd_bin with path "/usr/sbin/collectd"
+  group root
+  include /etc/monit/templates/rootbin
+
+check file collectd_rc with path "/etc/init.d/collectd"
+  group root
+  include /etc/monit/templates/rootbin

@@ -3,3 +3,12 @@ check process Nexus
   group nexus
   if changed pid then alert
   if changed ppid then alert
+
+
+check file nexus_bin with path " path to nexus binary"
+  group nexus-group
+  include /etc/monit/templates/rootbin
+
+check file nexus_rc with path "nexus init script-conf"
+  group nexus-group
+  include /etc/monit/templates/rootbin

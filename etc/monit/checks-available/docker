@@ -1,3 +1,11 @@
 check process docker with pidfile /var/run/docker.pid
   start program = "/usr/sbin/service docker start"
   stop  program = "/usr/sbin/service docker stop"
+
+check file docker_bin with path "/usr/sbin/docker"
+  group docker
+  include /etc/monit/templates/rootbin
+
+check file docker_rc with path "/etc/init.d/docker"
+  group docker
+  include /etc/monit/templates/rootbin

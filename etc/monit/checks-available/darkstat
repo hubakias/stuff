@@ -1,0 +1,13 @@
+check process darkstat with pidfile /var/run/darkstat.pid
+  start program  "/usr/sbin/service darkstat start"
+  stop program  "/usr/sbin/service darkstat stop"
+  if failed host 127.0.0.1 port 667 type tcp then alert
+  if 5 restarts within 5 cycles then timeout
+
+check file darkstat_bin with path "/usr/sbin/darkstat"
+  group root
+  include /etc/monit/templates/rootbin
+
+check file darkstat_rc with path "/etc/init.d/darkstat"
+  group root
+  include /etc/monit/templates/rootbin
