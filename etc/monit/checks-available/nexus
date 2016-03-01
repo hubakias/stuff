@@ -1,0 +1,5 @@
+check process Nexus
+  with pidfile /opt/nexus/bin/jsw/linux-x86-64/nexus.pid
+  group nexus
+  if changed pid then alert
+  if changed ppid then alert
