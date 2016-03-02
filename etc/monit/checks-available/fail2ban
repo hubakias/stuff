@@ -1,0 +1,4 @@
+check process fail2ban-server with pidfile /var/run/fail2ban/fail2ban.pid
+  start program = "/usr/sbin/service fail2ban start"
+  stop  program = "/usr/sbin/service fail2ban stop"
+  if 5 restarts with 5 cycles then alert

@@ -1,0 +1,6 @@
+check process ntop with pidfile /var/lib/ntop/ntop.pid
+  group ntop
+  start program = "/usr/sbin/service ntop start"
+  stop program  = "/usr/sbin/service ntop stop"
+  if failed host 127.0.0.1 port 3000 type tcp then alert
+  if 5 restarts within 5 cycles then timeout

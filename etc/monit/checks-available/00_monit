@@ -1,0 +1,28 @@
+set daemon 60                   # Run every 60 seconds
+set logfile /var/log/monit/monit.log
+set idfile /var/lib/monit/id
+set statefile /var/lib/monit/state
+set eventqueue
+  basedir /var/lib/monit/events # set the base directory where events will be stored
+  slots 100                     # optionally limit the queue size
+
+set httpd port 2812
+    use address localhost
+    and allow 127.0.0.1/32
+    allow admin:monit
+
+set mailserver localhost
+
+set alert monit@hostname but not on { instance, action }
+
+set mail-format {
+        from: monit@localhost
+        subject: monit on hostname: $EVENT $SERVICE
+        message:
+Host:        hostname
+Date:        $DATE
+Action:      $ACTION
+Description: $DESCRIPTION
+}
+
+
