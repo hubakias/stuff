@@ -1,0 +1,1 @@
+00 07 * * * nobody [ -x /usr/local/bin/check_orphans.sh ] && /usr/local/bin/check_orphans.sh
