@@ -18,7 +18,7 @@ check_hash = yes
 encryption=allow_incoming,try_outgoing,enable_retry
 
 # Watch the below directory for new torrent files
-schedule = watch_directory,5,5,load_start=~/.rtorrent/*.torrent
+schedule = watch_directory,5,5,load_start="~/.rtorrent/*.torrent"
 schedule = tied_directory,6,5,start_tied=
 schedule = untied_directory,7,5,stop_untied=
 
@@ -39,3 +39,15 @@ port_random = yes
 
 # Send me an email once the download is complete
 system.method.set_key = event.download.finished,notify_me, "execute = /usr/bin/mailx,-s,\"$d.get_name=\",kostikas@gmail.com"
+
+
+
+# When seeding ratio is reached close the torrent
+system.method.set = group.seeding.ratio.command, d.close=
+
+# Upload to a maximum ratio of 1%
+ratio.max.set=1
+
+## Move files to ./unsorted when download completes
+#system.method.set_key = event.download.finished,move_complete,"execute=mv,-n,$d.get_base_path=,./unsorted/;d.set_directory=./unsorted/"
+
