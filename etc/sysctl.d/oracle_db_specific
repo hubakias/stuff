@@ -1,0 +1,25 @@
+kernel.sem = 250 32000 100 128
+
+# free|grep -v free|awk '{s+=$2} END {print s / 2 * 0.4}'|xargs printf "%.0f\n"
+kernel.shmall = 
+
+# free|grep -v free|awk '{s+=$2} END {print s / 2}'|xargs printf "%.0f\n"
+kernel.shmmax =  # Half the size of physical memory in bytes
+
+kernel.shmmni = 4096
+
+kernel.panic_on_oops = 1
+
+fs.file-max = 6815744
+
+fs.aio-max-nr = 1048576
+
+net.ipv4.ip_local_port_range = 9000 65500
+
+net.core.rmem_default = 262144
+
+net.core.rmem_max = 4194304
+
+net.core.wmem_default = 262144
+                                                                                               
+net.core.wmem_max = 1048576
