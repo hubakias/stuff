@@ -1,0 +1,17 @@
+# Set the sysctl settings - included in this repo (etc/sysctl.d)
+
+# Install the rlwrap package (will provide history and autocomplete)
+
+# Add the below to the env of the oracle user - you need to fill the entries
+
+export ORACLE_HOSTNAME=""
+
+export ORACLE_BASE=""
+
+export ORACLE_HOME="$ORACLE_BASE/..."
+
+export PATH="$ORACLE_HOME/bin:$PATH"
+
+alias sqlplus="/usr/bin/rlwrap $ORACLE_HOME/bin/sqlplus"
+alias lsnrctl="/usr/bin/rlwrap $ORACLE_HOME/bin/lsnrctl"
+
