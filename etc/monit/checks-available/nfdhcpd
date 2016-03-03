@@ -1,0 +1,11 @@
+check process nfdhcpd with pidfile /var/run/nfdhcpd/nfdhcpd.pid
+  start program = "/usr/sbin/service nfdhcpd start"
+  stop  program = "/usr/sbin/service nfdhcpd stop"
+
+check file nfdhcpd_bin with path "/usr/sbin/nfdhcpd"
+  group nobody
+  include /etc/monit/templates/rootbin
+
+check file nfdhcpd_conf with path "/etc/nfdhcpd/nfdhcpd.conf"
+  group nobody
+  include /etc/monit/templates/rootbin
