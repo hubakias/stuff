@@ -1,0 +1,4 @@
+check process sendmail with pidfile /var/run/sendmail.pid
+  group root
+  start program = "/usr/sbin/service sendmail start"
+  stop program  = "/usr/sbin/service sendmail stop"
