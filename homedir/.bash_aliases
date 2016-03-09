@@ -14,4 +14,9 @@ alias rm='rm -i'
 alias dmesg='dmesg -T'
 alias bwm-ng='bwm-ng -d'
 
-alias git-data="git for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads"
+# Git specific
+#alias git-data="git for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads"
+
+# Oracle specific - with rlwrap - needs ORACLE_HOME to be set
+#alias sqlplus="/usr/bin/rlwrap $ORACLE_HOME/bin/sqlplus"
+#alias lsnrctl="/usr/bin/rlwrap $ORACLE_HOME/bin/lsnrctl"
