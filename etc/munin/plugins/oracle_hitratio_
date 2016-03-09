@@ -1,0 +1,92 @@
+#!/bin/sh
+#
+# Munin plugin to monitor Oracle hitratio
+#
+# Author: Konstantinos Tompoulidis (kostikas@gmail.com) on 9th of March 2016
+# (Based on the munin plugin by Joan Carles Soler)
+#
+# Licenced under GPL v2.
+#
+# Usage: Provide the parameters listed below
+#
+# Parameters:
+#   autoconf
+#    suggest
+#     config   (required)
+#
+# Config variables:
+#
+#         SID - Database to use. Defaults to "orcl" if "suggest" is not used.
+#        USER - user with read permission to the v$session view (MANDATORY)
+#      PASSWD - the password of the above user
+# ORACLE_HOME - The home directory of the ORACLE database (not the oracle user)
+#
+# Magic markers
+#%# family=auto
+#%# capabilities=autoconf suggest
+
+SID=${0#*_*_}   # Get the SID from the filename (wildcard plugin)
+USER=           # Mandatory - Ideal: a user with only the required privileges
+PASSWD=         # Mandatory
+ORACLE_HOME=    # Mandatory
+
+lsnrctl="$ORACLE_HOME/bin/lsnrctl"
+sqlplus="$ORACLE_HOME/bin/sqlplus"
+
+if [ -z "$SID" ]
+then
+    SID="orcl"
+fi
+
+# Autoconf is available
+if [ "$1" = "autoconf" ] ; then echo yes ; exit 0 ; fi
+
+if [ -z "$ORACLE_HOME" ]; then
+    echo "ORACLE_HOME must be set."
+    exit 1
+fi
+
+export ORACLE_HOME
+
+# Get available SIDs for suggest to work
+if [ "$1" = "suggest" ] ; then
+    if [ "$(pgrep pmon)" ]; then
+        su oracle -c "$lsnrctl status"|grep "  Instance "|cut -d\" -f2|sort|uniq
+    fi
+    exit 0
+fi
+
+# Provide munin configuration
+if [ "$1" = "config" ] ; then
+    if [ -z "$USER" ] || [ -z "$PASSWD" ]; then
+        echo "USER and PASSWD variables must be set."
+        exit 1
+    fi
+    printf "graph_title Oracle library and buffer cache hit ratios from $SID
+graph_args -u 120 -l 0
+graph_vlabel $(echo $0 | cut -d\_ -f2)
+graph_category Oracle
+graph_info This graph shows the percentage of blocks and libraries read from the cache
+read_hitratio.label Cache hitratio
+read_hitratio.type GAUGE
+read_hitratio.draw LINE2
+lib_hitratio.label Library hitratio
+lib_hitratio.type GAUGE
+lib_hitratio.draw LINE2
+"
+    exit 0
+fi
+
+#cache hitratio
+echo "read_hitratio.value" "`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | grep -v '^$' | \
+    awk 'END {print $NF}'
+set pagesize 0
+select (1-(pr.value/(dbg.value+cg.value)))*100 from v\\$sysstat pr, v\\$sysstat dbg, v\\$sysstat cg where pr.name='physical reads' and dbg.name='db block gets' and cg.name='consistent gets';
+EOF`"
+
+echo "lib_hitratio.value" "`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | grep -v '^$' | \
+    awk '{print $1 }'
+set pagesize 0
+select sum(lc.pins)/(sum(lc.pins)+sum(lc.reloads))*100 from v\\$librarycache lc;
+EOF`"
+

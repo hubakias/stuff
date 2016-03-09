@@ -1,0 +1,136 @@
+#!/bin/sh
+#
+# Munin plugin to monitor Oracle locks
+#
+# Author: Konstantinos Tompoulidis (kostikas@gmail.com) on 9th of March 2016
+# (Based on the munin plugin by Joan Carles Soler)
+#
+# Licenced under GPL v2.
+#
+# Usage: Provide the parameters listed below
+#
+# Parameters:
+#   autoconf
+#    suggest
+#     config   (required)
+#
+# Config variables:
+#
+#         SID - Database to use. Defaults to "orcl" if "suggest" is not used.
+#        USER - user with read permission to the v$session view (MANDATORY)
+#      PASSWD - the password of the above user
+# ORACLE_HOME - The home directory of the ORACLE database (not the oracle user)
+#
+# Magic markers
+#%# family=auto
+#%# capabilities=autoconf suggest
+
+SID=${0#*_*_}   # Get the SID from the filename (wildcard plugin)
+USER=           # Mandatory - Ideal: a user with only the required privileges
+PASSWD=         # Mandatory
+ORACLE_HOME=    # Mandatory
+
+lsnrctl="$ORACLE_HOME/bin/lsnrctl"
+sqlplus="$ORACLE_HOME/bin/sqlplus"
+
+if [ -z "$SID" ]
+then
+    SID="orcl"
+fi
+
+# Autoconf is available
+if [ "$1" = "autoconf" ] ; then echo yes ; exit 0 ; fi
+
+if [ -z "$ORACLE_HOME" ]; then
+    echo "ORACLE_HOME must be set."
+    exit 1
+fi
+
+export ORACLE_HOME
+
+# Get available SIDs for suggest to work
+if [ "$1" = "suggest" ] ; then
+    if [ "$(pgrep pmon)" ]; then
+        su oracle -c "$lsnrctl status"|grep "  Instance "|cut -d\" -f2|sort|uniq
+    fi
+    exit 0
+fi
+
+# Provide munin configuration
+if [ "$1" = "config" ] ; then
+    if [ -z "$USER" ] || [ -z "$PASSWD" ]; then
+        echo "USER and PASSWD variables must be set."
+        exit 1
+    fi
+    # Lock definition got from
+    # https://venzi.wordpress.com/2010/12/30/oracle-lock-types/
+    echo "graph_title Oracle locks for $SID"
+    echo "graph_args --base 1000 -l 0"
+    echo "graph_vlabel Locks"
+    echo "graph_category oracle"
+    echo "graph_info Shows oracle locks"
+    echo "graph_scale no"
+    echo "KD.label Scheduler Master DBRM Locks"
+    echo "KD.info Scheduler Master DBRM Oracle locks"
+    echo "KD.type GAUGE"
+#    echo "KD.warning 5"
+#    echo "KD.critical 10"
+    echo "RD.label RAC Load Locks"
+    echo "RD.info RAC load Oracle locks"
+    echo "RD.type GAUGE"
+#    echo "RD.warning 5"
+#    echo "RD.critical 10"
+    echo "AE.label Edition Locks"
+    echo "AE.info Edition Oracle locks"
+    echo "AE.type GAUGE"
+#    echo "AE.warning 5"
+#    echo "AE.critical 10"
+    echo "RS.label Reclaimable Space Locks"
+    echo "RS.info Reclaimable Oracle locks"
+    echo "RS.type GAUGE"
+#    echo "RS.warning 5"
+#    echo "RS.critical 10"
+    echo "RT.label Redo Thread (Exclusive) Locks"
+    echo "RT.info Redo Thread (Exclusive) Oracle locks"
+    echo "RT.type GAUGE"
+#    echo "RT.warning 5"
+#    echo "RT.critical 10"
+    echo "CF.label Controlfile Transaction locks"
+    echo "CF.info Controlfile Transaction Oracle locks"
+    echo "CF.type GAUGE"
+#    echo "CF.warning 5"
+#    echo "CF.critical 10"
+    echo "XR.label XR locks"
+    echo "XR.info XR Oracle locks"
+    echo "XR.type GAUGE"
+#    echo "XR.warning 5"
+#    echo "XR.critical 10"
+    echo "MR.label Media Recovery (Share) locks"
+    echo "MR.info Media Recovery (Share) Oracle locks"
+    echo "MR.type GAUGE"
+#    echo "MR.warning 5"
+#    echo "MR.critical 10"
+    echo "KT.label Scheduler Plan locks"
+    echo "KT.info Scheduler Plan Oracle locks"
+    echo "KT.type GAUGE"
+#    echo "KT.warning 5"
+#    echo "KT.critical 10"
+    echo "PW.label Buffer Cache PreWarm locks"
+    echo "PW.info Buffer Cache PreWarm Oracle locks"
+    echo "PW.type GAUGE"
+#    echo "PW.warning 5"
+#    echo "PW.critical 10"
+    echo "TS.label Temp Segment locks"
+    echo "TS.info Temp Segment Oracle locks"
+    echo "TS.type GAUGE"
+#    echo "TS.warning 5"
+#    echo "TS.critical 10"
+    exit 0
+fi
+
+#get locks
+echo "`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | egrep [0-9] | \
+    head -n -1 | awk '{print $1".value "$2}'
+set pagesize 0
+select type,count(*) from v\\$lock group by type;
+EOF`"

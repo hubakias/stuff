@@ -1,0 +1,121 @@
+#!/bin/sh
+#
+# Munin plugin to monitor Oracle SGA
+# SGA stands for System Global Area - It is a group of shared memory structures
+#
+# Author: Konstantinos Tompoulidis (kostikas@gmail.com) on 9th of March 2016
+# (Based on the munin plugin by Wilfred Chau)
+#
+# Licenced under GPL v2.
+#
+# Usage: Provide the parameters listed below
+#
+# Parameters:
+#   autoconf
+#    suggest
+#     config   (required)
+#
+# Config variables:
+#
+#         SID - Database to use. Defaults to "orcl" if "suggest" is not used.
+#        USER - user with read permission to the v$session view (MANDATORY)
+#      PASSWD - the password of the above user
+# ORACLE_HOME - The home directory of the ORACLE database (not the oracle user)
+#
+# Magic markers
+#%# family=auto
+#%# capabilities=autoconf suggest
+
+SID=${0#*_*_}   # Get the SID from the filename (wildcard plugin)
+USER=           # Mandatory - Ideal: a user with only the required privileges
+PASSWD=         # Mandatory
+ORACLE_HOME=    # Mandatory
+
+lsnrctl="$ORACLE_HOME/bin/lsnrctl"
+sqlplus="$ORACLE_HOME/bin/sqlplus"
+
+if [ -z "$SID" ]
+then
+    SID="orcl"
+fi
+
+# Autoconf is available
+if [ "$1" = "autoconf" ] ; then echo yes ; exit 0 ; fi
+
+if [ -z "$ORACLE_HOME" ]; then
+    echo "ORACLE_HOME must be set."
+    exit 1
+fi
+
+export ORACLE_HOME
+
+# Get available SIDs for suggest to work
+if [ "$1" = "suggest" ] ; then
+    if [ "$(pgrep pmon)" ]; then
+        su oracle -c "$lsnrctl status"|grep "  Instance "|cut -d\" -f2|sort|uniq
+    fi
+    exit 0
+fi
+
+# Provide munin configuration
+if [ "$1" = "config" ] ; then
+    if [ -z "$USER" ] || [ -z "$PASSWD" ]; then
+        echo "USER and PASSWD variables must be set."
+        exit 1
+    fi
+    echo "graph_title Oracle SGA for $SID"
+    echo "graph_args --base 1024k -r -l 0"
+    echo "graph_category Oracle"
+    echo "graph_info This graph shows the SGA memory usage (in MB)"
+    echo "graph_vlabel MB"
+    echo "graph_scale no"
+    echo "graph_period second"
+    for i in shared_pool buffer_cache java_pool large_pool log_buffer; do
+        echo "$i.label $i"
+        echo "$i.info SGA: $i"
+        echo "$i.type GAUGE"
+        echo "$i.draw STACK"
+    done
+        echo "fixed_area.label fixed_area"
+        echo "fixed_area.info SGA: fixed_area"
+        echo "fixed_area.type GAUGE"
+        echo "fixed_area.draw STACK"
+    exit 0
+fi
+
+
+shared_pool_query="`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | egrep [0-9]
+set pagesize 0
+select TO_CHAR(ROUND(SUM(decode(pool, 'shared pool',decode(name, 'library cache',0,'dictionary chace',0,'free memory',0,'sql area',0,(bytes)/(1024*1024)),0)),2)) pool_misc from V\\$SGASTAT;
+EOF`"
+
+buffer_cache_query="`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | egrep [0-9]
+set pagesize 0
+select TO_CHAR(ROUND(SUM(decode(pool,NULL,decode(name, 'db_block_buffers',(bytes)/(1024/1024),'buffer_cache',(bytes)/(1024*1024),0),0)),2)) sga_bufcache from V\\$SGASTAT;
+EOF`"
+
+fixed_area_query="`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | egrep [0-9]
+set pagesize 0
+select TO_CHAR(ROUND(SUM(decode(pool,NULL, decode(name, 'fixed_sga', (bytes)/(1024*1024),0),0)),2)) sga_fixed from V\\$SGASTAT;
+EOF`"
+
+java_pool_query="`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | egrep [0-9]
+set pagesize 0
+select TO_CHAR(ROUND(SUM(decode(pool, 'java pool', (bytes)/(1024*1024),0)),2)) sga_jpool from V\\$SGASTAT;
+EOF`"
+
+large_pool_query="`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | egrep [0-9]
+set pagesize 0
+SELECT TO_CHAR(ROUND(SUM(decode(pool, 'large pool', (bytes)/(1024*1024),0)),2)) sga_lpool from V\\$SGASTAT;
+EOF`"
+
+log_buffer_query="`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | egrep [0-9]
+set pagesize 0
+SELECT TO_CHAR(ROUND(SUM(decode(pool, NULL, decode(name, 'log_buffer', (bytes)/(1024*1024),0),0)),2)) sga_lbuffer from V\\$SGASTAT;
+EOF`"
+
+
+for i in shared_pool buffer_cache java_pool large_pool log_buffer; do
+    echo "$i.value "$(eval echo \$"$i"_query)""
+done
+

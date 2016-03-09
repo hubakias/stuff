@@ -1,0 +1,133 @@
+#!/bin/bash
+#
+# Munin plugin to monitor Oracle connections
+#
+# Author: Konstantinos Tompoulidis (kostikas@gmail.com) on 9th of March 2016
+# (Based on the munin plugin by Kevin Kunkel)
+#
+# Licenced under GPL v2.
+#
+# Usage: Provide the parameters listed below
+#
+# Parameters:
+#   autoconf
+#    suggest
+#     config   (required)
+#
+# Config variables:
+#
+#         SID - Database to use. Defaults to "orcl" if "suggest" is not used.
+#        USER - user with read permission to the v$session view (MANDATORY)
+#      PASSWD - the password of the above user
+#  SHOW_USERS - If set to 1 show usernames and number of connections.
+# ORACLE_HOME - The home directory of the ORACLE database (not the oracle user)
+#
+# Magic markers
+#%# family=auto
+#%# capabilities=autoconf suggest
+
+SID=${0#*_*_}     # Get the SID from the filename (wildcard plugin)
+USER=             # Mandatory - Ideal: a user with only the required privileges
+PASSWD=           # Mandatory
+SHOW_USERS=0      # Not set to "1" for security
+ORACLE_HOME=      # Mandatory
+
+lsnrctl="$ORACLE_HOME/bin/lsnrctl"
+sqlplus="$ORACLE_HOME/bin/sqlplus"
+
+if [ -z "$SID" ]
+then
+    SID="orcl"
+fi
+
+if [[ "$SHOW_USERS" -ne "1" ]] ; then
+    SHOW_USERS=0
+fi
+
+# Autoconf is available
+if [ "$1" = "autoconf" ] ; then echo yes ; exit 0 ; fi
+
+if [ -z "$ORACLE_HOME" ]; then
+    echo "ORACLE_HOME must be set."
+    exit 1
+fi
+
+export ORACLE_HOME
+
+# Get available SIDs for suggest to work
+if [ "$1" = "suggest" ] ; then
+    if [ "$(pgrep pmon)" ]; then
+        su oracle -c "$lsnrctl status"|grep "  Instance "|cut -d\" -f2|sort|uniq
+    fi
+    exit 0
+fi
+
+# Provide munin configuration
+if [ "$1" = "config" ] ; then
+    if [ -z "$USER" ] || [ -z "$PASSWD" ]; then
+        echo "USER and PASSWD variables must be set."
+        exit 1
+    fi
+
+    WARN_CRIT=`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | \
+        grep -v '^$' | awk '{print $1 * 0.7 " " $1 * 0.8 }'
+set pagesize 0
+select value from v\\$parameter where name = 'sessions';
+EOF`
+    echo "graph_title Oracle active connections to $SID"
+    echo "graph_args -l 0 --base 1000"
+    echo "graph_vlabel Connections"
+    echo "graph_category Oracle"
+    echo "graph_info Shows active oracle connections to $SID"
+    echo "graph_scale no"
+    if [ "$SHOW_USERS" -eq 1 ] ; then
+        $sqlplus -s ${USER}/${PASSWD}@$SID << EOF | \
+            grep -v '^$' | awk '{ print $1 ".label " $1 " active connections"
+                    print $1 ".info " $1 " active connections"
+                    print $1 ".type GAUGE" }; END {
+                    print "total.label total active connections"
+                    print "total.info total active connections"
+                    print "total.type GAUGE"
+                    print "max.label max connections"
+                    print "max.info max connections"
+                    print "max.type GAUGE"
+                }'
+set pagesize 0
+select username, count(username) from v\$session where username is not null group by username;
+EOF
+        echo $WARN_CRIT| awk '{ print "total.warning " $1 "\ntotal.critical " $2 }' 
+    else
+        echo "connections.label active connections"
+        echo "connections.info active connections"
+        echo "connections.type GAUGE"
+        echo "max.label max connections"
+        echo "max.info max connections"
+        echo "max.type GAUGE"
+        echo $WARN_CRIT| awk '{ print "connections.warning " $1 "\nconnections.critical " $2 }' 
+    fi
+    exit 0
+fi
+
+if [ "$SHOW_USERS" -eq 1 ] 
+then
+        $sqlplus -s ${USER}/${PASSWD}@$SID << EOF | \
+            grep -v '^$'|awk 'BEGIN { total=0 } {
+                print $1 ".value " $2 
+                total=total+$2 } END { print "total.value " total }'
+set pagesize 0
+select username, count(username) from v\$session where username is not null group by username;
+EOF
+else
+    $sqlplus -s ${USER}/${PASSWD}@$SID << EOF | grep -v '^$'|\
+            awk '{ print "connections.value " $1 }'
+set pagesize 0
+select count(username) from v\$session where username is not null;
+EOF
+fi
+    
+echo "max.value" "`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | grep -v '^$' | \
+    awk '{print $1 }'
+set pagesize 0
+select value from v\\$parameter where name = 'sessions';
+EOF`"
+
