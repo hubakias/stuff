@@ -25,7 +25,7 @@
 #%# family=auto
 #%# capabilities=autoconf suggest
 
-SID=${0#*_*_}   # Get the SID from the filename (wildcard plugin)
+SID=${0#*_*_*_}   # Get the SID from the filename (wildcard plugin)
 USER=           # Mandatory - Ideal: a user with only the required privileges
 PASSWD=         # Mandatory
 ORACLE_HOME=    # Mandatory
@@ -51,7 +51,8 @@ export ORACLE_HOME
 # Get available SIDs for suggest to work
 if [ "$1" = "suggest" ] ; then
     if [ "$(pgrep pmon)" ]; then
-        su oracle -c "$lsnrctl status"|grep "  Instance "|cut -d\" -f2|sort|uniq
+#        su oracle -c "$lsnrctl status"|grep "  Instance "|cut -d\" -f2|sort|uniq
+        su oracle -c "$lsnrctl status"| grep "^Service " | cut -d\" -f2 | egrep -v "^cdb$|^cdbXDB$"
     fi
     exit 0
 fi

@@ -2,7 +2,7 @@
 #
 # Munin plugin to monitor Oracle locks
 #
-# Author: Konstantinos Tompoulidis (kostikas@gmail.com) on 9th of March 2016
+# Author: Konstantinos Tompoulidis (kostikas@gmail.com) on 10th of March 2016
 # (Based on the munin plugin by Joan Carles Soler)
 #
 # Licenced under GPL v2.
@@ -51,7 +51,8 @@ export ORACLE_HOME
 # Get available SIDs for suggest to work
 if [ "$1" = "suggest" ] ; then
     if [ "$(pgrep pmon)" ]; then
-        su oracle -c "$lsnrctl status"|grep "  Instance "|cut -d\" -f2|sort|uniq
+#        su oracle -c "$lsnrctl status"|grep "  Instance "|cut -d\" -f2|sort|uniq
+        su oracle -c "$lsnrctl status"| grep "^Service " | cut -d\" -f2 | egrep -v "^cdb$|^cdbXDB$"
     fi
     exit 0
 fi
@@ -115,11 +116,6 @@ if [ "$1" = "config" ] ; then
     echo "KT.type GAUGE"
 #    echo "KT.warning 5"
 #    echo "KT.critical 10"
-    echo "PW.label Buffer Cache PreWarm locks"
-    echo "PW.info Buffer Cache PreWarm Oracle locks"
-    echo "PW.type GAUGE"
-#    echo "PW.warning 5"
-#    echo "PW.critical 10"
     echo "TS.label Temp Segment locks"
     echo "TS.info Temp Segment Oracle locks"
     echo "TS.type GAUGE"

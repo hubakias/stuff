@@ -2,7 +2,7 @@
 #
 # Munin plugin to monitor Oracle hitratio
 #
-# Author: Konstantinos Tompoulidis (kostikas@gmail.com) on 9th of March 2016
+# Author: Konstantinos Tompoulidis (kostikas@gmail.com) on 10th of March 2016
 # (Based on the munin plugin by Joan Carles Soler)
 #
 # Licenced under GPL v2.
@@ -51,7 +51,8 @@ export ORACLE_HOME
 # Get available SIDs for suggest to work
 if [ "$1" = "suggest" ] ; then
     if [ "$(pgrep pmon)" ]; then
-        su oracle -c "$lsnrctl status"|grep "  Instance "|cut -d\" -f2|sort|uniq
+#        su oracle -c "$lsnrctl status"|grep "  Instance "|cut -d\" -f2|sort|uniq
+        su oracle -c "$lsnrctl status"| grep "^Service " | cut -d\" -f2 | egrep -v "^cdb$|^cdbXDB$"
     fi
     exit 0
 fi
