@@ -23,8 +23,8 @@ set background=dark
 set mouse=a
 
 set textwidth=80
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 " To change the existing tab chars to match the current settings, use :retab
 

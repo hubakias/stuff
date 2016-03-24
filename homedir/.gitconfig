@@ -36,4 +36,4 @@
 #    sl = shortlog -sn # Commits per author
 #    d = diff --color-words # display diff words
 #    alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort # display aliases
-
+#    g = log --pretty=\"format: %G? %aN  %s\"
