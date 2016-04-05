@@ -1,0 +1,77 @@
+#!/bin/sh
+#
+# Munin plugin to monitor hdd temp
+#
+# Author: Konstantinos Tompoulidis (kostikas@gmail.com) on 5th of April 2016
+#
+# Licenced under GPL v2.
+#
+# Usage: Provide the parameters listed below
+#
+# Parameters:
+#   autoconf
+#    suggest
+#     config   (required)
+#
+# Config variables:
+#
+# Magic markers
+#%# family=auto
+#%# capabilities=autoconf suggest
+
+# This package needs smartomontools.
+
+cmd=$(which smartctl)
+
+if [ -z $cmd ] ; then
+    echo "This plugin needs smartmontools to run."
+    exit 1
+fi
+
+# Autoconf is available
+if [ "$1" = "autoconf" ] ; then echo yes ; exit 0 ; fi
+
+# Get existing physical disks
+if [ "$1" = "suggest" ] ; then
+
+    blkid=$(which blkid)
+
+    disks="$($blkid  | egrep -v "mapper|drbd" | cut -d ":" -f 1 | sed \
+        "s/[0-9]$//" | sort | uniq | sed "s/\/dev\///" | tr '\n' ' ')"
+
+    if [ "$disks" ] ; then
+        for i in $disks ; do echo $i ; done
+        exit 0
+    fi
+    exit 1
+fi
+
+disk="${0#*_*_}"
+
+# Provide munin configuration
+if [ "$1" = "config" ] ; then
+
+   if [ -z "$disk" ] ; then
+        echo "No disk(s) provided."
+        echo "Keep in mind that this is a wildcard plugin."
+        exit 1
+    fi
+
+    echo "graph_title HDD temperature for $disk"
+    echo "graph_args --base 1000 -r -l 0 -u 100"
+    echo "graph_category HDD"
+    echo "graph_info This graph shows the HDD temperature (in °C)"
+    echo "graph_vlabel Celsius °C"
+    echo "graph_scale no"
+    echo "graph_period second"
+    echo "$disk.label $disk"
+    echo "$disk.info Temperature: $disk"
+    echo "$disk.type GAUGE"
+    echo "$disk.draw STACK"
+    exit 0
+fi
+
+value=$($cmd -x /dev/$disk | grep "^Current Temp" | awk '{print $(NF-1)}')
+
+echo ""$disk".value $value"
+
