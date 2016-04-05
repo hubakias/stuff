@@ -1,0 +1,140 @@
+#!/bin/sh
+#
+# Munin plugin to monitor Oracle related info about:
+# 
+# - number of user transactions per second.
+# - number of full index scans per second.
+# - any value from v$sysmetric, if extended.
+#
+# Author: Konstantinos Tompoulidis (kostikas@gmail.com) on 11th of March 2016
+# (Based on the munin plugin by Anders Nordby)
+#
+# Licenced under GPL v2.
+#
+# Usage: Provide the parameters listed below
+#
+# Parameters:
+#   autoconf
+#    suggest
+#     config   (required)
+#
+# Config variables:
+#
+#         SID - Database to use. Defaults to "orcl" if "suggest" is not used.
+#        USER - user with read permission to the v$session view (MANDATORY)
+#      PASSWD - the password of the above user
+# ORACLE_HOME - The home directory of the ORACLE database (not the oracle user)
+#
+# Magic markers
+#%# family=auto
+#%# capabilities=autoconf suggest
+
+SID=${0#*_*_}   # Get the SID from the filename (wildcard plugin)
+USER=           # Mandatory - Ideal: a user with only the required privileges
+PASSWD=         # Mandatory
+ORACLE_HOME=    # Mandatory
+
+lsnrctl="$ORACLE_HOME/bin/lsnrctl"
+sqlplus="$ORACLE_HOME/bin/sqlplus"
+
+if [ -z "$SID" ]
+then
+    SID="orcl"
+fi
+
+# Autoconf is available
+if [ "$1" = "autoconf" ] ; then echo yes ; exit 0 ; fi
+
+if [ -z "$ORACLE_HOME" ]; then
+    echo "ORACLE_HOME must be set."
+    exit 1
+fi
+
+export ORACLE_HOME
+
+# Get available SIDs for suggest to work
+if [ "$1" = "suggest" ] ; then
+    if [ "$(pgrep pmon)" ]; then
+#        su oracle -c "$lsnrctl status"|grep "  Instance "|cut -d\" -f2|sort|uniq
+        su oracle -c "$lsnrctl status"| grep "^Service " | cut -d\" -f2 | egrep -v "^cdb$|^cdbXDB$"
+    fi
+    exit 0
+fi
+
+# Provide munin configuration
+if [ "$1" = "config" ] ; then
+    if [ -z "$USER" ] || [ -z "$PASSWD" ]; then
+        echo "USER and PASSWD variables must be set."
+        exit 1
+    fi
+    echo "graph_title Oracle Database Transactions per sec"
+    echo "graph_args --base 1000 -l 0"
+    echo "graph_vlabel Transactions per second"
+    echo "graph_category Oracle"
+    echo "graph_info Shows the number of Oracle DB transactions per second"
+
+    echo "User_Transaction_Per_Sec.label User Transactions"
+    echo "User_Transaction_Per_Sec.type GAUGE"
+    echo "User_Transaction_Per_Sec.graph yes"
+
+    echo "Full_Index_Scans_Per_Sec.label Full Index Scans"
+    echo "Full_Index_Scans_Per_Sec.type GAUGE"
+    echo "Full_Index_Scans_Per_Sec.graph yes"
+
+    echo "Physical_Write_Bytes_Per_Sec.label Physical Write Bytes"
+    echo "Physical_Write_Bytes_Per_Sec.type GAUGE"
+    echo "Physical_Write_Bytes_Per_Sec.graph yes"
+
+    echo "Physical_Read_Bytes_Per_Sec.label Physical Read Bytes"
+    echo "Physical_Read_Bytes_Per_Sec.type GAUGE"
+    echo "Physical_Read_Bytes_Per_Sec.graph yes"
+
+    echo "Database_Time_Per_Sec.label Database Time"
+    echo "Database_Time_Per_Sec.type GAUGE"
+    echo "Database_Time_Per_Sec.graph yes"
+
+#    echo "graph_title Buffer Cache Hit Ratio"
+#    echo "graph_args --base 1000 -l 0"
+#    echo "graph_vlabel Buffer Cache Hit Ratio"
+#    echo "graph_category Oracle"
+#    echo "graph_info Shows the ratio of buffer cache hits"
+    echo "Buffer_Cache_Hit_Ratio.label Buffer_Cache_Hit_Ratio"
+    echo "Buffer_Cache_Hit_Ratio.type GAUGE"
+    echo "Buffer_Cache_Hit_Ratio.graph yes"
+#
+#    echo "graph_title Host CPU Utilization (%)"
+#    echo "graph_args --base 1000 -l 0"
+#    echo "graph_vlabel Host CPU Utilization (%)"
+#    echo "graph_category Oracle"
+#    echo "graph_info Shows the percentage of host cpu utilization"
+    echo "Host_CPU_Utilization.label Host_CPU_Utilization_percentage"
+    echo "Host_CPU_Utilization.type GAUGE"
+    echo "Host_CPU_Utilization.graph yes"
+#
+#    echo "graph_title SQL Service Response Time"
+#    echo "graph_args --base 1000 -l 0"
+#    echo "graph_vlabel CentiSeconds Per Call"
+#    echo "graph_category Oracle"
+#    echo "graph_info Shows the SQL Service Response Time"
+    echo "SQL_Service_Response_Time.label SQL Service Response Time"
+    echo "SQL_Service_Response_Time.type GAUGE"
+    echo "SQL_Service_Response_Time.graph yes"
+#
+#    echo "graph_title Database Wait Time Ratio"
+#    echo "graph_args --base 1000 -l 0"
+#    echo "graph_vlabel Database Wait Time Ratio"
+#    echo "graph_category Oracle"
+#    echo "graph_info Shows the Database Wait Time Ratio"
+    echo "Database_Wait_Time_Ratio.label Database Wait Time Ratio"
+    echo "Database_Wait_Time_Ratio.type GAUGE"
+    echo "Database_Wait_Time_Ratio.graph yes"
+
+    exit 0
+fi
+
+# Get info
+echo "`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | egrep -v "rows select|^$" | sed 's/\t/ /g' | tr -s ' ' | tr ' ' '_' | sed 's/\(.*\)_/\1.value /' | sed "s/(.*)//"
+set pagesize 0
+select METRIC_NAME,VALUE,METRIC_UNIT from v$sysmetric where GROUP_ID = '2' and ( METRIC_NAME = 'User Transaction Per Sec' or METRIC_NAME = 'Full Index Scans Per Sec' or METRIC_NAME = 'Database Time Per Sec' or METRIC_NAME = 'Physical Read Bytes Per Sec' or METRIC_NAME = 'Physical Write Bytes Per Sec' or METRIC_NAME = 'Buffer Cache Hit Ratio' or METRIC_NAME = 'Host CPU Utilization (%)' or METRIC_NAME = 'SQL Service Response Time' or METRIC_NAME = 'Database Wait Time Ratio' ) ;
+EOF`"
+
