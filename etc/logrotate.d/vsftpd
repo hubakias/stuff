@@ -1,0 +1,13 @@
+/var/log/ftpd/vsftpd.log {
+  olddir=/var/log/ftpd/old/
+  create 640 root adm
+
+  # ftpd doesn't handle SIGHUP properly
+  weekly
+  missingok
+  notifempty
+  rotate 27
+  dateext
+  compress
+  delaycompress
+}

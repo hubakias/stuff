@@ -1,0 +1,11 @@
+/var/log/logstash/*.log {
+  olddir=/var/log/logstash/old/
+  daily
+  rotate 15
+  dateext
+  copytruncate
+  compress
+  delaycompress
+  missingok
+  notifempty
+}

@@ -1,0 +1,13 @@
+/var/log/iptraf/*.log {
+  olddir=/var/log/iptraf/old/
+  rotate 16
+  daily
+  compress
+  delaycompress
+  dateext
+  missingok
+  notifempty
+  postrotate
+    /usr/bin/killall -USR1 iptraf 2> /dev/null || :
+  endscript
+}

@@ -1,0 +1,15 @@
+/var/log/named/*.log {
+  olddir=/var/log/named/old/
+  weekly
+  rotate 53
+  dateext
+  compress
+  delaycompress
+  missingok
+  notifempty
+  create 0664 bind root
+  postrotate
+    /etc/init.d/bind9 reload > /dev/null
+  endscript
+}
+

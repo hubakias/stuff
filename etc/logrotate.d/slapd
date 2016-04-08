@@ -1,0 +1,15 @@
+/var/log/ldap/slapd.log {
+  olddir=/var/log/ldap/old/
+  weekly
+  rotate 53
+  compress
+  delaycompress
+  dateext
+  missingok
+  notifempty
+  create 640 root adm
+  sharedscripts
+  postrotate
+    invoke-rc.d rsyslog rotate > /dev/null
+  endscript
+}

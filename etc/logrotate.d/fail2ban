@@ -1,0 +1,16 @@
+/var/log/fail2ban/fail2ban.log {
+  olddir=/var/log/fail2ban/old/
+  weekly
+  rotate 9
+  compress
+  delaycompress
+  dateext
+  missingok
+  postrotate
+    fail2ban-client flushlogs 1>/dev/null
+  endscript
+
+  # If fail2ban runs as non-root it still needs write access to logfiles.
+  # create 640 fail2ban adm
+  create 640 root adm
+}

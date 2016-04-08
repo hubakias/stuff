@@ -1,0 +1,9 @@
+/var/log/mrtg/mrtg.log {
+  olddir=/var/log/mrtg/old/
+  weekly
+  rotate 12
+  compress
+  delaycompress
+  dateext
+  missingok
+}

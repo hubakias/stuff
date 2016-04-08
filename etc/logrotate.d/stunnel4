@@ -1,0 +1,15 @@
+/var/log/stunnel4/*.log {
+  olddir=/var/log/stunnel4/old/
+  daily
+  missingok
+  rotate 366
+  compress
+  delaycompress
+  dateext
+  notifempty
+  create 640 stunnel4 stunnel4
+  sharedscripts
+  postrotate
+    /etc/init.d/stunnel4 reopen-logs > /dev/null
+  endscript
+}

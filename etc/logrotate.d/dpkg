@@ -1,0 +1,23 @@
+/var/log/dpkg.log {
+#  olddir=/var/log/dpkg/old/
+  monthly
+  rotate 12
+  compress
+  dateext
+  delaycompress
+  missingok
+  notifempty
+  create 644 root root
+}
+
+/var/log/alternatives.log {
+#  olddir=/var/log/alternatives/old/
+  monthly
+  rotate 12
+  compress
+  dateext
+  delaycompress
+  missingok
+  notifempty
+  create 644 root root
+}

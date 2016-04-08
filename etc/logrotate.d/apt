@@ -1,0 +1,9 @@
+/var/log/apt/term.log /var/log/apt/history.log {
+  olddir=/var/log/apt/old/
+  rotate 12
+  monthly
+  compress
+  dateext
+  missingok
+  notifempty
+}

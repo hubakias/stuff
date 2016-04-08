@@ -1,0 +1,12 @@
+/var/log/openvpn/*.log {
+  olddir=/var/log/openvpn/old/
+  weekly
+  size 100M
+  rotate 27
+  compress
+  delaycompress
+  dateext
+  missingok
+  notifempty
+  create 640 syslog adm
+}

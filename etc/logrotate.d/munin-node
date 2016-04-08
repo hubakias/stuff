@@ -1,0 +1,12 @@
+/var/log/munin/munin-node.log {
+  olddir=/var/log/munin/old/
+  daily
+  missingok
+  rotate 15
+  compress
+  delaycompress
+  dateext
+  copytruncate
+  notifempty
+  create 640 root root
+}

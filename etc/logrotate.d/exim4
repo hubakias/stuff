@@ -1,0 +1,11 @@
+/var/log/exim4/mainlog /var/log/exim4/rejectlog /var/log/exim4/paniclog {
+  olddir=/var/log/exim4/old/
+  daily
+  missingok
+  rotate 31
+  compress
+  delaycompress
+  dateext
+  notifempty
+  create 640 Debian-exim adm
+}

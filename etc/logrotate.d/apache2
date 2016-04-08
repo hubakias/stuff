@@ -1,0 +1,20 @@
+/var/log/apache2/*.log {
+  olddir=/var/log/apache2/old/
+  weekly
+  missingok
+  rotate 53
+  compress
+  dateext
+  delaycompress
+  notifempty
+  create 640 root adm
+  sharedscripts
+  postrotate
+    /etc/init.d/apache2 reload > /dev/null
+  endscript
+  prerotate
+    if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+        run-parts /etc/logrotate.d/httpd-prerotate; \
+    fi; \
+  endscript
+}

@@ -1,0 +1,15 @@
+/var/log/monit/monit.log {
+  olddir=/var/log/monit/old/
+  rotate 9
+  weekly
+  minsize 1M
+  missingok
+  create 640 root adm
+  notifempty
+  compress
+  dateext
+  delaycompress
+  postrotate
+    invoke-rc.d monit reload > /dev/null
+  endscript
+}

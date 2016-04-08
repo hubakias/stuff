@@ -1,0 +1,16 @@
+/var/log/gunicorn/*.log {
+  olddir=/var/log/gunicorn/old/
+  weekly
+  missingok
+  rotate 53
+  compress
+  delaycompress
+  dateext
+  notifempty
+  su root www-data
+  create 660 root www-data
+  sharedscripts
+  postrotate
+    /etc/init.d/gunicorn reload > /dev/null
+  endscript
+}

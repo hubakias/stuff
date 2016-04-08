@@ -1,0 +1,11 @@
+/var/log/rkhunter/rkhunter.log {
+  olddir=/var/log/rkhunter/old/
+  weekly
+  missingok
+  rotate 9
+  compress
+  delaycompress
+  dateext
+  notifempty
+  create 640 root adm
+}
