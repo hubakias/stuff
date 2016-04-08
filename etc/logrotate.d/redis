@@ -1,0 +1,11 @@
+/var/log/redis/*.log {
+  olddir=/var/log/redis/old/
+  weekly
+  missingok
+  copytruncate
+  rotate 27
+  compress
+  delaycompress
+  dateext
+  notifempty
+}

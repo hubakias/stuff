@@ -1,0 +1,16 @@
+/var/log/ejabberd/*.log {
+  olddir=/var/log/ejabberd/old/
+  weekly
+  missingok
+  rotate 27
+  size 1M
+  compress
+  delaycompress
+  dateext
+  ifempty
+  create 640 ejabberd adm
+  sharedscripts
+  postrotate
+    su ejabberd -c '/usr/sbin/ejabberdctl reopen-log' > /dev/null
+  endscript
+}

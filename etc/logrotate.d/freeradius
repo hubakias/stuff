@@ -1,0 +1,13 @@
+/var/log/freeradius/*.log {
+  olddir=/var/log/freeradius/old/
+  weekly
+  rotate 53
+  compress
+  delaycompress
+  dateext
+  notifempty
+  missingok
+  postrotate
+    /etc/init.d/freeradius reload > /dev/null
+  endscript
+}
