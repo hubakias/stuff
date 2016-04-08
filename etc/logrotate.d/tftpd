@@ -1,0 +1,15 @@
+/var/log/tftpd.log {
+#  olddir=/var/log/tftpd/old/
+  daily
+  rotate 5
+  compress
+  delaycompress
+  dateext
+  missingok
+  notifempty
+  create 640 root adm
+  sharedscripts
+  postrotate
+    invoke-rc.d rsyslog rotate > /dev/null
+  endscript
+}

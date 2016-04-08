@@ -1,0 +1,32 @@
+/var/log/icinga2/icinga2.log /var/log/icinga2/debug.log {
+  olddir=/var/log/icinga2/old/
+  daily
+  rotate 15
+  su nagios nagios
+  compress
+  delaycompress
+  dateext
+  missingok
+  notifempty
+  create 644 nagios nagios
+  copytruncate
+  postrotate
+    if ! killall -q -USR1 icinga2; then
+      exit 1
+    fi
+  endscript
+}
+
+/var/log/icinga2/error.log {
+    daily
+    su nagios nagios
+    rotate 90
+    compress
+    dateext
+    delaycompress
+    missingok
+    notifempty
+    create 644 nagios nagios
+    copytruncate
+    # TODO: figure out how to get Icinga to re-open this log file
+}
