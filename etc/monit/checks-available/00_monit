@@ -13,13 +13,13 @@ set httpd port 2812
 
 set mailserver localhost
 
-set alert monit@hostname but not on { instance, action }
+set alert monit@XXX but not on { instance, action }
 
 set mail-format {
-        from: monit@localhost
-        subject: monit on hostname: $EVENT $SERVICE
+        from: monit@$HOST
+        subject: monit on $HOST: $EVENT $SERVICE
         message:
-Host:        hostname
+Host:        $HOST
 Date:        $DATE
 Action:      $ACTION
 Description: $DESCRIPTION
