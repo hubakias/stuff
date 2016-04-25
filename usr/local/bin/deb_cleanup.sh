@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Version 0.01
+# Version 0.02
 # GPL v2
 
 # Meant to be used on Debian hosts.
@@ -25,9 +25,6 @@ if [ $(which aptitude) ]; then
     aptitude purge '~c'
 fi
 
-# Remove downloaded deb packages from cache - clear cache
-apt-get clean
-
 # Completely remove packages that are no longer needed (as dependencies)
 apt-get --purge autoremove
 
@@ -39,7 +36,16 @@ done
 
 # Erase the existing information about what packages are available.
 dpkg --clear-avail
+
 # Repopulate the the information cleared above from the system repositories.
 apt-get update
+
+# Remove downloaded deb packages from cache - clear cache
+apt-get clean
+
+# Maybe get rid of unnecessary stuff - especially in simple servers
+#dpkg -l | egrep -i "smb|samba|avahi|sound|media|video|cups|heimdal"
+#dpkg -l | egrep -iv "^ii" # show packages not properly installed
+#dpkg -l | egrep "^rc" | awk '{print $2}' | tr '\n' ' ' # show remainders
 
 exit 0
