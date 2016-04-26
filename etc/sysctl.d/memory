@@ -1,0 +1,5 @@
+# Disable overcommitment of memory and change the overcommit ratio
+
+#vm.overcommit_memory = 2 # default : 0
+#vm.overcommit_ratio = 80 # default : 50
+
