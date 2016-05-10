@@ -1,10 +1,10 @@
 kernel.sem = 250 32000 100 128
 
 # free|grep -v free|awk '{s+=$2} END {print s / 2 * 0.4}'|xargs printf "%.0f\n"
-kernel.shmall = 
+#kernel.shmall = 
 
 # free|grep -v free|awk '{s+=$2} END {print s / 2}'|xargs printf "%.0f\n"
-kernel.shmmax =  # Half the size of physical memory in bytes
+#kernel.shmmax =  # Half the size of physical memory in bytes
 
 kernel.shmmni = 4096
 
