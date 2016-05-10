@@ -1,0 +1,2 @@
+# (From LARTC) You need to set this if you use dial-on-demand with a dynamic interface address. Once your demand interface comes up, any local TCP sockets which haven't seen replies will be rebound to have the right address. This solves the problem that the connection that brings up your interface itself does not work, but the second try does.
+#net.ipv4.ip_dynaddr = 1

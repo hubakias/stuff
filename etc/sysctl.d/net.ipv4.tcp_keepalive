@@ -1,0 +1,4 @@
+#net.ipv4.tcp_keepalive_time = 7200 # default is 2 hours
+net.ipv4.tcp_keepalive_intvl = 75 # default is 75 seconds
+net.ipv4.tcp_keepalive_probes =4 # default is 9 tries
+# the sum ok keepalive_intvl * keepalive_probes determines when a link is considered to be down

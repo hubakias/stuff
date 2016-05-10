@@ -1,0 +1,2 @@
+# To open the other side of the connection, the kernel sends a SYN with a piggybacked ACK on it, to acknowledge the earlier received SYN. This is part 2 of the threeway handshake. This setting determines the number of SYN+ACK packets sent before the kernel gives up on the connection.
+net.ipv4.tcp_synack_retries = 2 # Default is 5 (Dangerous)

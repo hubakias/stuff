@@ -1,6 +1,8 @@
 # temp - need to comment each one
 net.ipv4.conf.all.mc_forwarding = 0
 net.ipv6.conf.all.mc_forwarding = 0
+net.ipv4.conf.default.mc_forwarding = 0
+net.ipv6.conf.default.mc_forwarding = 0
 net.ipv4.tcp_syncookies = 1
 net.ipv4.icmp_echo_ignore_broadcasts = 1
 #net.ipv4.netfilter.ip_conntrack_tcp_timeout_established = 216000
@@ -26,10 +28,12 @@ net.ipv4.tcp_congestion_control=htcp
 
 # Disable IPv6
 #net.ipv6.conf.all.disable_ipv6 = 0
+#net.ipv6.conf.default.disable_ipv6 = 0
 
 net.netfilter.nf_conntrack_acct = 1
 
 net.ipv6.conf.all.accept_ra = 0
+net.ipv6.conf.default.accept_ra = 0
 net.ipv6.conf.eth0.accept_ra = 0
 
 # The tcp_tw_reuse setting is particularly useful in environments where numerous short connections are open and left in TIME_WAIT state, such as web servers.

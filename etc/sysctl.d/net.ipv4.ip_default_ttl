@@ -1,0 +1,2 @@
+# Change default ttl for the host - use with caution
+#net.ipv4.ip_default_ttl = 64
