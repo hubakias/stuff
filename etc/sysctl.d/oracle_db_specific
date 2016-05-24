@@ -23,3 +23,9 @@ net.core.rmem_max = 4194304
 net.core.wmem_default = 262144
                                                                                                
 net.core.wmem_max = 1048576
+
+# From https://wiki.debian.org/DataBase/Oracle
+#
+# The value for vm.hugetlb_shm_group should be the gid number of the dba group.
+# vm.hugetlb_shm_group = 
+vm.nr_hugepages = 64
