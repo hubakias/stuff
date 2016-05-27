@@ -11,3 +11,7 @@
 
 check program CPU with path "/etc/monit/scripts/cpu_temp.sh"
     if status > 57 then alert
+
+
+# Include the configuration
+include /etc/monit/checks-enabled/*

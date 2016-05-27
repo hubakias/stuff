@@ -21,7 +21,7 @@ net.core.rmem_default = 262144
 net.core.rmem_max = 4194304
 
 net.core.wmem_default = 262144
-                                                                                               
+
 net.core.wmem_max = 1048576
 
 # From https://wiki.debian.org/DataBase/Oracle
