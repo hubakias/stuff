@@ -1,0 +1,4 @@
+[centos_6.8]
+name=CentOS 6.8 packages - $basearch
+baseurl=ftp://ftp.ntua.gr/pub/linux/centos/6.8/os/x86_64/
+gpgkey=file:///root/RPM-GPG-KEY-CentOS-6
