@@ -2,7 +2,7 @@
   olddir=/var/log/openvpn/old/
   weekly
   size 100M
-  rotate 27
+  rotate 52
   compress
   delaycompress
 #  dateformat -%Y%m%d_%H%M
@@ -10,4 +10,7 @@
   missingok
   notifempty
   create 640 syslog adm
+  postrotate
+    /etc/init.d/openvpn restart > /dev/null
+  endscript
 }
