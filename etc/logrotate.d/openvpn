@@ -5,12 +5,13 @@
   rotate 52
   compress
   delaycompress
+#  copytruncate # May lose log entries during the truncate time
 #  dateformat -%Y%m%d_%H%M
   dateext
   missingok
   notifempty
   create 640 syslog adm
   postrotate
-    /etc/init.d/openvpn restart > /dev/null
+    /etc/init.d/openvpn reload > /dev/null
   endscript
 }
