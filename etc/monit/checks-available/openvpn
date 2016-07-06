@@ -1,0 +1,26 @@
+check process openvpn with pidfile /run/openvpn.pid
+  user nobody
+  start program = "/usr/sbin/service openvpn start"
+  stop  program = "/usr/sbin/service openvpn stop"
+#  if failed host vpn-gateway port 1194 type udp then restart
+  if failed host vpn-gateway port 1194 type tcp then restart
+  if 5 restarts with 5 cycles then timeout
+  depend openvpn_bin
+  depend openvpn_rc
+  depend openvpn_conf
+
+check file openvpn_bin with path /usr/sbin/openvpn
+  include /etc/monit/templates/rootbin
+
+check file openvpn_conf with path /etc/openvpn/openvpn.conf
+  include /etc/monit/templates/rootrc
+
+check file openvpn_rc with path "/etc/init.d/openvpn"
+  include /etc/monit/templates/rootbin
+
+check host tun0 with address 10.10.10.10
+  start program = "/usr/sbin/service openvpn start"
+  stop  program = "/usr/sbin/service openvpn stop"
+    if failed
+        icmp type echo count 5 with timeout 15 seconds
+    then restart
