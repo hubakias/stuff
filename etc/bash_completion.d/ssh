@@ -1,0 +1,1 @@
+complete -W "$(cat /etc/clusters | tr '\n' ' ' | grep -v ^$ )" ssh
