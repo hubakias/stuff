@@ -1,0 +1,18 @@
+check process redis-server with pidfile /run/redis/redis.pid
+  group redis
+  start program = "/usr/sbin/service redis-server start"
+  stop  program = "/usr/sbin/service redis-server stop"
+  if failed host localhost port 6379 type tcp then alert
+  depend redis-server_bin
+  depend redis-server_conf
+
+check file redis-server_bin with path /usr/bin/redis-server
+  include /etc/monit/templates/rootbin
+
+check file redis-server_conf with path /etc/redis/redis.conf
+  group redis
+  if changed checksum      then alert
+  if failed permission 644 then unmonitor
+  if failed uid redis      then unmonitor
+  if failed gid redis      then unmonitor
+
