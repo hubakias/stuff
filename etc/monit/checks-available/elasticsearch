@@ -1,0 +1,13 @@
+check process elasticsearch with pidfile /var/run/elasticsearch.pid
+  start program = "/usr/sbin/service elasticsearch start"
+  stop  program = "/usr/sbin/service elasticsearch stop"
+  group elasticsearch
+
+check host elasticsearch_conn with address $hostname
+  if failed url http://$hostname:9200/ with timeout 15 seconds then alert
+  group elasticsearch
+
+check host elasticsearch_status with address $hostname
+  if failed url http://$hostname:9200/_cluster/health
+    and content == 'green' with timeout 60 seconds then alert
+  group elasticsearch
