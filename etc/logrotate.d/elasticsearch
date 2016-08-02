@@ -1,0 +1,25 @@
+/var/log/elasticsearch/*.log.????-??-?? {
+  olddir=/var/log/elasticsearch/old/
+  daily
+  rotate 62
+  compress
+#  delaycompress
+  dateext
+  copytruncate
+  missingok
+  notifempty
+  create 640 elasticsearch elasticsearch
+}
+
+/var/log/elasticsearch/*.log {
+  olddir=/var/log/elasticsearch/old/
+  daily
+  rotate 62
+  compress
+#  delaycompress
+  dateext
+  copytruncate
+  missingok
+  notifempty
+  create 640 elasticsearch elasticsearch
+}
