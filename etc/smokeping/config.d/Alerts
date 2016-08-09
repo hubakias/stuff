@@ -1,0 +1,34 @@
+*** Alerts ***
+to = 
+from = 
+
++someloss
+type = loss
+# in percent
+pattern = >0%,*12*,>0%,*12*,>0%
+comment = loss 3 times  in a row
+
++bigloss
+type = loss
+# in percent
+pattern = ==0%,==0%,==0%,==0%,>0%,>0%,>0%
+comment = suddenly there is packet loss
+
++startloss
+type = loss
+# in percent
+pattern = ==S,>0%,>0%,>0%
+comment = loss at startup
+
++rttdetect
+type = rtt
+# in milli seconds
+pattern = <10,<10,<10,<10,<10,<100,>100,>100,>100
+edgetrigger = yes
+comment = routing messed up again ???
+
++increased_rtt
+type = rtt
+pattern = >35,>35,>35
+edgetrigger = yes
+comment = Triggered if RTT increases over 35ms
