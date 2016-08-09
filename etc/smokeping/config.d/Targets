@@ -1,0 +1,21 @@
+@include /etc/smokeping/config.d/Targets.d/000-Base
+
+@include /etc/smokeping/config.d/Targets.d/001-IXF
+
+@include /etc/smokeping/config.d/Targets.d/002-Other
+
+@include /etc/smokeping/config.d/Targets.d/003-Home
+
+@include /etc/smokeping/config.d/Targets.d/004-Work
+
+@include /etc/smokeping/config.d/Targets.d/010-DC1
+@include /etc/smokeping/config.d/Targets.d/020-DC2
+@include /etc/smokeping/config.d/Targets.d/030-DC3
+
+@include /etc/smokeping/config.d/Targets.d/100-Europe
+@include /etc/smokeping/config.d/Targets.d/200-Africa
+@include /etc/smokeping/config.d/Targets.d/300-Asia
+@include /etc/smokeping/config.d/Targets.d/400-Australia
+@include /etc/smokeping/config.d/Targets.d/500-North_America
+@include /etc/smokeping/config.d/Targets.d/600-South_America
+
