@@ -1,0 +1,16 @@
++ Australia
+menu = Australia
+title = Australia Connectivity
+
+# Australia
+++ AU-IX
+menu = AU-IX
+title = AU-IX
+host = www.ix.asn.au
+
+# New Zealand
+++ NZ-IX
+menu = NZ-IX
+title = NZ-IX
+host = nzix.net
+

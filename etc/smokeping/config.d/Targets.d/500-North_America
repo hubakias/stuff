@@ -1,0 +1,22 @@
++ North_America
+menu = North America
+title = North America
+
+# USA (California)
+++ CIIX
+menu = CIIX
+title = CIIX
+host = www.ciix.net
+
+# USA (Chicago)
+++ CHI-IX
+menu = CHI-IX
+title = CHI-IX
+host = chi.ams-ix.net
+
+# USA (New York)
+++ NYIIX
+menu = NYIIX
+title = NYIIX
+host = 67.214.159.1
+

@@ -9,24 +9,20 @@ title = Internet Exchange Foundation
 menu = APIX
 title = APIX
 host = apix.asia
-alerts = someloss
 
 # Euro-IX (European Internet Exchange Association)
 ++ Euro-IX
 menu = Euro-IX
 title = Euro-IX
 host = euro-ix.net
-alerts = someloss
 
 # LAC-IX (Latin America & Caribbean Internet Exchange Association)
 ++ LAC-IX
 menu = LAC-IX
 title = LAC-IX
 host = www.lac-ix.org
-alerts = someloss
 
 ++ Af-IX (African Internet Exchange Association)
 menu = Af-IX
 title = Af-IX
 host = www.af-ix.net
-alerts = someloss

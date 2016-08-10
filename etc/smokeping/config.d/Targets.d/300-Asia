@@ -1,0 +1,10 @@
++ Asia
+menu = Asia
+title = Asia Connectivity
+
+# Japan
+++ JPIX
+menu = JPIX
+title = JPIX
+host = www.jpix.ad.jp
+

@@ -5,13 +5,13 @@ from =
 +someloss
 type = loss
 # in percent
-pattern = >0%,*12*,>0%,*12*,>0%
-comment = loss 3 times  in a row
+pattern = >0%,*5*,>0%,*5*,>0%
+comment = Some loss was observed. Three losses were observed in the past hour.
 
 +bigloss
 type = loss
 # in percent
-pattern = ==0%,==0%,==0%,==0%,>0%,>0%,>0%
+pattern = ==0%,==0%,>0%,>0%
 comment = suddenly there is packet loss
 
 +startloss
@@ -25,7 +25,7 @@ type = rtt
 # in milli seconds
 pattern = <10,<10,<10,<10,<10,<100,>100,>100,>100
 edgetrigger = yes
-comment = routing messed up again ???
+comment = RTT went from less that 10ms to over 100ms
 
 +increased_rtt
 type = rtt

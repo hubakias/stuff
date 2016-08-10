@@ -6,6 +6,8 @@ menu = Top
 title = Network Latency Grapher
 remark = Welcome to the SmokePing website of the ... Company. \
          Here you will learn all about the latency of our network.
+# The below will propagate to all subentries
+alerts = someloss,bigloss,rttdetect
 
 + Local
 
@@ -18,5 +20,4 @@ title = Local Network
 menu = Local Machine
 title = This host
 host = localhost
-#alerts = someloss
 

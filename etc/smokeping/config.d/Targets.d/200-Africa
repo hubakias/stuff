@@ -1,0 +1,10 @@
++ Africa
+menu = Africa
+title = African Connectivity
+
+# South Africa
+++ SAIX
+menu = SAIX
+title = SAIX
+host = igubu.saix.net
+

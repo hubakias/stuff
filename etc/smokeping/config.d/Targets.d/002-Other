@@ -1,0 +1,80 @@
++ International_Companies
+menu = International Companies
+title = International Companies
+
+++ Google1
+menu = Google (www)
+title = Google (www)
+host = www.google.com
+
+++ Google
+menu = Google
+title = Google
+host = google.com
+
+++ Gmail
+menu = Gmail
+title = Gmail
+host = gmail.com
+
+++ Google_DNS
+menu = Google_DNS
+title = Google_DNS
+host = 8.8.8.8
+
+++ Yahoo
+menu = Yahoo
+title = Yahoo
+host = www.yahoo.com
+
+++ Wikipedia
+menu = Wikipedia
+title = Wikipedia
+host = www.wikipedia.org
+
+++ Facebook
+menu = Facebook
+title = Facebook
+host = www.facebook.com
+
+++ BBC
+menu = BBC
+title = bbc.co.uk
+host = bbc.co.uk
+
+++ Hurricane_Electric
+menu = He.net
+title = He.net
+host = he.net
+
+
+
++ Greece
+menu = Greece
+title = Greece
+
+++ OTE
+menu = OTE
+title = OTE
+host = ipv6.otenet.gr
+
+++ Forthnet
+menu = Forthnet
+title = Forthnet
+host = www.forthnet.gr
+
+++ HoL
+menu = HOL
+title = HOL
+host = ns1.hol.gr
+
+++ Cyta
+menu = Cyta
+title = Cyta
+host = 78.87.0.22
+
+++ On
+menu = On
+title = On
+host = 91.132.4.4
+

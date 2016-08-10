@@ -1,0 +1,63 @@
++ Europe
+menu = Europe
+title = European Connectivity
+
+++ Vienna
+menu = Vienna (Geant)
+title = Vienna (Geant)
+host = ae8.mx1.vie.at.geant.net
+alerts = geantrtt
+
+++ Milano
+menu = Milan (Geant)
+title = Milan (Geant)
+host = ae2.mx1.mil2.it.geant.net
+alerts = geantrtt
+
+# Holland - Amsterdam
+++ AMS-IX
+menu = AMS-IX
+title = AMS-IX
+host = www.ams-ix.com
+
+# Bulgary
+++ BIX_BG
+menu = BIX.BG
+title = BIX.BG
+host = www.bix.bg
+
+# Balkan
+++ B-IX
+menu = B-IX
+title = B-IX
+host = www.b-ix.net
+
+# Czech
+++ NIX_CZ
+menu = NIX.CZ
+title = NIX.CZ
+host = www.nix.cz
+
+# Polland
+++ PLIX
+menu = PLIX
+title = PLIX
+host = www.plix.pl
+
+# Greece
+++ GR-IX
+menu = GR-IX
+title = GR-IX
+host = www.gr-ix.gr
+
+# Russia (Moscow)
+++ MSK-IX
+menu = MSK-IX
+title = MSK-IX
+host = 194.226.65.3
+
+# London
+++ LINX
+menu = LINX
+title = LINX
+host = coral.linx.net

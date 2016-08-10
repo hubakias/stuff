@@ -2,16 +2,21 @@
 
 @include /etc/smokeping/config.d/Targets.d/001-IXF
 
+# Anything else
 @include /etc/smokeping/config.d/Targets.d/002-Other
 
-@include /etc/smokeping/config.d/Targets.d/003-Home
+# Home ?
+#@include /etc/smokeping/config.d/Targets.d/003-Home
 
-@include /etc/smokeping/config.d/Targets.d/004-Work
+# Work ?
+# @include /etc/smokeping/config.d/Targets.d/004-Work
 
-@include /etc/smokeping/config.d/Targets.d/010-DC1
-@include /etc/smokeping/config.d/Targets.d/020-DC2
-@include /etc/smokeping/config.d/Targets.d/030-DC3
+# Datacenter 1,2,3
+#@include /etc/smokeping/config.d/Targets.d/010-DC1
+#@include /etc/smokeping/config.d/Targets.d/020-DC2
+#@include /etc/smokeping/config.d/Targets.d/030-DC3
 
+# Sparated per continent (could make hierarchy(check smokeping docs) easier)
 @include /etc/smokeping/config.d/Targets.d/100-Europe
 @include /etc/smokeping/config.d/Targets.d/200-Africa
 @include /etc/smokeping/config.d/Targets.d/300-Asia
