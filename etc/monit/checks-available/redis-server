@@ -1,4 +1,4 @@
-check process redis-server with pidfile /run/redis/redis.pid
+check process redis-server with pidfile /run/redis/redis-server.pid
   group redis
   start program = "/usr/sbin/service redis-server start"
   stop  program = "/usr/sbin/service redis-server stop"
