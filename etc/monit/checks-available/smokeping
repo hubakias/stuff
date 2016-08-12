@@ -1,0 +1,16 @@
+check process smokeping with pidfile /var/run/smokeping/smokeping.pid
+  group smokeping
+  start program = "/usr/sbin/service smokeping start"
+  stop  program = "/usr/sbin/service smokeping stop"
+  depend on sshd_bin
+  depend on sftp_bin
+  depend on sshd_rc
+  depend on sshd_rsa_key
+  depend on sshd_dsa_key
+
+check file smokeping_bin with path /usr/sbin/smokeping
+  include /etc/monit/templates/rootbin
+
+check file smokeping_cgi with path /usr/lib/cgi-bin/smokeping.cgi
+  include /etc/monit/templates/rootbin
+
