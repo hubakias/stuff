@@ -1,0 +1,12 @@
+/var/log/postgresql/*.log {
+  olddir=/var/log/postgresql/old/
+  weekly
+  rotate 12
+  copytruncate
+  delaycompress
+  compress
+  notifempty
+  missingok
+  su root root
+  dateext
+}
