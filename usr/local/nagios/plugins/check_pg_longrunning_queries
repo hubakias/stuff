@@ -6,6 +6,8 @@
 # Both should represent the number of seconds.
 #
 
+db=""
+
 # Getting the parameters:
 while getopts "w:c:" OPT; do
         case $OPT in
@@ -17,7 +19,7 @@ done
 # The actual db statement
 q="SELECT floor(EXTRACT(EPOCH FROM ( NOW() - (SELECT xact_start from pg_stat_activity where xact_start < CURRENT_TIMESTAMP - INTERVAL '"$warn" seconds' order by xact_start asc limit 1))));"
 
-out="$(psql postgres -t -F ' ' -A -d txlc -c "$q")"
+out="$(psql postgres -t -F ' ' -A -d $db -c "$q")"
 
 if [ $? -gt 0 ] ; then
     echo "psql exited with code $?"
