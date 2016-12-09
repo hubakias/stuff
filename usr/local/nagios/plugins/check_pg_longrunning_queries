@@ -1,0 +1,45 @@
+#!/bin/bash
+#
+# Nagios plugin to check PostgreSQL long running queries
+#
+# The script needs/takes two arguments, the warning and critical thresholds.
+# Both should represent the number of seconds.
+#
+
+# Getting the parameters:
+while getopts "w:c:" OPT; do
+        case $OPT in
+                "w") warn=$OPTARG;;
+                "c") crit=$OPTARG;;
+        esac
+done
+
+# The actual db statement
+q="SELECT floor(EXTRACT(EPOCH FROM ( NOW() - (SELECT xact_start from pg_stat_activity where xact_start < CURRENT_TIMESTAMP - INTERVAL '"$warn" seconds' order by xact_start asc limit 1))));"
+
+out="$(psql postgres -t -F ' ' -A -d txlc -c "$q")"
+
+if [ $? -gt 0 ] ; then
+    echo "psql exited with code $?"
+    exit 3
+fi
+
+if [ "$out" -gt "$crit" ] ; then
+    echo "CRITICAL - longest query runs for $out seconds"
+    exit 2
+fi
+
+if [ "$out" -gt "$warn" ] ; then
+    echo "WARNING - longest query runs for $out seconds"
+    exit 1
+fi
+
+if [ -z $out ] ; then
+    echo "OK - top sql query time : $out seconds"
+    exit 0
+fi
+
+if [ $out ] ; then
+    echo "UNKNOWN - no output"
+    exit 3
+fi
