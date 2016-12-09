@@ -1,0 +1,66 @@
+#!/bin/bash
+#
+#
+# Nagios plugin to check PostgreSQL replication.
+# Check how many sec ago the slave db sync'ed with the master.
+#
+# Two arguments are needed. Critical threshold and warning threshold.
+
+# Getting parameters:
+while getopts "w:c:" OPT; do
+        case $OPT in
+                "w") warn=$OPTARG;;
+                "c") crit=$OPTARG;;
+        esac
+done
+
+# Check if variables were set properly
+re="^[0-9]+$"
+if [[ -z $crit || -z $warn || ! $warn =~ $re || ! $crit =~ $re || $warn -ge $crit ]]; then
+    echo -e "\n Variables not properly set.\n"
+    echo -e " You need to set two variables, warning and critical thresholds.\n"
+    exit 1
+fi
+
+# Check if this is a PostgreSQL slave
+q1="select pg_is_in_recovery();"
+out1="$(psql -h /var/run/postgresql/ -U postgres -t -F ' ' -A -c "$q1" 2>/dev/null)"
+
+if [ $? -gt 0 ] ; then
+    echo "psql exited with code $?"
+    exit 3
+fi
+
+if [[ $out1 != "t" ]]; then
+    echo -e"\n This is not a PostgreSQL slave.\n"
+    exit 1
+fi
+
+# Get the current replication delay
+q="SELECT CASE WHEN pg_last_xlog_receive_location() = pg_last_xlog_replay_location() THEN 0 ELSE EXTRACT (EPOCH FROM now() - pg_last_xact_replay_timestamp())::INTEGER END AS replication_lag;"
+out="$(psql -h /var/run/postgresql/ -U postgres -t -F ' ' -A -c "$q")"
+
+if [ $? -gt 0 ] ; then
+    echo "psql exited with code $?"
+    exit 3
+fi
+
+if [[ $out -gt $crit ]] ; then
+    echo "CRITICAL - Last replication took place $out seconds ago."
+    exit 2
+fi
+
+if [[ "$out" -gt "$warn" ]] ; then
+    echo "WARNING - Last replication took place $out seconds ago."
+    exit 1
+fi
+
+if [ -z $out ] ; then
+    echo "UNKNOWN - no idea what is happening with replication."
+    exit 3
+fi
+
+if [ $out ] ; then
+    echo "OK - PostgreSQL replication is ok - $out seconds"
+    exit 0
+fi
