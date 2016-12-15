@@ -17,7 +17,9 @@ while getopts "w:c:" OPT; do
 done
 
 # The actual db statement
-q="SELECT floor(EXTRACT(EPOCH FROM ( NOW() - (SELECT xact_start from pg_stat_activity where xact_start < CURRENT_TIMESTAMP - INTERVAL '"$warn" seconds' order by xact_start asc limit 1))));"
+#q="SELECT floor(EXTRACT(EPOCH FROM ( NOW() - (SELECT xact_start from pg_stat_activity where xact_start < CURRENT_TIMESTAMP - INTERVAL '"$warn" seconds' order by xact_start asc limit 1))));"
+q="SELECT FLOOR(EXTRACT(EPOCH FROM (CURRENT_TIMESTAMP - (SELECT xact_start from pg_stat_activity order by xact_start asc limit 1))));"
+
 
 out="$(psql postgres -t -F ' ' -A -d $db -c "$q")"
 
@@ -36,12 +38,12 @@ if [ "$out" -gt "$warn" ] ; then
     exit 1
 fi
 
-if [ -z $out ] ; then
+if [ $out ] ; then
     echo "OK - top sql query time : $out seconds"
     exit 0
 fi
 
-if [ $out ] ; then
+if [ -z $out ] ; then
     echo "UNKNOWN - no output"
     exit 3
 fi
