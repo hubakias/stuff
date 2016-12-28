@@ -1,0 +1,3 @@
+deb http://packages.ntop.org/apt-stable/jessie/ x64/
+deb http://packages.ntop.org/apt-stable/jessie/ all/
+# wget --quiet -O - http://packages.ntop.org/apt-stable/ntop.key | apt-key add -
