@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+#
+# Nagios plugin to check if existing running processes rely on deleted binaries.
+#
+# Example config for the plugin to work since it needs list access to /proc
+# Add to /etc/sudoers.d/nrpe
+# echo -e 'Defaults: nagios !requiretty\nnagios    ALL=(root)  NOPASSWD: /usr/lib/nagios/plugins/check_procs_using_deleted_binaries ""'
+#
+# and add to /etc/nagios/nrpe.d/commands.cfg something like:
+#
+# command[check_procs_using_deleted_binaries]=/usr/bin/sudo /usr/lib/nagios/plugins/check_procs_using_deleted_binaries
+#
+# Do not forget to add the service check to the nagios server
+
+
+# Set variable of deleted pids
+dpids="$(ls -l /proc/[1-9]*/exe 2>/dev/null|egrep "\(deleted\)$"|cut -d\/ -f3|tr '\n' ' '|sed "s/ $//")"
+bad_procs=""
+
+check_access="$()"
+
+if [ -z "$dpids" ] ; then
+  echo "OK - No processes using deleted binaries found"
+  exit 0
+else
+  for i in $dpids ; do
+    bad_procs+="$(echo "$(ls -l /proc/$i/exe | awk -F "/" '{print $NF}')" | sed "s/ (deleted)/\($i\) /g" | sed "s/ - //")"
+  done
+  echo "Critical - Processes using deleted binaries: $bad_procs"
+  exit 2
+fi
