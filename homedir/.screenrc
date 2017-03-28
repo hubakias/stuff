@@ -31,8 +31,8 @@ bindkey -k k8 hardstatus alwayslastline
 bindkey -k F1 prev
 bindkey -k F2 next
 
-screen -t bash
-screen -t bash
-#screen -t bash
+screen -t ktom_1
+screen -t ktom_2
+#screen -t ktom_3
 
 select 0
