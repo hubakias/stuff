@@ -1,0 +1,18 @@
+# Add the username and the domain
+Username        $username
+Domain          $domain
+
+# Use "cntlm -M" and/or "cntlm -H" to generate the below - do not use plaintext
+PassLM          0000000000000000000000000000000
+PassNT          0000000000000000000000000000000
+PassNTLMv2      0000000000000000000000000000000      
+
+# Sepcify the proxies to be used/connected to.
+Proxy           proxy1...:port
+Proxy           proxy2...:port
+
+# Specify for which IPs the requests should not be forwarded to the proxy(ies).
+# Below are IPv4 ranges for local and private subnets - adjust to your needs.
+NoProxy         localhost, 127.*, 10.*, 172.16.*, 172.17.*, 172.18.*, 172.19.*, 172.2?.*, 172.30.*, 172.31.*, 172.32.*, 192.168.*
+
+Listen          3128
