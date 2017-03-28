@@ -1,3 +1,3 @@
 # stuff
 Contains various tools, scripts, etc.
-In *nix like dire structure
+In a generic *nix like directory structure
