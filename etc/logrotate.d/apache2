@@ -1,5 +1,6 @@
 /var/log/apache2/*.log {
   olddir=/var/log/apache2/old/
+#  olddir=old/ # relative to the path of the log file(s)
   weekly
   missingok
   rotate 53
