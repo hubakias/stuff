@@ -3,7 +3,7 @@
 shellcheck bash zsh nmap zmap
 
 # Nice/handy tools
-pv
+pv termsaver
 
 
 # When isolated in a Windows domain, consider the below
