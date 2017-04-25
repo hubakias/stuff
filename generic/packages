@@ -2,5 +2,9 @@
 
 shellcheck bash zsh nmap zmap
 
+# Nice/handy tools
+pv
+
+
 # When isolated in a Windows domain, consider the below
 # cntlm
