@@ -1,0 +1,2 @@
+deb ftp://ftp.deb-multimedia.org jessie main non-free
+deb ftp://ftp.deb-multimedia.org jessie-backports main
