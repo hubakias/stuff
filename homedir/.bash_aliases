@@ -13,6 +13,7 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias dmesg='dmesg -T'
 alias bwm-ng='bwm-ng -d'
+alias free="free -h"
 
 # Git specific
 #alias git-data="git for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads"
