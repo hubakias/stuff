@@ -27,10 +27,10 @@
 #%# capabilities=autoconf suggest
 
 SID=${0#*_*_}     # Get the SID from the filename (wildcard plugin)
-USER=             # Mandatory - Ideal: a user with only the required privileges
-PASSWD=           # Mandatory
+USER=""           # Mandatory - Ideal: a user with only the required privileges
+PASSWD=""         # Mandatory
 SHOW_USERS=0      # Not set to "1" for security
-ORACLE_HOME=      # Mandatory
+ORACLE_HOME=""    # Mandatory
 
 lsnrctl="$ORACLE_HOME/bin/lsnrctl"
 sqlplus="$ORACLE_HOME/bin/sqlplus"
@@ -96,7 +96,7 @@ EOF`
 set pagesize 0
 select username, count(username) from v\$session where username is not null group by username;
 EOF
-        echo $WARN_CRIT| awk '{ print "total.warning " $1 "\ntotal.critical " $2 }' 
+        echo "$WARN_CRIT" | awk '{ print "total.warning " $1 "\ntotal.critical " $2 }' 
     else
         echo "connections.label active connections"
         echo "connections.info active connections"
@@ -104,7 +104,7 @@ EOF
         echo "max.label max connections"
         echo "max.info max connections"
         echo "max.type GAUGE"
-        echo $WARN_CRIT| awk '{ print "connections.warning " $1 "\nconnections.critical " $2 }' 
+        echo "$WARN_CRIT"| awk '{ print "connections.warning " $1 "\nconnections.critical " $2 }' 
     fi
     exit 0
 fi
@@ -125,7 +125,7 @@ set pagesize 0
 select count(username) from v\$session where username is not null;
 EOF
 fi
-    
+
 echo "max.value" "`$sqlplus -s ${USER}/${PASSWD}@$SID << EOF | grep -v '^$' | \
     awk '{print $1 }'
 set pagesize 0

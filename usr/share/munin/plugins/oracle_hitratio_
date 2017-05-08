@@ -26,9 +26,9 @@
 #%# capabilities=autoconf suggest
 
 SID=${0#*_*_}   # Get the SID from the filename (wildcard plugin)
-USER=           # Mandatory - Ideal: a user with only the required privileges
-PASSWD=         # Mandatory
-ORACLE_HOME=    # Mandatory
+USER=""         # Mandatory - Ideal: a user with only the required privileges
+PASSWD=""       # Mandatory
+ORACLE_HOME=""  # Mandatory
 
 lsnrctl="$ORACLE_HOME/bin/lsnrctl"
 sqlplus="$ORACLE_HOME/bin/sqlplus"
@@ -63,9 +63,9 @@ if [ "$1" = "config" ] ; then
         echo "USER and PASSWD variables must be set."
         exit 1
     fi
-    printf "graph_title Oracle library and buffer cache hit ratios from $SID
+    printf "graph_title Oracle library and buffer cache hit ratios from %s
 graph_args -u 120 -l 0
-graph_vlabel $(echo $0 | cut -d\_ -f2)
+graph_vlabel $(echo %s | cut -d'_' -f2)
 graph_category Oracle
 graph_info This graph shows the percentage of blocks and libraries read from the cache
 read_hitratio.label Cache hitratio
@@ -74,7 +74,7 @@ read_hitratio.draw LINE2
 lib_hitratio.label Library hitratio
 lib_hitratio.type GAUGE
 lib_hitratio.draw LINE2
-"
+" "$SID" "$0"
     exit 0
 fi
 

@@ -26,9 +26,9 @@
 #%# capabilities=autoconf suggest
 
 SID=${0#*_*_}   # Get the SID from the filename (wildcard plugin)
-USER=           # Mandatory - Ideal: a user with only the required privileges
-PASSWD=         # Mandatory
-ORACLE_HOME=    # Mandatory
+USER=""         # Mandatory - Ideal: a user with only the required privileges
+PASSWD=""       # Mandatory
+ORACLE_HOME=""  # Mandatory
 
 lsnrctl="$ORACLE_HOME/bin/lsnrctl"
 sqlplus="$ORACLE_HOME/bin/sqlplus"

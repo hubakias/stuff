@@ -21,9 +21,9 @@
 
 # This package needs smartomontools.
 
-cmd=$(which smartctl)
+cmd="$(which smartctl)"
 
-if [ -z $cmd ] ; then
+if [ -z "$cmd" ] ; then
     echo "This plugin needs smartmontools to run."
     exit 1
 fi
@@ -40,7 +40,7 @@ if [ "$1" = "suggest" ] ; then
         "s/[0-9]$//" | sort | uniq | sed "s/\/dev\///" | tr '\n' ' ')"
 
     if [ "$disks" ] ; then
-        for i in $disks ; do echo $i ; done
+        for i in $disks ; do echo "$i" ; done
         exit 0
     fi
     exit 1
@@ -71,7 +71,7 @@ if [ "$1" = "config" ] ; then
     exit 0
 fi
 
-value=$($cmd -x /dev/$disk | grep "^Current Temp" | awk '{print $(NF-1)}')
+value=$($cmd -x /dev/"$disk" | grep "^Current Temp" | awk '{print $(NF-1)}')
 
-echo ""$disk".value $value"
+echo "$disk".value "$value"
 
