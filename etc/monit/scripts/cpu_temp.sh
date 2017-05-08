@@ -10,8 +10,8 @@
 checked_item="^Core 3"
 
 
-if [ $(which sensors) ]; then
-    exit $(sensors | grep "$checked_item" | sed "s/\..°.*//" | sed "s/.*+//")
+if [ "$(which sensors)" ]; then
+    exit "$(sensors | grep "$checked_item" | sed "s/\..°.*//" | sed "s/.*+//")"
 else
     exit 250
 fi

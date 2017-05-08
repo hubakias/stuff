@@ -15,7 +15,7 @@ if [ ! -f "/etc/debian_version" ]; then
 fi
 
 # Check if the required commands are available
-if [ $(which dpkg) ] && [ $(which apt-cache) ]; then
+if [ "$(which dpkg)" ] && [ "$(which apt-cache)" ]; then
     echo "Starting ..."
 else
     echo "Required packages are missing."
@@ -26,12 +26,12 @@ fi
 ignored_packages="pl@ceholder"
 
 for i in $(dpkg -l | tail -n +6 | cut -d' ' -f3 | egrep -v "$ignored_packages" ) ; do 
-   if [[ -z $(apt-cache madison $i) ]]; then
-     find /tmp/ -mtime 7 -name check_orphans* -delete 2>/dev/null
-     echo -n "$i " >> /tmp/check_orphans-$(date "+%d_%b_%G")
+   if [[ -z $(apt-cache madison "$i") ]]; then
+     find /tmp/ -mtime 7 -name "check_orphans*" -delete 2>/dev/null
+     echo -n "$i " >> /tmp/check_orphans-"$(date "+%d_%b_%G")"
    fi
 done
 
-echo "" >> /tmp/check_orphans-$(date "+%d_%b_%G")
+echo "" >> /tmp/check_orphans-"$(date "+%d_%b_%G")"
 
 exit 0

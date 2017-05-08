@@ -18,7 +18,7 @@
 dpids="$(ls -l /proc/[1-9]*/exe 2>/dev/null|egrep "\(deleted\)$"|cut -d\/ -f3|tr '\n' ' '|sed "s/ $//")"
 bad_procs=""
 
-check_access="$()"
+#check_access="$()"
 
 if [ -z "$dpids" ] ; then
   echo "OK - No processes using deleted binaries found"

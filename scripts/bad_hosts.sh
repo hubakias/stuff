@@ -19,15 +19,15 @@ http://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext
 "
 
 for i in $dl_lists ; do
-    curl -s "$i" >>$tmp_file
+    curl -s "$i" >>"$tmp_file"
 done
 
 # For use in squid (blocked domains) - look for my squid conf/etc
-cat $tmp_file | egrep "^127.0.0.1 |^0.0.0.0 " | sed -e "s/^127.0.0.1 //" -e "s/^0.0.0.0 //" | awk '{print $NF}' | sort | uniq
+cat "$tmp_file" | egrep "^127.0.0.1 |^0.0.0.0 " | sed -e "s/^127.0.0.1 //" -e "s/^0.0.0.0 //" | awk '{print $NF}' | sort | uniq
 
 ## For use in /etc/hosts file (either use 127.0.0.1 or 0.0.0.0 - your choice) - I do not recommend it.
-#cat $tmp_file | egrep "^127.0.0.1 |^0.0.0.0 " | sed -e "s/^127.0.0.1 //" -e "s/^0.0.0.0 //" | awk '{print $NF}' | sort | uniq  | sed "s/^/127.0.0.1 /"
+#cat "$tmp_file" | egrep "^127.0.0.1 |^0.0.0.0 " | sed -e "s/^127.0.0.1 //" -e "s/^0.0.0.0 //" | awk '{print $NF}' | sort | uniq  | sed "s/^/127.0.0.1 /"
 
 # Cleanup
-rm -f $tmp_file
+rm -f "$tmp_file"
 

@@ -8,7 +8,7 @@
 
 
 # Check if "createrepo exists in the available path"
-if [ ! $(which createrepo) ]; then
+if [ ! "$(which createrepo)" ]; then
     echo "The package \"createrepo\" is not available in the executable path."
     echo "The packge is probably not installed. Exiting ..."
     exit 1
@@ -53,5 +53,4 @@ for i in $repos ; do
     createrepo --update --basedir "$repo_dir"/"$i" "$repo_dir"/"$i"
 
 done
-
 
