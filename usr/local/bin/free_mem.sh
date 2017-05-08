@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Version 0.02
 # GPL v2
@@ -22,8 +22,8 @@ echo -n 3>/proc/sys/vm/drop_caches
 
 # Empty swap partitions (may take some time on slow/heavily_used disks)
 if [ "${used_swap_partitions}" ]; then
-  for i in "${used_swap_partitions}"; do
-    swapoff $i && swapon $i
+  for i in ${used_swap_partitions}; do
+    swapoff "$i" && swapon "$i"
   done
 fi
 

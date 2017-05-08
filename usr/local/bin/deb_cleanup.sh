@@ -21,7 +21,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # Check if aptitude is installed - if not ignore and proceed
-if [ $(which aptitude) ]; then
+if [ "$(which aptitude)" ]; then
     aptitude purge '~c'
 fi
 
@@ -31,7 +31,7 @@ apt-get --purge autoremove
 # Check recursively if there are any orphans ( packages that were not explicitly
 # installed and that no other package depends on them ).
 while [ "$(deborphan -n | wc -l)" -gt 0 ] ; do
-    apt-get purge $(deborphan -n)
+    apt-get purge "$(deborphan -n)"
 done
 
 # Erase the existing information about what packages are available.

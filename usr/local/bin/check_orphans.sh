@@ -6,9 +6,9 @@
 ignored_packages="pl@ceholder"
 
 for i in $(dpkg -l | tail -n +6 | cut -d' ' -f3 | egrep -v "$ignored_packages" ) ; do 
-   if [[ -z $(apt-cache madison $i) ]]; then
-     find /tmp/ -mtime 7 -name check_orphans* -delete 2>/dev/null
-     echo -n "$i " >> /tmp/check_orphans-$(date "+%d_%b_%G")
+   if [[ -z $(apt-cache madison "$i") ]]; then
+     find /tmp/ -mtime 7 -name "check_orphans*" -delete 2>/dev/null
+     echo -n "$i " >> /tmp/check_orphans-"$(date "+%d_%b_%G")"
    fi
 done
 
