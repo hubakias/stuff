@@ -16,7 +16,7 @@ fi
 
 
 # Check if we are root
-if [[ $EUID -ne 0 ]]; then
+if [ $EUID -ne 0 ]; then
     echo "This script must be run by root ..." 1>&2
     exit 1
 fi
