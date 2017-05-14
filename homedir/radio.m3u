@@ -1,0 +1,17 @@
+#EXTM3U
+
+#EXTINF:-1,Athens DJ - Athens DJ
+http://rdj-lh.akamaihd.net/i/live_1@324558/master.m3u8
+
+#EXTINF:-1,Red FM - Red FM
+http://s8.streammonster.com:8325
+
+##EXTINF:-1,ERA 2o - ERA 2o
+#http://nerit2radio-lh.akamaihd.net/i/deftero_1@123328/index_192_a-b.m3u8?sd=10&rebase=on
+
+#EXTINF:-1,?
+http://907ioannina.live24.gr/907ioannina
+
+#EXTINF:-1,Melodia - Melodia
+http://netradio.live24.gr:80/melodia
+
