@@ -2,7 +2,7 @@
 solaar
 
 # Generic
-shellcheck bash zsh nmap zmap
+shellcheck bash zsh nmap zmap ldnsutils
 
 # Nice/handy tools
 pv termsaver bsdmainutils ssh-agent-filter
