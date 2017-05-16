@@ -3,7 +3,7 @@
 shellcheck bash zsh nmap zmap
 
 # Nice/handy tools
-pv termsaver bsdmainutils
+pv termsaver bsdmainutils ssh-agent-filter
 
 
 # When isolated in a Windows domain, consider the below
