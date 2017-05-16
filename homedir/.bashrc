@@ -41,18 +41,19 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-function parse_git_branch_and_add_brackets {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ \[\1\]/'
+git_branch()
+{
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\[\1\] /'
 }
 
 if [[ "$color_prompt" = yes && $EUID = "0" ]]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[01;33m\]$(parse_git_branch_and_add_brackets)\[\033[01;34m\] \$\[\033[00m\] '
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h \[\033[01;34m\]\w \[\033[01;33m\]$(git_branch)\[\033[01;34m\]\$ \[\033[00m\]'
 else
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[01;33m\]$(parse_git_branch_and_add_brackets)\[\033[01;34m\] \$\[\033[00m\] '
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \[\033[01;33m\]$(git_branch)\[\033[01;34m\]\$ \[\033[00m\]'
 fi
 
 if [[ $(grep docker /proc/1/cgroup) ]] ; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[01;32m\]$(parse_git_branch_and_add_brackets)\[\033[01;34m\] \$\[\033[00m\] '
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u@\h \[\033[01;34m\]\w \[\033[01;33m\]$(git_branch)\[\033[01;34m\]\$ \[\033[00m\]'
 fi
 
 unset color_prompt force_color_prompt
@@ -135,5 +136,16 @@ fi
 # PS3 - Prompt used by “select” inside shell script
 # PS4 – Used by “set -x” to prefix tracing output
 
-# PROMPT_COMMAND will prepend the output of the command to PS1
-#export PROMPT_COMMAND="echo -n [$(date +%k:%m:%S)]"
+# PROMPT_COMMAND will prepend the output of the command (at first run) to PS1
+# export PROMPT_COMMAND="echo -n [$(date +%k:%m:%S)]"
+
+
+
+#export http_proxy=http://127.0.0.1:3128/
+#export https_proxy=$http_proxy
+#export ftp_proxy=$http_proxy
+#export rsync_proxy=$http_proxy
+
+#export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+
+#echo "Week number: $(date +%V)"
