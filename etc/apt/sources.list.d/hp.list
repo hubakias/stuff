@@ -1,0 +1,6 @@
+# HP repo - needed for hpacucli
+
+deb http://downloads.linux.hpe.com/SDR/repo/mcp/ jessie/current non-free
+
+# curl http://downloads.linux.hpe.com/SDR/hpePublicKey2048_key1.pub | apt-key add -
+
