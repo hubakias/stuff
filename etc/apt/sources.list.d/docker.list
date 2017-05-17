@@ -1,1 +1,5 @@
-deb https://apt.dockerproject.org/repo debian-jessie main
+deb [arch=amd64] https://download.docker.com/linux/debian jessie stable
+# deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) \
+#            stable"
+#
+# curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
