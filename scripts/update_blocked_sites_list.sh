@@ -10,6 +10,12 @@
 # Notes : Not specific paths.
 #
 
+if [ -z "$(which ssconvert)" ]; then
+  echo "This package needs ssconvert."
+  echo "Please install package gnumeric which contains it."
+  exit 1
+fi
+
 tmp_file="/tmp/$(date +%s%N | sha256sum | cut -d ' ' -f1).tmp"
 
 ####################################
