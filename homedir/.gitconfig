@@ -37,3 +37,10 @@
 #    d = diff --color-words # display diff words
 #    alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort # display aliases
 #    g = log --pretty=\"format: %G? %aN  %s\"
+
+[mergetool]
+        prompt = false
+
+[merge]
+        conflictstyle = diff3
+        tool = vimdiff
