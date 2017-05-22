@@ -8,5 +8,5 @@
   dateext
   copytruncate
   notifempty
-  create 640 root root
+  create 640 root root # make sure munin_stats has read access to these files
 }
