@@ -1,5 +1,5 @@
 # My desktop/laptop
-solaar
+solaar pandoc(+ tex dependencies)
 
 # Generic
 shellcheck bash zsh nmap zmap ldnsutils
