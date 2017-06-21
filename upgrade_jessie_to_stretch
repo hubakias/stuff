@@ -1,0 +1,29 @@
+#cat /etc/debian_version    # Current release
+#lsb_release -a             # Current release
+
+# Ensure that the the system is updated before proceeding with the upgrade.
+apt-get update
+apt-get upgrade
+
+dpkg -C                    # Check the database for consistency.
+apt-mark showhold          # List packages on hold.
+
+# Update the repos - Custom repos may not yet have packages for Stretch.
+sed -i "s#jessie#stretch#g" /etc/apt/sources.list.d/*.list
+sed -i "s#jessie#stretch#g" /etc/apt/sources.list
+
+apt-get clean              # Clean up all cached content.
+dpkg --clear-avail         # Clear the list of available packages.
+apt-get update             # Update the package cache based on the new repos.
+#aptitude search '~o'       # Find installed packages that cannot be downloaded.
+#apt list --upgradable      # List upgredable packages.
+apt-get -f dist-upgrade    # Upgrade
+
+# Purge stale/unneeded/orphan packages
+aptitude purge '~c'        # Purge packages that were removed but not purged.
+apt-get -f autoremove --purge
+while [ "$(deborphan -n)" ] ; do apt-get purge $(deborphan -n); done
+# There may be circular dependencies. Triplecheck the above.
+
+apt-get clean              # Clean up the cache.
+
