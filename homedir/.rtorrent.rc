@@ -9,7 +9,7 @@ session = ~/.rtorrent
 upload_rate = 3
 
 # Download directory
-directory=~/1
+directory=~/Downloads
 
 # Check hash of a torrent once it completes to verify all is good
 check_hash = yes
@@ -51,3 +51,8 @@ ratio.max.set=1
 ## Move files to ./unsorted when download completes
 #system.method.set_key = event.download.finished,move_complete,"execute=mv,-n,$d.get_base_path=,./unsorted/;d.set_directory=./unsorted/"
 
+# Logging
+execute_log = ~/.rtorrent/rtorrent.log
+
+# Use UDP trackers
+use_udp_trackers = yes

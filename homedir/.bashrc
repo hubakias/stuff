@@ -43,7 +43,7 @@ fi
 
 git_branch()
 {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\[\1\] /'
+  git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\[\1\] /'
 }
 
 if [[ "$color_prompt" = yes && $EUID = "0" ]]; then

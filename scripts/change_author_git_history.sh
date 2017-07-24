@@ -14,5 +14,5 @@ then
 fi
 ' --tag-name-filter cat -- --branches --tags
 
-# Use the below if the changes were push to a repo
+# Use the below command to force push the changes to the repository
 # git push --force --tags origin 'refs/heads/*'

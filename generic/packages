@@ -1,5 +1,5 @@
 # My desktop/laptop
-solaar pandoc(+ tex dependencies)
+solaar pandoc(+ tex dependencies) exiv2 mediainfo
 
 # Generic
 shellcheck bash zsh nmap zmap ldnsutils
@@ -10,3 +10,7 @@ pv termsaver bsdmainutils ssh-agent-filter
 
 # When isolated in a Windows domain, consider the below
 # cntlm
+
+
+# Logging
+logcheck logwatch
