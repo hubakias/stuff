@@ -1,0 +1,16 @@
+# Meant for ReHat distro and derivatives - Debian* has slapd
+/var/log/openldap/openldap.log {
+  olddir=/var/log/openldap/old/
+  weekly
+  rotate 53
+  compress
+  delaycompress
+  dateext
+  missingok
+  notifempty
+  create 640 root adm
+  sharedscripts
+  postrotate
+    invoke-rc.d rsyslog rotate > /dev/null
+  endscript
+}
