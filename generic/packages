@@ -11,6 +11,8 @@ pv termsaver bsdmainutils ssh-agent-filter
 # When isolated in a Windows domain, consider the below
 # cntlm
 
+# Security
+psad
 
 # Logging
 logcheck logwatch
