@@ -1,4 +1,4 @@
-*           hard            nofile          32764
+*           hard            nofile          32768
 *           hard            nproc           8192
 
 *           soft            nofile          16384

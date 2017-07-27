@@ -1,0 +1,4 @@
+mongod       soft        nproc        32768
+mongod       hard        nproc        32768
+mongod       soft        nofile       32768
+mongod       hard        nofile       32768
