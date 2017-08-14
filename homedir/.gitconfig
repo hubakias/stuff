@@ -1,46 +1,52 @@
 [color]
-    ui = auto
-    branch = auto
-    diff = auto
-    interactive = auto
-    status = auto
-    decorate = auto
-    grep = auto
+  ui = auto
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  decorate = auto
+  grep = auto
 
 [core]
-    editor = vim
-    autocrlf = input # remove crlf when introduced in new files
-    pager = less
-    excludesfile = ~/.gitignore
+  editor = vim
+  autocrlf = input # remove crlf when introduced in new files
+  pager = less
+  excludesfile = ~/.gitignore
 
 [push]
-    default = current
-#    default = upstream
+  default = current
+#  default = upstream
 
 [user]
-    name = 
-    email = 
-    mail = 
-    signingkey =
+  name = 
+  email = 
+  mail = 
+  signingkey =
 
 [https]
-    proxy = 
+  proxy = 
 
 [http]
-    proxy = 
+  proxy = 
 
-#[alias]
-#    s = status
-#    ll = log --stat --abbrev-commit # detailed history
-#    l = log --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset' # history overview
-#    sl = shortlog -sn # Commits per author
-#    d = diff --color-words # display diff words
-#    alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort # display aliases
-#    g = log --pretty=\"format: %G? %aN  %s\"
+[alias]
+#  s = status
+#  ll = log --stat --abbrev-commit # detailed history
+#  l = log --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset' # history overview
+#  sl = shortlog -sn # Commits per author
+#  d = diff --color-words # display diff words
+#  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort # display aliases
+#  g = log --pretty=\"format: %G? %aN  %s\"
+  wdiff = diff --word-diff=color --unified=1
 
 [mergetool]
-        prompt = false
+  prompt = false
 
 [merge]
-        conflictstyle = diff3
-        tool = vimdiff
+  conflictstyle = diff3
+  tool = vimdiff
+
+[diff "pandoc"]
+  textconv=pandoc --to=markdown
+  prompt = false
+
