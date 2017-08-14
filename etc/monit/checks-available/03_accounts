@@ -1,0 +1,17 @@
+# Check if the passwd file is readable - security concern
+check program read_shadow_file with path "/etc/monit/scripts/users_no_passwd.sh"
+  if status == 1 then alert
+
+# Check if there are users without a password set
+check program users_no_passwd with path "/etc/monit/scripts/users_no_passwd.sh"
+  if status == 2 then alert
+
+
+# Check if the passwd file is readable - security concern
+check program read_passwd_file with path "/etc/monit/scripts/user_ug-id_zero.sh"
+  if status == 1 then alert
+
+# Check if there are users with a UID or GID of zero (except root)
+check program user_gu_id_zero with path "/etc/monit/scripts/user_ug-id_zero.sh"
+  if status == 2 then alert
+
