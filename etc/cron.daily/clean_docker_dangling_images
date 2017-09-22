@@ -1,0 +1,1 @@
+00 04 * * * root [ $(which docker) ] && docker rmi $(docker images -f "dangling=true" -q)
