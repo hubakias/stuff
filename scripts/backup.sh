@@ -2,10 +2,20 @@
 
 # Simple rsync backup script
 
-bkp_dir="" #absolute path backup dir
-remote_host="" # remote host (IP or FQDN)
+# Remote how (IP or FQDN)
+remote_host="$1"
 
-rsync -aADXv --delete -e "ssh" --rsync-path="sudo rsync" $remote_host:/ "$bkp_dir"/ --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/lib/udev/devices/*,/var/spool/postfix/dev/*}
+# Backup directory - currently the location of the script
+bkp_dir="$(dirname "$0")/${remote_host}"
+
+touch "$(dirname $0)"/exclusions_"${remote_host}"
+
+rsync -aADXhvz --delete --delete-excluded -e "ssh" --rsync-path="sudo rsync" \
+  "${remote_host}":/ "${bkp_dir}" --exclude-from "./exclusions_${remote_host}"
 
 # Set the last backup date
-touch "$dir"
+touch "${bkp_dir}"
+
+# The exclusion list for a host usually include :
+#{/dev,/lib/udev/devices,/lost+found,/media,/mnt,/proc,/run,/sys,/tmp, \
+#  /var/spool,/var/cache}
