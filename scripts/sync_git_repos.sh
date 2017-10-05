@@ -15,9 +15,15 @@ dir_path="$(pwd)"
 err_dir="${red}Could not change into directory:${normal}"
 err_git="${red}Failed to pull repository!${normal}"
 
-if [ "$1" = "-f" ]; then
+# Dirty way to check if the below options are supplied in the command line.
+if [[ "$@" == *"-f"* ]]; then
 
-  ee="p"
+  if [[ "$@" == *"-r"* ]]; then
+    ee="r"
+  else
+    ee="p"
+  fi
+
   eee="yes"
 
 fi
