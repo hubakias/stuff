@@ -34,16 +34,28 @@ for i in $(find ./ -type d -name '.git' | sed "s/.git$//"); do
 
   cd "${dir_path}"/"${i}" || { echo "${err_dir} ${i}" ; continue ; }
 
-  if [ ! "$ee" ]; then read -r -n1 -p "Rebase/Pull (r/p)?" ee ; fi
+  if [ ! "$ee" ]; then read -r -s -n1 -p $'\nRebase/Pull (r/p)? : ' ee ; fi
+
+  if [ ! "$eee" ]; then read -r -n 5 -p $'\nCleanup (yes/no) ? : ' eee ; fi
 
   if [ "${ee,,}" = "p" ]; then
 
-    echo -e "\n${green}Pulling:${normal} ${bold}${i}${normal}"
+    repo="${blue}${bold}$(awk -F "/" '{print $NF}' <<< $(pwd))${normal}"
+    branch="[$(git branch --no-color 2> /dev/null | awk 'NR==1 {print $NF}')]"
+    branch="${yellow}${bold}${branch}${normal}"
+    echo
+#    echo -e "${bold}Directory:${normal} ${blue}${bold}${i}${normal}"
+    echo -e "${green}${bold}Pulling: ${repo} ${branch}"
     git pull --all || { echo "${err_git}" ; continue ; }
 
   elif [ "${ee,,}" = "r" ]; then
 
-    echo -e "\n${green}Rebasing:${normal} ${bold}${i}${normal}"
+    repo="${blue}${bold}$(awk -F "/" '{print $NF}' <<< $(pwd))${normal}"
+    branch="[$(git branch --no-color 2> /dev/null | awk 'NR==1 {print $NF}')]"
+    branch="${yellow}${bold}${branch}${normal}"
+    echo
+#    echo -e "\n${bold}Directory:${normal} ${blue}${bold}${i}${normal}"
+    echo -e "${green}${bold}Rebasing: ${repo} ${branch}"
     git pull --rebase || { echo "${err_git}" ; continue ; }
 
   else
@@ -53,11 +65,9 @@ for i in $(find ./ -type d -name '.git' | sed "s/.git$//"); do
   fi
 
 # Cleanup local stale entries
-  if [ ! "$eee" ]; then read -r -n 5 -p "Cleanup ??? (yes/no)" eee ; fi
-
   if [ "${eee,,}" = "yes" ]; then
 
-    echo -e "\n${green}Cleaning up:${normal} ${bold}${i}${normal}"
+    echo -e "${green}${bold}Cleaning up:${normal} ${bold}${i}${normal}"
     git remote update --prune origin || { echo "${err_git}" ; continue ; }
 
   else
