@@ -1,31 +1,52 @@
-kernel.sem = 250 32000 100 128
+# Considering Oracle 12 (.2) - 10/2017
 
-# free|grep -v free|awk '{s+=$2} END {print s / 2 * 0.4}'|xargs printf "%.0f\n"
-#kernel.shmall = 
+# RHEL7 and Debian9 have the below two at ~16EB (Yes ExxaBytes) - No change
+#kernel.shmall =
+#kernel.shmmax =
 
-# free|grep -v free|awk '{s+=$2} END {print s / 2}'|xargs printf "%.0f\n"
-#kernel.shmmax =  # Half the size of physical memory in bytes
+kernel.shmmni = 4096 # Default for RHEL7 and Debian9
 
-kernel.shmmni = 4096
+kernel.panic_on_oops = 1 # Do not trust the system after oops
 
-kernel.panic_on_oops = 1
+# Oracle recommends at least 6815744 - much higher than RH7-Deb9 default
+fs.file-max = 8388608 # My touch 8*(2**20) - tsigounies that kanoume?
 
-fs.file-max = 6815744
+fs.aio-max-nr = 1048576 # 16x the default of RH7-Deb9
 
-fs.aio-max-nr = 1048576
-
-net.ipv4.ip_local_port_range = 9000 65500
+net.ipv4.ip_local_port_range = 8192 65535
 
 net.core.rmem_default = 262144
-
 net.core.rmem_max = 4194304
-
 net.core.wmem_default = 262144
-
 net.core.wmem_max = 1048576
 
-# From https://wiki.debian.org/DataBase/Oracle
-#
 # The value for vm.hugetlb_shm_group should be the gid number of the dba group.
-# vm.hugetlb_shm_group = 
+# vm.hugetlb_shm_group =
+
 vm.nr_hugepages = 64
+
+# Oracle suggests to disable Transparent Huge Pages (THP)
+# Put the below in grub as a kernel parameter
+#transparent_hugepage=never
+# In order to disable in runtime
+# (cannot reclaim what has already been assigned without a reboot)
+#echo never > /sys/kernel/mm/transparent_hugepage/enabled
+#echo never > /sys/kernel/mm/transparent_hugepage/defrag
+ 
+kernel.sem = 256 32768 128 128
+
+vm.swappiness = 1 # Avoid swapping
+
+# For the below, either bytes or ratio(of total memory) need to be set.
+# The most recent takes precedence
+vm.dirty_background_ratio = 3
+#vm.dirty_background_bytes = xxxx
+vm.dirty_ratio = 80
+#vm.dirty_bytes = xxxx
+
+# Max allowed time in cache before syncing to disk
+vm.dirty_expire_centisecs = 500 # 5 seconds
+
+# How often to wake up, check and if necessary(^) flush.
+vm.dirty_writeback_centisecs = 100 # 1 sec
+
