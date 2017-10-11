@@ -2,16 +2,39 @@
 
 # Install the rlwrap package (will provide history and autocomplete)
 
-# Add the below to the env of the oracle user - you need to fill the entries
+# Add the below to the env of the oracle user - example entries
 
-export ORACLE_HOSTNAME=""
+# Oracle Settings
+export TMP="/tmp"
+export TMPDIR="$TMP"
 
-export ORACLE_BASE=""
+export ORACLE_HOSTNAME="$(hostname)"
+export ORACLE_BASE="/u01/app/oracle"
 
-export ORACLE_HOME="$ORACLE_BASE/..."
+# The path where the base bin directory is located
+export ORACLE_HOME="$ORACLE_BASE/product/12.2.0/dbhome_1"
 
-export PATH="$ORACLE_HOME/bin:$PATH"
+# The path under which the *.ora files exist
+export TNS_ADMIN="/home/oracle/tnsadmin"
+
+# Appended at the end of the ora* processes - dirty way
+export ORACLE_SID="xxxxxxxx"
+
+# Just to be safe
+export PATH="$ORACLE_HOME/bin:/usr/sbin:/usr/local/bin:$PATH"
+
+export LD_LIBRARY_PATH="$ORACLE_HOME/lib:/lib:/usr/lib"
+export CLASSPATH="$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib"
+
 
 alias sqlplus="/usr/bin/rlwrap $ORACLE_HOME/bin/sqlplus"
 alias lsnrctl="/usr/bin/rlwrap $ORACLE_HOME/bin/lsnrctl"
 
+export PATH="${ORACLE_HOME}/bin:$PATH}"
+
+alias sqlplus="/usr/bin/rlwrap ${ORACLE_HOME}/bin/sqlplus"
+alias lsnrctl="/usr/bin/rlwrap ${ORACLE_HOME}/bin/lsnrctl"
+
+####
+
+# [oracle@xxxxxxxx ~]$ sqlplus '/ as sysdba'
