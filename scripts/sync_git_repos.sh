@@ -40,7 +40,7 @@ for i in $(find ./ -type d -name '.git' | sed "s/.git$//"); do
 
   if [ "${ee,,}" = "p" ]; then
 
-    repo="${blue}${bold}$(awk -F "/" '{print $NF}' <<< $(pwd))${normal}"
+    repo="${blue}${bold}$(awk -F "/" '{print $NF}' <<< "$(pwd)")${normal}"
     branch="[$(git branch --no-color 2> /dev/null | awk 'NR==1 {print $NF}')]"
     branch="${yellow}${bold}${branch}${normal}"
     echo
@@ -50,7 +50,7 @@ for i in $(find ./ -type d -name '.git' | sed "s/.git$//"); do
 
   elif [ "${ee,,}" = "r" ]; then
 
-    repo="${blue}${bold}$(awk -F "/" '{print $NF}' <<< $(pwd))${normal}"
+    repo="${blue}${bold}$(awk -F "/" '{print $NF}' <<< "$(pwd)")${normal}"
     branch="[$(git branch --no-color 2> /dev/null | awk 'NR==1 {print $NF}')]"
     branch="${yellow}${bold}${branch}${normal}"
     echo

@@ -19,3 +19,10 @@ touch "${bkp_dir}"
 # The exclusion list for a host usually include :
 #{/dev,/lib/udev/devices,/lost+found,/media,/mnt,/proc,/run,/sys,/tmp, \
 #  /var/spool,/var/cache}
+
+# For "sudo rsync" to work, add to the host(s) in a/the sudoers file :
+# "username ALL = NOPASSWD: /usr/bin/rsync ...$args"
+# Change the username accordingly.
+# Do not forget to add the precise arguments. Avoid using wildcards.
+
+exit 0
