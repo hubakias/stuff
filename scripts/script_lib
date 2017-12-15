@@ -7,7 +7,7 @@ if test -t 1; then
   # Check if the terminal supports colors
   ncolors=$(tput colors)
 
-  if [ "$ncolors" ] && [ "$ncolors" -ge 16 ]; then
+  if [ "$ncolors" ] && [ "$ncolors" -gt 16 ]; then
 
     normal="$(tput sgr0)"        # Turn off all attributes
     bold="$(tput bold)"          # Bold
