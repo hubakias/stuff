@@ -1,0 +1,10 @@
+# Quick fix for Dynazoom
+
+file_to_modify="$(updatedb && locate -r munin-cgi-graph$)"
+for dynazoom, on the munin-server modify /var/www/cgi-bin/munin-cgi-graph
+modify the lines :
+push @params, "--upper_limit", $upper_limit if defined $upper_limit;
+push @params, "--lower_limit", $lower_limit if defined $lower_limit;
+with:
+push @params, "--upper_limit", $upper_limit if defined $upper_limit && $upper_limit ne "";
+push @params, "--lower_limit", $lower_limit if defined $lower_limit && $upper_limit ne "";
