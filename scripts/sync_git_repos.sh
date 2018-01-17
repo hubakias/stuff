@@ -17,29 +17,20 @@ err_git="${red}Failed to pull repository!${normal}"
 
 # Dirty way to check if the below options are supplied in the command line.
 if [[ "$@" == *"-f"* ]]; then
-
   if [[ "$@" == *"-r"* ]]; then
     ee="r"
   else
     ee="p"
   fi
-
   eee="yes"
-
 fi
-
 
 # Execute
 for i in $(find ./ -type d -name '.git' | sed "s/.git$//"); do
-
   cd "${dir_path}"/"${i}" || { echo "${err_dir} ${i}" ; continue ; }
-
   if [ ! "$ee" ]; then read -r -s -n1 -p $'\nRebase/Pull (r/p)? : ' ee ; fi
-
   if [ ! "$eee" ]; then read -r -n 5 -p $'\nCleanup (yes/no) ? : ' eee ; fi
-
   if [ "${ee,,}" = "p" ]; then
-
     repo="${blue}${bold}$(awk -F "/" '{print $NF}' <<< "$(pwd)")${normal}"
     branch="[$(git branch --no-color 2> /dev/null | awk 'NR==1 {print $NF}')]"
     branch="${yellow}${bold}${branch}${normal}"
@@ -47,9 +38,7 @@ for i in $(find ./ -type d -name '.git' | sed "s/.git$//"); do
 #    echo -e "${bold}Directory:${normal} ${blue}${bold}${i}${normal}"
     echo -e "${green}${bold}Pulling: ${repo} ${branch}"
     git pull --all || { echo "${err_git}" ; continue ; }
-
   elif [ "${ee,,}" = "r" ]; then
-
     repo="${blue}${bold}$(awk -F "/" '{print $NF}' <<< "$(pwd)")${normal}"
     branch="[$(git branch --no-color 2> /dev/null | awk 'NR==1 {print $NF}')]"
     branch="${yellow}${bold}${branch}${normal}"
@@ -57,16 +46,12 @@ for i in $(find ./ -type d -name '.git' | sed "s/.git$//"); do
 #    echo -e "\n${bold}Directory:${normal} ${blue}${bold}${i}${normal}"
     echo -e "${green}${bold}Rebasing: ${repo} ${branch}"
     git pull --rebase || { echo "${err_git}" ; continue ; }
-
   else
-
     echo "Moving on ..."
-
   fi
 
 # Cleanup local stale entries
   if [ "${eee,,}" = "yes" ]; then
-
     echo -e "${green}${bold}Cleaning up:${normal} ${bold}${i}${normal}"
     git remote update --prune origin || { echo "${err_git}" ; continue ; }
     git fetch -p || { echo "${err_git}" ; continue ; }
@@ -76,15 +61,9 @@ for i in $(find ./ -type d -name '.git' | sed "s/.git$//"); do
       if [ ! ${del} = "yes" ]; then continue ; fi
       git branch -D ${i}
     done
-
   else
-
     echo -e "\nNothing to do ..."
-
   fi
-
 done
-
 echo
-
 exit 0
