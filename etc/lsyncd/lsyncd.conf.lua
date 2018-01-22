@@ -2,7 +2,8 @@ settings = {
     logfile = "/var/log/lsyncd/lsyncd.log",
 --    pidfile = "/var/run/lsyncd.pid",
 --    nodaemon = "true",
-    statusFile = "/var/log/lsyncd/lsyncd.status"
+    statusFile = "/var/log/lsyncd/lsyncd.status",
+--    statusInterval = 1,
 }
 
 sync {
