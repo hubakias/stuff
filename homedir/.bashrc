@@ -91,7 +91,11 @@ fi
 HISTCONTROL=ignorespace
 HISTSIZE=10000
 HISTFILESIZE=20000
-HISTTIMEFORMAT="%F %T "
+#HISTTIMEFORMAT="%F %T "
+#HISTTIMEFORMAT="%x %X " # Use representation from locale
+#LC_TIME=C # For 24 hour representation
+HISTTIMEFORMAT="%x %T "
+
 shopt -s histappend
 
 # See who is logged in
