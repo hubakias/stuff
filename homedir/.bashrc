@@ -88,7 +88,7 @@ if ! shopt -oq posix; then
 fi
 
 # History stuff
-HISTCONTROL=ignorespace
+HISTCONTROL=ignorespace:erasedups
 HISTSIZE=10000
 HISTFILESIZE=20000
 #HISTTIMEFORMAT="%F %T "
@@ -153,3 +153,6 @@ fi
 #export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
 
 #echo "Week number: $(date +%V)"
+
+# Make sure the user ends up in the homedir (if set ...).
+cd ${HOME}
