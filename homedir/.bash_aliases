@@ -36,5 +36,5 @@ swap_usage() {
 # Occupy a portion of the memory. CAUTION
 memory_fill() {
   \dd if=/dev/zero of=/dev/shm/fill bs=1k count=1024k
-#  \dd if=/dev/zero of=/dev/shm/fill bs=1m count="$1"
+#  \dd if=/dev/zero of=/dev/shm/fill bs=1M count="$1"
 }
