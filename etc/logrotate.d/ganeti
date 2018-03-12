@@ -2,7 +2,7 @@
   olddir=/var/log/ganeti/old/
   weekly
   missingok
-  rotate 53
+  rotate 52
   notifempty
   compress
   delaycompress

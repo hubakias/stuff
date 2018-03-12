@@ -1,7 +1,7 @@
 /var/log/dhcpd/dhcpd.log {
   olddir=/var/log/dhcpd/old/
   weekly
-  rotate 53
+  rotate 52
   compress
   delaycompress
   dateext

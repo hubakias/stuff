@@ -1,7 +1,7 @@
 /var/log/named/*.log {
   olddir=/var/log/named/old/
   weekly
-  rotate 53
+  rotate 52
   dateext
   compress
   delaycompress

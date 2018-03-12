@@ -2,7 +2,7 @@
 /var/log/openldap/openldap.log {
   olddir=/var/log/openldap/old/
   weekly
-  rotate 53
+  rotate 52
   compress
   delaycompress
   dateext
@@ -11,6 +11,6 @@
   create 640 root adm
   sharedscripts
   postrotate
-    invoke-rc.d rsyslog rotate > /dev/null
+    /bin/kill -HUP $(cat /var/run/syslogd.pid 2> /dev/null) 2> /dev/null || true
   endscript
 }

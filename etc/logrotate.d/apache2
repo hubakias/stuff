@@ -3,7 +3,7 @@
 #  olddir=old/ # relative to the path of the log file(s)
   weekly
   missingok
-  rotate 53
+  rotate 52
   compress
   dateext
   delaycompress
