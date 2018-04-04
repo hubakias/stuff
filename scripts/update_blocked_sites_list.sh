@@ -1,25 +1,22 @@
 #!/bin/bash
 #
-# Released under the GPL v2
-# Last update May 2017
+# List malicious sites (domain) - check below
 #
-# Gather "malicious" site list
+# 2017-2018 kostikas
+#
+# Released under the GPL v3
+#
 # Meant to be used for the /etc/hosts file and/or Squid.
 #
-# Notes : At the moment the whole domain is considered "malicious"
-# Notes : Not specific paths.
-#
 
-# Check if ssconvert exists - needed to convert and parse files
+# Check if ssconvert exists (gnumeric) - needed to convert and parse files
 if [ -z "$(which ssconvert)" ]; then
   echo "This package needs ssconvert."
   echo "Please install package gnumeric which contains it."
   exit 1
 fi
 
-# A random hash to use for storing the temporary files (in /tmp - volatile)
-#tmp_file="/tmp/$(date +%s%N | sha256sum | cut -d ' ' -f1).tmp" # too long
-tmp_file="/tmp/$(date +%s%N | md5sum | cut -d ' ' -f1).tmp"
+tmp_file="/tmp/kt_${RANDOM}.tmp"
 
 
 ####################################
@@ -55,7 +52,7 @@ curl --connect-timeout 3 -m 10 -s -o "$tmp_file" $url
 
 # Parse the content of the file (above) and provide an easier to use file.
 cut -d '"' -f4,6 "$tmp_file" | grep ^- | sed "s/^..//" | cut -d "/" -f1 | \
-cut -d ":" -f1 | sort | uniq > "$tmp_file".ips.md # IPs only
+cut -d ":" -f1 | sort | uniq > "/tmp/$(date +%F)_bad_IPs"
 cut -d '"' -f4,6 "$tmp_file" | grep -v ^- | sed "s/\/.*//" | cut -d '"' -f1 | \
 grep -v ^$ | sort | uniq | sed "s/^/127.0.0.1 /" > "$tmp_file".dom.md # domains
 
@@ -64,12 +61,27 @@ rm -f "$tmp_file"
 rm -f "$tmp_file".csv
 
 # Concatenate the files that contain domain names only
-cat "$tmp_file".gc "$tmp_file".dom.md | sort | uniq > "$tmp_file".hosts
+cat "$tmp_file".[gd]* | sort | uniq > "/tmp/$(date +%F)_bad_domains"
 
 # Results
-echo -e "\nOutput file of Gaming commission gov gr : ""$tmp_file"".gc\n"
-echo -e "Output file of Malware Domain list (IPs): ""$tmp_file"".ips.md\n"
-echo -e "Output file of Malware Domain list (Domains): ""$tmp_file"".dom.md\n"
-echo -e "Merged file of all domain based output : ""$tmp_file"".hosts\n"
+#echo -e "\nOutput file of Gaming commission gov gr : ""$tmp_file"".gc"
+echo -e "\nMalware IP list : ""$(wc -l /tmp/$(date +%F)_bad_IPs)"
+#echo -e "\nOutput file of Malware Domain list (Domains): ""$tmp_file"".dom.md"
+echo -e "\nMalware Domain list : ""$(wc -l /tmp/$(date +%F)_bad_domains)\n"
+
+# Compare with /etc/hosts and report
+# diff -u /etc/hosts /tmp/2018-04-03_bad_domains | \
+# sed "s/^-127.0.0.1/Removed:/p" | sed "s/^+127.0.0.1/Added:/" | \
+# egrep "^Add|^Rem" | sort
+
+# Regenerate /etc/hosts file
+# cat /etc/hosts.base /tmp/$(date +%F)_bad_domains > /etc/hosts
+
+# Add reported IPs to the firewall
+# for i in $(cat /tmp/$(date +%F)_bad_IPs) ; do
+#   iptables -I INPUT -s $i -j DROP
+# done
+
+
 
 exit 0
