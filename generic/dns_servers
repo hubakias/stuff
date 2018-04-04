@@ -1,0 +1,9 @@
+# DNS Providers
+nameserver 8.8.8.8         # Google: Private and unfiltered. Most popular option.
+nameserver 1.1.1.1         # CloudFlare: Private and unfiltered. New player.
+nameserver 9.9.9.9         # Quad9: Private and security aware. New player that blocks access to malicious domains.
+nameserver 208.67.222.222  # OpenDNS: Old player that blocks malicious domains and offers the option to block adult content.
+nameserver 199.85.126.20   # Norton DNS: Old player that blocks malicious domains and is integrated with their Antivirus.
+nameserver 185.228.168.168 # CleanBrowsing: Private and security aware. New player that blocks access to adult content.
+nameserver 77.88.8.7       # Yandex DNS: Old player that blocks malicious domains. Very popular in Russia.
+nameserver 8.26.56.26      # Comodo DNS: Old player that blocks malicious domains.
