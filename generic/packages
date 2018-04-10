@@ -1,8 +1,8 @@
 # My desktop/laptop
-solaar pandoc(+ tex dependencies) exiv2 mediainfo
+solaar pandoc(+ tex dependencies) exiv2 mediainfo bpython
 
 # Generic - tools
-shellcheck bash zsh nmap zmap ldnsutils
+shellcheck bash zsh nmap zmap ldnsutils urlview
 
 # Generic
 rdesktop
