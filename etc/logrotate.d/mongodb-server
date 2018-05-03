@@ -1,5 +1,6 @@
+# MongoDB configuration  
 /var/log/mongodb/*.log {
-  olddir=/var/log/postgresql/old/
+  olddir=/var/log/mongodb/old/
   weekly
   rotate 12
   copytruncate

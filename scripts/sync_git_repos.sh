@@ -58,7 +58,7 @@ for i in $(find ./ -type d -name '.git' | sed "s/.git$//"); do
     for i in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do
       echo "${red}Warning: ${yellow}${i}${normal} has no remote."
       read -n3 -p "Remove it? (yes/${bold}no${normal})" del
-      if [ ! ${del} = "yes" ]; then continue ; fi
+      if [ ! ${del} = "yes" ]; then echo "" && continue ; fi
       git branch -D ${i}
     done
   else
