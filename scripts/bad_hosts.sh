@@ -31,3 +31,7 @@ cat "$tmp_file" | egrep "^127.0.0.1 |^0.0.0.0 " | sed -e "s/^127.0.0.1 //" -e "s
 # Cleanup
 rm -f "$tmp_file"
 
+
+# Add custom entries
+#127.0.0.1 dondraper.funda.io
+#127.0.0.1 ad.doubleclick.net
