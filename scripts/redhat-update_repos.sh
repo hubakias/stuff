@@ -7,10 +7,10 @@
 # Can be used in any distro that has the "createrepo" package.
 
 
-# Check if "createrepo exists in the available path"
+# Check if "createrepo exists in the executable path"
 if [ ! "$(which createrepo)" ]; then
     echo "The package \"createrepo\" is not available in the executable path."
-    echo "The packge is probably not installed. Exiting ..."
+    echo "The package is probably not installed. Exiting ..."
     exit 1
 fi
 
@@ -24,7 +24,7 @@ fi
 
 # Folder which contains all repositories. Also, contains the "all"
 # folder which contains packages common to all other repositories.
-repo_dir="/srv/yum_repo"
+repo_dir="/srv/yum_repos"
 
 
 # Repositories
