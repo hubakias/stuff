@@ -40,7 +40,7 @@ done
 cd $repo_dir || exit 1
 for i in $repos ; do
   reposync -l -d -n -r epel"$i"
-  createrepo --update --basedir epel"$i" epel"$i"
+  createrepo --update --basedir epel"$i" "$(pwd)"/epel"$i"
 done
 
 exit 0
