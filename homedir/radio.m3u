@@ -1,17 +1,35 @@
 #EXTM3U
 
-#EXTINF:-1,Athens DJ - Athens DJ
-http://rdj-lh.akamaihd.net/i/live_1@324558/master.m3u8
+#EXTINF:0, Athens Radio DJ
+http://netradio.live24.gr:80/athensdeejay
 
-#EXTINF:-1,Red FM - Red FM
-http://s8.streammonster.com:8325
+#EXTINF:0, Dromos
+http://dromos898.live24.gr:80/dromos89
 
-##EXTINF:-1,ERA 2o - ERA 2o
-#http://nerit2radio-lh.akamaihd.net/i/deftero_1@123328/index_192_a-b.m3u8?sd=10&rebase=on
+#EXTINF:0, Best
+http://best.live24.gr:80/best1222
 
-#EXTINF:-1,?
+#EXTINF:0, Skai
+http://netradio.live24.gr:80/skai100
+
+#EXTINF:0, Melodia
+http://ample-11.radiojar.com:80/melodia992
+#http://netradio.live24.gr:80/melodia
+
+#EXTINF:0, Diesi
+http://diesi.live24.gr:80/diesi1013
+
+#EXTINF:0, Sfera
+http://sfera.live24.gr:80/sfera4132
+
+#EXTINF:0, Red
+http://stream.radiojar.com:80/redfm963
+
+#EXTINF:0, Kiss
+http://kissfm.live24.gr:80/kissfmathens
+
+#EXTINF:0, Love Radio
+http://loveradio.live24.gr:80/loveradio-1000
+
+#EXTINF:-1, No idea
 http://907ioannina.live24.gr/907ioannina
-
-#EXTINF:-1,Melodia - Melodia
-http://netradio.live24.gr:80/melodia
-
