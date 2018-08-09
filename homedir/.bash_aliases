@@ -38,3 +38,14 @@ memory_fill() {
   \dd if=/dev/zero of=/dev/shm/fill bs=1k count=1024k
 #  \dd if=/dev/zero of=/dev/shm/fill bs=1M count="$1"
 }
+
+# Get the branch that the current branch spawned from.
+# Basic heuristics - limit to branches develop and any starting with "release/".
+git_parent_branch() {
+  git log --oneline | cut -f 1 -d' ' | (while read commit ; do \
+other_branches="$(git branch --contains $commit | egrep -v '^\* ')"; \
+if [ -n "${other_branches}" ] ; then echo -e "${commit} is \
+in:\n${other_branches}"; break; fi; done | egrep "^  release/|^  develop$" \
+| awk '{print $1}')
+}
+
