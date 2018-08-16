@@ -1,0 +1,19 @@
+# Create a selfsigned certificate
+# req (csr), x509 (type), encryption, 
+openssl req -x509 -sha256 -newkey rsa:2048 -keyout certificate.key -out certificate.crt -days 1024 -nodes -config file.cnf
+
+# For multiple alternative names use in the cnf file (base it on the used openssl.cnf)
+
+...
+[ v3_ca ]
+subjectAltName      = @alternate_names
+...
+
+copy_extensions = copy # make sure this is uncommented in the openssl.cnf file
+
+[ alternate_names ]
+
+DNS.1 = www.google.com
+DNS.2 = www.test.com
+IP.1  = 8.8.8.8
+IP.2  = 8.8.8.4
