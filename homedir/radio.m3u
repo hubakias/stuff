@@ -1,35 +1,47 @@
 #EXTM3U
 
 #EXTINF:0, Athens Radio DJ
-http://netradio.live24.gr:80/athensdeejay
+http://netradio.live24.gr/athensdeejay
 
 #EXTINF:0, Dromos
-http://dromos898.live24.gr:80/dromos898
+http://dromos898.live24.gr/dromos898
 
 #EXTINF:0, Best
-http://best.live24.gr:80/best1222
+http://best.live24.gr/best1222
 
 #EXTINF:0, Skai
-http://netradio.live24.gr:80/skai1003
+http://netradio.live24.gr/skai1003
 
 #EXTINF:0, Melodia
-http://ample-11.radiojar.com:80/melodia992
-#http://netradio.live24.gr:80/melodia
+http://netradio.live24.gr:80/melodia
 
 #EXTINF:0, Diesi
-http://diesi.live24.gr:80/diesi1013
+http://diesi.live24.gr/diesi1013
 
 #EXTINF:0, Sfera
-http://sfera.live24.gr:80/sfera4132
+http://sfera.live24.gr/sfera4132
 
 #EXTINF:0, Red
-http://stream.radiojar.com:80/redfm963
+http://stream.radiojar.com/redfm963
 
 #EXTINF:0, Kiss
-http://kissfm.live24.gr:80/kissfmathens
+http://kissfm.live24.gr/kissfmathens
 
 #EXTINF:0, Love Radio
-http://loveradio.live24.gr:80/loveradio-1000
+http://loveradio.live24.gr/loveradio-1000
 
-#EXTINF:-1, No idea
+#EXTINF:0, No idea
 http://907ioannina.live24.gr/907ioannina
+
+#EXTINF:0,Nitro
+http://nitro.live24.gr/nitro4555
+
+#EXTINF:0, Derti
+http://derti.live24.gr/derty1000
+
+#EXTINF:0, Galaxy
+http://galaxy.live24.gr/galaxy9292
+
+#EXTINF:0, Mad
+http://mediaserver.mad.tv/stream
+
