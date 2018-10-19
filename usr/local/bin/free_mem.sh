@@ -11,7 +11,7 @@ fi
 
 used_swap_partitions="$(tail /proc/swaps -n +2 | awk '$4 != "0" {print $1}')"
 
-# Sync data to disks (just to be safe since we will drop al caches below)
+# Sync data to disks (just to be safe since we will drop all caches below)
 sync
 
 # Drop all caches
