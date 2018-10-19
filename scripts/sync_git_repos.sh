@@ -16,42 +16,30 @@ err_dir="${red}Could not change into directory:${normal}"
 err_git="${red}Failed to pull repository!${normal}"
 
 # Dirty way to check if the below options are supplied in the command line.
-if [[ "$@" == *"-f"* ]]; then
-  if [[ "$@" == *"-r"* ]]; then
-    ee="r"
-  else
-    ee="p"
-  fi
-  eee="yes"
-fi
+if [[ "$@" == *"-f"* ]]; then force="yes" ; fi
+if [[ "$@" == *"-r"* ]]; then rebase="true" ; fi
 
-# Execute
-for i in $(find ./ -type d -name '.git' | sed "s/.git$//"); do
+apply () {
   cd "${dir_path}"/"${i}" || { echo "${err_dir} ${i}" ; continue ; }
-  if [ ! "$ee" ]; then read -r -s -n1 -p $'\nRebase/Pull (r/p)? : ' ee ; fi
-  if [ ! "$eee" ]; then read -r -n 5 -p $'\nCleanup (yes/no) ? : ' eee ; fi
-  if [ "${ee,,}" = "p" ]; then
+  if [ ! "$force" ]; then read -r -n 5 -p $'\nCleanup (yes/no) ? : ' force ; fi
+  if [ ! "$rebase" ]; then
     repo="${blue}${bold}$(awk -F "/" '{print $NF}' <<< "$(pwd)")${normal}"
     branch="[$(git branch --no-color 2> /dev/null | awk 'NR==1 {print $NF}')]"
     branch="${yellow}${bold}${branch}${normal}"
     echo
-#    echo -e "${bold}Directory:${normal} ${blue}${bold}${i}${normal}"
     echo -e "${green}${bold}Pulling: ${repo} ${branch}"
     git pull --all || { echo "${err_git}" ; continue ; }
-  elif [ "${ee,,}" = "r" ]; then
+  else
     repo="${blue}${bold}$(awk -F "/" '{print $NF}' <<< "$(pwd)")${normal}"
     branch="[$(git branch --no-color 2> /dev/null | awk 'NR==1 {print $NF}')]"
     branch="${yellow}${bold}${branch}${normal}"
     echo
-#    echo -e "\n${bold}Directory:${normal} ${blue}${bold}${i}${normal}"
     echo -e "${green}${bold}Rebasing: ${repo} ${branch}"
-    git pull --rebase || { echo "${err_git}" ; continue ; }
-  else
-    echo "Moving on ..."
+    git pull --rebase || { echo "${err_git}" ; }
   fi
 
 # Cleanup local stale entries
-  if [ "${eee,,}" = "yes" ]; then
+  if [ "${force,,}" = "yes" ]; then
     echo -e "${green}${bold}Cleaning up:${normal} ${bold}${i}${normal}"
     git remote update --prune origin || { echo "${err_git}" ; continue ; }
     git fetch -p || { echo "${err_git}" ; continue ; }
@@ -64,6 +52,13 @@ for i in $(find ./ -type d -name '.git' | sed "s/.git$//"); do
   else
     echo -e "\nNothing to do ..."
   fi
-done
-echo
+}
+
+# Execute
+if [ ! "$(find ./ -type d -name '.git' | sed "s/.git$//")" ]; then
+  if [ "$(git branch --no-color 2> /dev/null)" ] ;then apply ; fi
+else
+  for i in $(find ./ -type d -name '.git' | sed "s/.git$//"); do apply ; done
+fi
+
 exit 0
