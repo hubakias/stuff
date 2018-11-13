@@ -1,12 +1,26 @@
 
+[BlurScope]
+color=14815566
+
+[CDDA]
+disc_speed=4
+
 [aosd]
 decoration_code=1
-position_offset_x=12
-position_offset_y=12
+position_offset_x=10
+position_offset_y=10
+text_fonts_name_0=FreeMono Bold 22
+trigger_enabled=1,1,1,1
 
 [audacious]
-advance_on_delete=TRUE
 chardet_fallback=ISO-8859-7
+clear_playlist=FALSE
+generic_title_format=${?artist:${artist} - }${title}
+leading_zero=TRUE
+show_hours=FALSE
+
+[audgui]
+info_win=692,331,528,349
 
 [globalHotkey]
 Hotkey_0_event=0
@@ -30,11 +44,11 @@ Hotkey_4_key=56
 Hotkey_4_mask=64
 Hotkey_4_type=0
 Hotkey_5_event=5
-Hotkey_5_key=85
+Hotkey_5_key=114
 Hotkey_5_mask=64
 Hotkey_5_type=0
 Hotkey_6_event=6
-Hotkey_6_key=83
+Hotkey_6_key=113
 Hotkey_6_mask=64
 Hotkey_6_type=0
 Hotkey_7_event=7
@@ -52,14 +66,36 @@ Hotkey_9_type=0
 NumHotkeys=10
 
 [gtkui]
-column_expand=1,1,1,0,0
-column_widths=-1,-1,-1,-1,-1
-entry_count_visible=TRUE
-player_x=1156
-player_y=678
+column_widths=10,275,175,10,175,175,10,100,32,10,275,275,275,10
+player_height=1015
+player_width=1920
+player_x=0
+player_y=0
 
 [gtkui-layout]
 item_count=0
+
+[skins]
+equalizer_visible=TRUE
+equalizer_x=316
+equalizer_y=31
+mainwin_font=FreeMono Bold 9
+mainwin_use_bitmapfont=FALSE
+player_x=41
+player_y=31
+playlist_font=FreeSerif 14
+playlist_height=522
+playlist_visible=TRUE
+playlist_width=550
+playlist_x=41
+playlist_y=147
+show_remaining_time=TRUE
+skin=/usr/share/audacious/Skins/Classic
+
+[skins-layout]
+blur_scope=1264,0,288,192
+cairo-spectrum=1264,0,288,192
+gl-spectrum=1264,0,288,192
 
 [statusicon]
 close_to_tray=TRUE

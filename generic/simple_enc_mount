@@ -1,0 +1,9 @@
+# assume vdb as the encrypted block device
+# Follow instuctions from command output
+
+apt-get install cryptsetup
+cryptsetup luksFormat /dev/vdb
+cryptsetup luksOpen /dev/vdb data
+apt-get install xfsprogs 
+mkfs.xfs /dev/mapper/data 
+mount /dev/mapper/data ${enc_mount_point}
