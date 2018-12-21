@@ -20,7 +20,7 @@ if [[ "$@" == *"-f"* ]]; then force="yes" ; fi
 if [[ "$@" == *"-r"* ]]; then rebase="true" ; fi
 
 apply () {
-  cd "${dir_path}"/"${i}" || { echo "${err_dir} ${i}" ; continue ; }
+  cd "${dir_path}"/"${i}" || echo "${err_dir} ${i}"
   if [ ! "$force" ]; then read -r -n 5 -p $'\nCleanup (yes/no) ? : ' force ; fi
   if [ ! "$rebase" ]; then
     repo="${blue}${bold}$(awk -F "/" '{print $NF}' <<< "$(pwd)")${normal}"
@@ -28,7 +28,7 @@ apply () {
     branch="${yellow}${bold}${branch}${normal}"
     echo
     echo -e "${green}${bold}Pulling: ${repo} ${branch}"
-    git pull --all || { echo "${err_git}" ; continue ; }
+    git pull --all || echo "${err_git}"
   else
     repo="${blue}${bold}$(awk -F "/" '{print $NF}' <<< "$(pwd)")${normal}"
     branch="[$(git branch --no-color 2> /dev/null | awk 'NR==1 {print $NF}')]"
@@ -41,8 +41,8 @@ apply () {
 # Cleanup local stale entries
   if [ "${force,,}" = "yes" ]; then
     echo -e "${green}${bold}Cleaning up:${normal} ${bold}${i}${normal}"
-    git remote update --prune origin || { echo "${err_git}" ; continue ; }
-    git fetch -p || { echo "${err_git}" ; continue ; }
+    git remote update --prune origin || echo "${err_git}"
+    git fetch -p || echo "${err_git}"
     for i in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do
       echo "${red}Warning: ${yellow}${i}${normal} has no remote."
       read -n3 -p "Remove it? (yes/${bold}no${normal}): " del && echo ""
