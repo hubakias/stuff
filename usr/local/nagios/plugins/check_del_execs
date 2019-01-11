@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Nagios plugin to check for deleted binaries that are still in use.
+
+nr_deleted_exes="$(find /proc/[1-9]* -maxdepth 1 -name exe -xtype l | wc -l)"
+
+if [ "$nr_deleted_exes" -ne 0 ]; then
+  echo "Critical! Non existing executables are running"
+  exit 2
+fi
+
+echo "OK"
+exit 0
