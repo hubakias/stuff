@@ -154,5 +154,7 @@ fi
 
 #echo "Week number: $(date +%V)"
 
+EDITOR="vim"
+
 # Make sure the user ends up in the homedir (if set ...).
 cd ${HOME}
