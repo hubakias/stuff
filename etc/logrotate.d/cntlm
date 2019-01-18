@@ -1,0 +1,12 @@
+/var/log/cntlm/cntlm.log
+{
+  olddir=/var/log/cntlm/old/
+  daily
+  missingok
+  rotate 31
+  compress
+  delaycompress
+  dateext
+  notifempty
+  create 640 root adm
+}
