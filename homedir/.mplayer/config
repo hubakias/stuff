@@ -1,0 +1,9 @@
+subcp=utf8
+#subcp=iso8859-7
+#unicode=1
+#utf8=1
+#font='Bitstream Vera Sans'
+
+osdlevel=0
+nojoystick=1
+nolirc=1
