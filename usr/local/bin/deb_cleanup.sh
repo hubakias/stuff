@@ -43,6 +43,9 @@ apt-get update
 # Remove downloaded deb packages from cache - clear cache
 apt-get clean
 
+# Carefully check the output of the below
+# dpkg --no-act --purge *
+
 # Maybe get rid of unnecessary stuff - especially in simple servers
 #dpkg -l | egrep -i "smb|samba|avahi|sound|media|video|cups|heimdal"
 #dpkg -l | egrep -iv "^ii" # show packages not properly installed
