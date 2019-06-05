@@ -15,7 +15,7 @@ used_swap_partitions="$(tail /proc/swaps -n +2 | awk '$4 != "0" {print $1}')"
 sync
 
 # Drop all caches
-echo -n 3>/proc/sys/vm/drop_caches
+echo -n 3 > /proc/sys/vm/drop_caches
 
 # Change swappiness???
 # echo 5 > /proc/sys/vm/swappiness
