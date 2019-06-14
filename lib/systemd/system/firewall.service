@@ -1,0 +1,15 @@
+[Unit]
+Description=Firewall Service
+After=syslog.target network.target
+#Conflicts=xx1.service xx2.service
+
+
+[Service]
+#EnvironmentFile=/etc/sysconfig/firewall
+ExecStart=/root/firewall.sh
+#ExecStart=/root/firewall.sh start
+#ExecReload=/root/firewall.sh reload
+#ExecStop=/root/firewall.sh stop
+
+[Install]
+WantedBy=multi-user.target
