@@ -1,0 +1,4 @@
+# CVE-2019-11479
+# https://www.debian.org/security/2019/dsa-4465
+# https://access.redhat.com/security/cve/cve-2019-11479
+net.ipv4.tcp_min_snd_mss = 536

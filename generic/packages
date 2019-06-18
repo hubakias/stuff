@@ -3,14 +3,13 @@ chromium tcpdump yakuake krusader kdiff3 krename bzip2 p7zip gkrellm fdupes vim 
 #solaar pandoc(+ tex dependencies) exiv2 mediainfo bpython
 
 # Generic - tools
-shellcheck bash zsh nmap zmap ldnsutils urlview
+shellcheck bash zsh nmap zmap ldnsutils urlview needrestart debian-goodies
 
 # Generic
 rdesktop
 
 # Nice/handy tools
-pv termsaver bsdmainutils ssh-agent-filter iperf iperf3 ldapvi netperf
-netperfmeter
+pv termsaver bsdmainutils ssh-agent-filter iperf iperf3 ldapvi netperf netperfmeter
 
 # When isolated in a Windows domain, consider the below
 # cntlm
