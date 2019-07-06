@@ -1,5 +1,5 @@
 # RabbitMQ repository
-#wget -O - 'https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc' | sudo apt-key add -
+#curl https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc | apt-key add -
 
 deb https://dl.bintray.com/rabbitmq/debian stretch main
 deb http://dl.bintray.com/rabbitmq/debian stretch erlang
