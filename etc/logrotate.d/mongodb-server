@@ -1,4 +1,4 @@
-# MongoDB configuration  
+# MongoDB configuration
 /var/log/mongodb/*.log {
   olddir=/var/log/mongodb/old/
   weekly
@@ -9,4 +9,5 @@
   notifempty
   missingok
   dateext
+#  dateformat -%Y%m%d-%s
 }

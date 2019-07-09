@@ -5,7 +5,7 @@ Domain          $domain
 # Use "cntlm -M" and/or "cntlm -H" to generate the below - do not use plaintext
 PassLM          0000000000000000000000000000000
 PassNT          0000000000000000000000000000000
-PassNTLMv2      0000000000000000000000000000000      
+PassNTLMv2      0000000000000000000000000000000
 
 # Sepcify the proxies to be used/connected to.
 Proxy           proxy1...:port

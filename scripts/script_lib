@@ -15,7 +15,7 @@ if test -t 1; then
     uline="$(tput smul)"         # Underline
     rm_uline="$(tput rmul)"      # Remove underline
     rev_mode="$(tput rev)"       # Reverse mode
-#    standout="$(tput smso)"      # Standout mode   
+#    standout="$(tput smso)"      # Standout mode
 #    rm_standout="$(tput rmso)"   # Reverse Standout mode
 
     # Foreground Colors

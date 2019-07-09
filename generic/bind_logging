@@ -1,5 +1,5 @@
 # Below are all the bind9 categories ... channels are used to direct logs
-# and/or to syslog/files.  
+# and/or to syslog/files.
 
 logging {
 
@@ -14,33 +14,33 @@ logging {
     };
 
     category default { everything_debug; };
-    
+
     category general { everything_debug; };
-    
+
     category client { everything_debug; };
-    
+
     category config { everything_debug; };
-    
+
     category database { everything_debug; };
-    
+
     category dnssec { everything_debug; };
-    
+
     category lame-servers { everything_debug; };
-    
+
     category network { everything_debug; };
-    
+
     category notify { everything_debug; };
-    
+
     category queries { everything_debug; };
-    
+
     category resolver { everything_debug; };
-    
+
     category security { everything_debug; };
-    
+
     category update { everything_debug; };
-    
+
     category xfer-in { everything_debug; };
-    
+
     category xfer-out { everything_debug; };
-    
+
 };
