@@ -1,5 +1,5 @@
 /var/log/rabbitmq/*.log {
-  olddir=/var/log/rabbitmq/old/
+  olddir=/var/log/rabbitmq/old
   weekly
   missingok
   rotate 27

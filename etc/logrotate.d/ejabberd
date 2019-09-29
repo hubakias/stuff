@@ -1,5 +1,5 @@
 /var/log/ejabberd/*.log {
-  olddir=/var/log/ejabberd/old/
+  olddir=/var/log/ejabberd/old
   weekly
   missingok
   rotate 26

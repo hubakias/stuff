@@ -1,5 +1,5 @@
 /var/log/logstash/*.log {
-  olddir=/var/log/logstash/old/
+  olddir=/var/log/logstash/old
   daily
   rotate 15
   dateext

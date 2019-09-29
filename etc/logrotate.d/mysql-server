@@ -7,7 +7,7 @@
 /var/log/mysql/mysql-slow.log
 /var/log/mysql/mysql-error.log
 {
-  olddir=/var/log/mysql/old/
+  olddir=/var/log/mysql/old
   daily
   rotate 16
   missingok

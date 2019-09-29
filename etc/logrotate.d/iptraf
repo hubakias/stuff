@@ -1,5 +1,5 @@
 /var/log/iptraf/*.log {
-  olddir=/var/log/iptraf/old/
+  olddir=/var/log/iptraf/old
   rotate 16
   daily
   compress

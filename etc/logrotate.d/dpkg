@@ -1,5 +1,5 @@
 /var/log/dpkg.log {
-#  olddir=/var/log/dpkg/old/
+#  olddir=/var/log/dpkg/old
   monthly
   rotate 12
   compress
@@ -11,7 +11,7 @@
 }
 
 /var/log/alternatives.log {
-#  olddir=/var/log/alternatives/old/
+#  olddir=/var/log/alternatives/old
   monthly
   rotate 12
   compress

@@ -1,5 +1,5 @@
 /var/log/munin/*.log {
-  olddir=/var/log/munin/old/
+  olddir=/var/log/munin/old
   daily
   missingok
   rotate 15

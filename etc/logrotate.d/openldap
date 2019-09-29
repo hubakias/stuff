@@ -1,6 +1,6 @@
 # Meant for ReHat distro and derivatives - Debian* has slapd
 /var/log/openldap/openldap.log {
-  olddir=/var/log/openldap/old/
+  olddir=/var/log/openldap/old
   weekly
   rotate 52
   compress

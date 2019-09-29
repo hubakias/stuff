@@ -1,5 +1,5 @@
 /var/log/named/*.log {
-  olddir=/var/log/named/old/
+  olddir=/var/log/named/old
   weekly
   rotate 52
   dateext

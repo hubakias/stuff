@@ -1,6 +1,6 @@
 /var/log/openvpn/*.log {
-  olddir=/var/log/openvpn/old/
-#  olddir=old/ # relative to the path of the log file(s)
+  olddir=/var/log/openvpn/old
+#  olddir=old # relative to the path of the log file(s)
   weekly
   size 100M
   rotate 52

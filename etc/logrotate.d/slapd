@@ -1,5 +1,5 @@
 /var/log/ldap/slapd.log {
-  olddir=/var/log/ldap/old/
+  olddir=/var/log/ldap/old
   weekly
   rotate 52
   compress

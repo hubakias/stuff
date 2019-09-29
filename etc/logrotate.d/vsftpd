@@ -1,6 +1,6 @@
 /var/log/ftpd/vsftpd.log {
-  olddir=/var/log/ftpd/old/
-#  olddir=old/ # relative to the path of the log file(s)
+  olddir=/var/log/ftpd/old
+#  olddir=old # relative to the path of the log file(s)
   create 640 root adm
 
   # ftpd doesn't handle SIGHUP properly

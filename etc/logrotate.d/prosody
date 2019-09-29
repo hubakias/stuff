@@ -1,5 +1,5 @@
 /var/log/prosody/*.log /var/log/prosody/*.err {
-  olddir=/var/log/prosody/old/
+  olddir=/var/log/prosody/old
   weekly
   missingok
   rotate 52

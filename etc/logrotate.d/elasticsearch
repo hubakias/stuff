@@ -1,5 +1,5 @@
 /var/log/elasticsearch/*.log.????-??-?? {
-  olddir=/var/log/elasticsearch/old/
+  olddir=/var/log/elasticsearch/old
   daily
   rotate 62
   compress
@@ -12,7 +12,7 @@
 }
 
 /var/log/elasticsearch/*.log {
-  olddir=/var/log/elasticsearch/old/
+  olddir=/var/log/elasticsearch/old
   daily
   rotate 62
   compress

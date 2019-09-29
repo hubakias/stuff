@@ -1,5 +1,5 @@
 /var/log/ceph/*.log {
-  olddir=/var/log/ceph/old/
+  olddir=/var/log/ceph/old
   missingok
   rotate 16
   daily

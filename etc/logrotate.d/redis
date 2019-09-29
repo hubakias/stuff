@@ -1,5 +1,5 @@
 /var/log/redis/*.log {
-  olddir=/var/log/redis/old/
+  olddir=/var/log/redis/old
   weekly
   missingok
   copytruncate

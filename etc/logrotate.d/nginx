@@ -1,5 +1,5 @@
 /var/log/nginx/*.log {
-  olddir=/var/log/nginx/old/
+  olddir=/var/log/nginx/old
   weekly
   missingok
   rotate 52

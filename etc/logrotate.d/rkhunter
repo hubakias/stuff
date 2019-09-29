@@ -1,5 +1,5 @@
 /var/log/rkhunter/rkhunter.log {
-  olddir=/var/log/rkhunter/old/
+  olddir=/var/log/rkhunter/old
   weekly
   missingok
   rotate 9

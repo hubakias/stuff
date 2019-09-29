@@ -1,5 +1,5 @@
 /var/log/freeradius/*.log {
-  olddir=/var/log/freeradius/old/
+  olddir=/var/log/freeradius/old
   weekly
   rotate 52
   compress

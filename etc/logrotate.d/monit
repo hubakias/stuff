@@ -1,5 +1,5 @@
 /var/log/monit/monit.log {
-  olddir=/var/log/monit/old/
+  olddir=/var/log/monit/old
   rotate 9
   weekly
   minsize 1M

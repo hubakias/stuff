@@ -1,5 +1,5 @@
 /var/log/ntop/*.log {
-  olddir=/var/log/ntop/old/
+  olddir=/var/log/ntop/old
   weekly
   missingok
   rotate 9

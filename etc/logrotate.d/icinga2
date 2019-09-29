@@ -1,5 +1,5 @@
 /var/log/icinga2/icinga2.log /var/log/icinga2/debug.log {
-  olddir=/var/log/icinga2/old/
+  olddir=/var/log/icinga2/old
   daily
   rotate 15
   su nagios nagios

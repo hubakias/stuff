@@ -1,5 +1,5 @@
 /var/log/tftpd.log {
-#  olddir=/var/log/tftpd/old/
+#  olddir=/var/log/tftpd/old
   daily
   rotate 5
   compress

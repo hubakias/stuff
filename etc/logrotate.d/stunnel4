@@ -1,5 +1,5 @@
 /var/log/stunnel4/*.log {
-  olddir=/var/log/stunnel4/old/
+  olddir=/var/log/stunnel4/old
   daily
   missingok
   rotate 366

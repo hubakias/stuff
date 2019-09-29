@@ -1,5 +1,5 @@
 /var/log/exim4/mainlog /var/log/exim4/rejectlog /var/log/exim4/paniclog {
-  olddir=/var/log/exim4/old/
+  olddir=/var/log/exim4/old
   daily
   missingok
   rotate 31

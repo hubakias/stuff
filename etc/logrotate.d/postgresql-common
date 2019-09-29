@@ -1,5 +1,5 @@
 /var/log/postgresql/*.log {
-  olddir=/var/log/postgresql/old/
+  olddir=/var/log/postgresql/old
   weekly
   rotate 12
   copytruncate

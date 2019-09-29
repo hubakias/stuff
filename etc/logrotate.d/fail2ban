@@ -1,5 +1,5 @@
 /var/log/fail2ban/fail2ban.log {
-  olddir=/var/log/fail2ban/old/
+  olddir=/var/log/fail2ban/old
   weekly
   rotate 9
   compress

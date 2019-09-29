@@ -1,5 +1,5 @@
 /var/log/syslog {
-  olddir=/var/log/old/
+  olddir=/var/log/old
   rotate 16
   daily
   missingok
@@ -22,7 +22,7 @@
 /var/log/debug
 /var/log/messages
 {
-  olddir=/var/log/old/
+  olddir=/var/log/old
   rotate 5
   weekly
   missingok

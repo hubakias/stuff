@@ -1,5 +1,5 @@
 /var/log/ganeti/*.log {
-  olddir=/var/log/ganeti/old/
+  olddir=/var/log/ganeti/old
   weekly
   missingok
   rotate 52
