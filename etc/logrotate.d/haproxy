@@ -1,0 +1,12 @@
+/var/log/haproxy/*.log {
+  olddir=/var/log/haproxy/old/
+  weekly
+  missingok
+  rotate 52
+  compress
+  delaycompress
+  dateext
+  notifempty
+  dateext
+  create 0640 root adm
+}
