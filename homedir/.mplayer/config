@@ -1,9 +1,35 @@
-subcp=utf8
+#subcp=utf8
 #subcp=iso8859-7
 #unicode=1
 #utf8=1
 #font='Bitstream Vera Sans'
 
 osdlevel=0
-nojoystick=1
-nolirc=1
+
+# Cache
+cache=4096    # KB
+cache-min=90  # %
+
+
+utf8=yes
+
+cache=256
+cache-min=20
+
+prefer-ipv4=yes
+prefer-ipv6=no
+
+nolirc=yes
+nojoystick=yes
+nomouseinput=yes
+
+#really-quiet=yes
+quiet=yes
+
+msgcolor=yes
+
+autosync=30
+
+ao=alsa,
+#vo=matrixview
+#vo=aa,
