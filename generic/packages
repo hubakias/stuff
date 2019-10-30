@@ -1,12 +1,12 @@
-# My desktop/laptop
-chromium tcpdump yakuake krusader kdegraphics-thumbnailers kdiff3 krename bzip2 p7zip gkrellm fdupes vim fdupes mlocate fonts-freefont-ttf mtr-tiny iptraf-ng bwm-ng tig curl audacious gkrellm gkrellm-leds gkrellshoot kompare xxdiff md5deep cfv lhasa arj  rpm unrar-free unace deborphan pavucontrol bc ssvnc ethtool exif termsaver pdftk
+# Desktop/Laptop
+chromium yakuake krusader kdegraphics-thumbnailers kdiff3 krename fonts-freefont-ttf audacious gkrellm gkrellm-leds gkrellshoot kompare xxdiff md5deep lhasa arj rpm unrar-free unace pavucontrol ssvnc exif pdftk
 #solaar pandoc(+ tex dependencies) exiv2 mediainfo bpython
 
 # Generic - tools
-shellcheck bash zsh nmap zmap ldnsutils urlview needrestart debian-goodies whois
+shellcheck bash zsh nmap zmap ldnsutils urlview needrestart debian-goodies whois bzip2 p7zip fdupes mlocate vim git tig curl deborphan bc rdesktop
 
-# Generic
-rdesktop
+# Network tools
+tcpdump ethtool mtr-tiny iptraf-ng bwm-ng
 
 # Nice/handy tools
 pv termsaver bsdmainutils ssh-agent-filter iperf iperf3 ldapvi netperf netperfmeter subnetcalc
@@ -15,8 +15,7 @@ pv termsaver bsdmainutils ssh-agent-filter iperf iperf3 ldapvi netperf netperfme
 # cntlm
 
 # Security
-psad
+psad lynis rkhunter chkrootkit libpam-passwdqc libpam-cracklib debsums
 
 # Logging
 logcheck logwatch
-
