@@ -1,0 +1,10 @@
+# Managed by Ansible/Puppet
+Host *
+  AddressFamily inet
+  CheckHostIP no
+#  Ciphers aes256-ctr # Only for old OpenSSH versions - e.g. RH6 w/o ed25519
+  HashKnownHosts yes
+  PreferredAuthentications "publickey,password"
+  Protocol 2
+  TCPKeepAlive no
+  GSSAPIAuthentication no

@@ -1,0 +1,3 @@
+# Drop privileges to ntp:ntp, set pid, daemonize and only listen on IPv4
+OPTIONS="-u ntp:ntp -p /var/run/ntpd.pid -g -4"
+#OPTIONS="-u ntp:ntp -p /var/run/ntpd.pid -g"

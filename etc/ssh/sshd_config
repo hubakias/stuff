@@ -1,0 +1,40 @@
+# Managed by Ansible/Puppet
+
+# The below are meant only for IPv4 enabled hosts. Ciphers are old/less_secure.
+# With RH6 OpenSSH versions - should not be used in prod.
+
+# Daemon
+AddressFamily inet
+ListenAddress 0.0.0.0
+Protocol 2
+
+# Service
+TCPKeepAlive no
+UseDNS no
+LogLevel INFO
+ClientAliveInterval 10
+HostKey /etc/ssh/ssh_host_rsa_key
+Subsystem sftp /usr/lib/openssh/sftp-server
+
+# Forwarding
+AllowAgentForwarding no
+AllowTcpForwarding no
+
+# Encryption
+Ciphers aes256-ctr
+MACs hmac-sha1
+
+# Access
+IgnoreUserKnownHosts yes
+MaxAuthTries 2
+MaxSessions 2
+PermitRootLogin no
+AuthorizedKeysFile .ssh/authorized_keys
+
+# Generic
+PrintMotd no
+PrintLastLog no
+Banner /etc/ssh/my_login_banner
+
+# Debian Specific
+#DebianBanner no

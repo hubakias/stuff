@@ -3,7 +3,7 @@ chromium yakuake krusader kdegraphics-thumbnailers kdiff3 krename fonts-freefont
 #solaar pandoc(+ tex dependencies) exiv2 mediainfo bpython
 
 # Generic - tools
-shellcheck bash zsh nmap zmap ldnsutils urlview needrestart debian-goodies whois bzip2 p7zip fdupes mlocate vim git tig curl deborphan bc rdesktop
+shellcheck bash zsh nmap zmap ldnsutils urlview needrestart debian-goodies whois bzip2 p7zip fdupes mlocate vim git tig curl deborphan bc rdesktop expect
 
 # Network tools
 tcpdump ethtool mtr-tiny iptraf-ng bwm-ng
@@ -19,3 +19,6 @@ psad lynis rkhunter chkrootkit libpam-passwdqc libpam-cracklib debsums
 
 # Logging
 logcheck logwatch
+
+# Desktop - low prio
+dosage atom
