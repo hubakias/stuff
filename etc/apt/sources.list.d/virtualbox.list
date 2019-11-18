@@ -1,3 +1,2 @@
-deb http://download.virtualbox.org/virtualbox/debian stretch contrib
-
-# curl https://www.virtualbox.org/download/oracle_vbox_2016.asc | apt-key add -
+deb http://download.virtualbox.org/virtualbox/debian buster contrib non-free
+# curl -s https://www.virtualbox.org/download/oracle_vbox_2016.asc | apt-key add -

@@ -1,3 +1,2 @@
 deb [arch=amd64] http://packages.2ndquadrant.com/pglogical/apt/ jessie-2ndquadrant main
 #curl http://packages.2ndquadrant.com/pglogical/apt/AA7A6805.asc | apt-key add -
-

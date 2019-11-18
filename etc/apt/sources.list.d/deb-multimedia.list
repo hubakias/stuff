@@ -1,2 +1,4 @@
-deb ftp://ftp.deb-multimedia.org jessie main non-free
-deb ftp://ftp.deb-multimedia.org jessie-backports main
+deb [trusted=yes] http://ftp.deb-multimedia.org buster main non-free
+deb [trusted=yes] http://ftp.deb-multimedia.org buster-backports main
+# apt-get update && apt-get install deb-multimedia-keyring
+# Then remove [trusted=yes]

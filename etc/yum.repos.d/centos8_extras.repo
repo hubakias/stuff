@@ -1,0 +1,7 @@
+[centos8_extras]
+name=CentOS 8 - Extras - $basearch
+baseurl=http://mirror.centos.org/centos/8/extras/$basearch/os
+failovermethod=priority
+enabled=1
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-8

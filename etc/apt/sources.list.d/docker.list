@@ -1,5 +1,2 @@
-deb [arch=amd64] https://download.docker.com/linux/debian jessie stable
-# deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) \
-#            stable"
-#
-# curl https://download.docker.com/linux/debian/gpg | apt-key add -
+deb [arch=amd64] https://download.docker.com/linux/debian buster stable
+# curl -s https://download.docker.com/linux/debian/gpg | apt-key add -

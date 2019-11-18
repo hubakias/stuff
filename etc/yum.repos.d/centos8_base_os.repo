@@ -1,0 +1,4 @@
+[centos8_base_os]
+name=CentOS 8 Base packages - $basearch
+baseurl=ftp://ftp.ntua.gr/pub/linux/centos/8/BaseOS/x86_64/os/
+gpgkey=file:///root/RPM-GPG-KEY-CentOS-8

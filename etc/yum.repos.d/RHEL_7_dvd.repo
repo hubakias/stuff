@@ -1,5 +1,0 @@
-[RHEL_7_DVD]
-name=Red Hat Enterprise Linux Installation DVD
-baseurl=file:///media/repo/Server
-enabled=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release

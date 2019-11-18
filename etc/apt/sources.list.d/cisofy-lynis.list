@@ -1,4 +1,2 @@
-# Add the repository key
-# curl -s https://packages.cisofy.com/keys/cisofy-software-public.key | apt-key add -
-
 deb https://packages.cisofy.com/community/lynis/deb/ stable main
+# curl -s https://packages.cisofy.com/keys/cisofy-software-public.key | apt-key add -

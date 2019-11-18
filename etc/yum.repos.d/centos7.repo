@@ -1,4 +1,4 @@
-[CentOS 7]
+[centos7]
 name=CentOS 7 packages - $basearch
 baseurl=ftp://ftp.ntua.gr/pub/linux/centos/7/os/x86_64/
 gpgkey=file:///root/RPM-GPG-KEY-CentOS-7

@@ -1,0 +1,5 @@
+#[rhel8]
+#name=Red Hat 8 Enterprise Linux Installation DVD
+#baseurl=file:///repo_path
+#enabled=1
+#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release

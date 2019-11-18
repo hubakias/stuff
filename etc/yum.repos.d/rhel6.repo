@@ -1,0 +1,5 @@
+#[rhel6]
+#name=Red Hat 6 Enterprise Linux Installation DVD
+#baseurl=file:///repo_path
+#enabled=1
+#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release

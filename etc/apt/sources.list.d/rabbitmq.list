@@ -1,7 +1,4 @@
 # RabbitMQ repository
-#curl https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc | apt-key add -
-
-deb https://dl.bintray.com/rabbitmq/debian stretch main
-deb http://dl.bintray.com/rabbitmq/debian stretch erlang
-
+deb https://dl.bintray.com/rabbitmq/debian buster main
+#curl -s https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc | apt-key add -
 # https://www.rabbitmq.com/install-debian.html

@@ -1,0 +1,4 @@
+[centos8_powertools]
+name=CentOS 8 PowerTools packages - $basearch
+baseurl=ftp://ftp.ntua.gr/pub/linux/centos/8/AppStream/x86_64/os/
+gpgkey=file:///root/RPM-GPG-KEY-CentOS-8

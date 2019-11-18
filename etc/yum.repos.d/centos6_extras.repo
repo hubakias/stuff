@@ -1,0 +1,7 @@
+[centos6_extras]
+name=CentOS 6 - Extras - $basearch
+baseurl=http://mirror.centos.org/centos/6/extras/$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-6

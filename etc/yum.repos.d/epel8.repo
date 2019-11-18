@@ -1,0 +1,7 @@
+[epel8]
+name=Extra Packages for Enterprise Linux 8 - $basearch
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-8&arch=$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=1
+gpgkey=https://archive.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8

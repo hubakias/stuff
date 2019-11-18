@@ -21,4 +21,4 @@ psad lynis rkhunter chkrootkit libpam-passwdqc libpam-cracklib debsums
 logcheck logwatch
 
 # Desktop - low prio
-dosage atom
+dosage atom gpick kolourpaint
