@@ -14,7 +14,7 @@ UseDNS no
 LogLevel INFO
 ClientAliveInterval 10
 HostKey /etc/ssh/ssh_host_rsa_key
-Subsystem sftp /usr/lib/openssh/sftp-server
+Subsystem sftp /usr/lib/openssh/sftp-server -l INFO
 
 # Forwarding
 AllowAgentForwarding no
