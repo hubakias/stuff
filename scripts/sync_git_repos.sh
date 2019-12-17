@@ -49,6 +49,7 @@ apply () {
       if [ ! ${del} = "yes" ]; then continue ; fi
       git branch -D ${i} ; unset del
     done
+    echo "Doing garbage collection ..." && git gc
   else
     echo -e "\nNothing to do ..."
   fi
