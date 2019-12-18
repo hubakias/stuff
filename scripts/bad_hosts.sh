@@ -23,10 +23,10 @@ for i in $dl_lists ; do
 done
 
 # For use in squid (blocked domains) - look for my squid conf/etc
-cat "$tmp_file" | egrep "^127.0.0.1 |^0.0.0.0 " | sed -e "s/^127.0.0.1 //" -e "s/^0.0.0.0 //" | awk '{print $NF}' | sort | uniq
+grep -E "^127.0.0.1 |^0.0.0.0 " "$tmp_file" | sed -e "s/^127.0.0.1 //" -e "s/^0.0.0.0 //" | awk '{print $NF}' | sort | uniq
 
 ## For use in /etc/hosts file (either use 127.0.0.1 or 0.0.0.0 - your choice) - I do not recommend it.
-#cat "$tmp_file" | egrep "^127.0.0.1 |^0.0.0.0 " | sed -e "s/^127.0.0.1 //" -e "s/^0.0.0.0 //" | awk '{print $NF}' | sort | uniq  | sed "s/^/127.0.0.1 /"
+#grep -E "^127.0.0.1 |^0.0.0.0 " "$tmp_file" | sed -e "s/^127.0.0.1 //" -e "s/^0.0.0.0 //" | awk '{print $NF}' | sort | uniq  | sed "s/^/127.0.0.1 /"
 
 # Cleanup
 rm -f "$tmp_file"

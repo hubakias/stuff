@@ -1,3 +1,5 @@
+#!/bin/bash
+
 git filter-branch --env-filter '
 WRONG_EMAIL=""
 NEW_NAME=""

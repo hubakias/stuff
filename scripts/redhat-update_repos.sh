@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Draft ...
 
 
@@ -17,7 +16,7 @@ fi
 
 # Check if we are root
 if [ $EUID -ne 0 ]; then
-    echo "This script must be run by root ..." 1>&2
+    echo "This script must be run as root ..." 1>&2
     exit 1
 fi
 
@@ -50,7 +49,8 @@ done
 # Update repositories
 for i in $repos ; do
 
-    createrepo --update --basedir "$repo_dir"/"$i" "$repo_dir"/"$i"
+  createrepo --update --basedir "$repo_dir"/"$i" "$repo_dir"/"$i"
 
 done
 
+exit 0

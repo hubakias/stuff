@@ -10,11 +10,11 @@ rm -Rf /root/.cshrc /root/.tcshrc /home/*/.cshrc /home/*/.tcshrc
 rm -Rf /var/log/lost+found /var/log/anaco* # /root/*
 for i in $(find /var/log/ -type f); do echo -n >$i ; done
 
-for i in $(cat /proc/mounts | grep ^/dev | cut -d' ' -f2); do
+for i in $(grep ^/dev /proc/mounts | cut -d' ' -f2); do
   dd if=/dev/zero of="${i}"/aaaa bs=4M
 done
 
-for i in $(cat /proc/mounts | grep ^/dev | cut -d' ' -f2); do
+for i in $(grep ^/dev /proc/mounts | cut -d' ' -f2); do
   rm -Rf "${i}"/aaaa
 done
 df

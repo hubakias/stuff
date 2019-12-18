@@ -2,7 +2,7 @@
 #
 # List malicious sites (domain) - check below
 #
-# 2017-2018 kostikas
+# 2017-2019 kostikas
 #
 # Released under the GPL v3
 #
@@ -34,8 +34,8 @@ curl --connect-timeout 3 -m 10 -s -o "$tmp_file" $url
 ssconvert "$tmp_file" "$tmp_file".csv 2>/dev/null
 
 # Parse the content of the file (above) and provide an easire to use file.
-egrep "^[1-9]" "$tmp_file".csv | egrep "," | cut -d ',' -f3 | \
-cut -d '/' -f1 | egrep "\." | sed "s/^/127.0.0.1 /" > "$tmp_file".gc
+grep -E "^[1-9]" "$tmp_file".csv | grep -E "," | cut -d ',' -f3 | \
+cut -d '/' -f1 | grep -E "\." | sed "s/^/127.0.0.1 /" > "$tmp_file".gc
 
 
 
@@ -72,7 +72,7 @@ echo -e "\nMalware Domain list : ""$(wc -l /tmp/$(date +%F)_bad_domains)\n"
 # Compare with /etc/hosts and report
 # diff -u /etc/hosts /tmp/2018-04-03_bad_domains | \
 # sed "s/^-127.0.0.1/Removed:/p" | sed "s/^+127.0.0.1/Added:/" | \
-# egrep "^Add|^Rem" | sort
+# grep -E "^Add|^Rem" | sort
 
 # Regenerate /etc/hosts file
 # cat /etc/hosts.base /tmp/$(date +%F)_bad_domains > /etc/hosts

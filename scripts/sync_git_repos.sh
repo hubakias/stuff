@@ -45,9 +45,9 @@ apply () {
     git fetch -p || echo "${err_git}"
     for i in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do
       echo "${red}Warning: ${yellow}${i}${normal} has no remote."
-      read -n3 -p "Remove it? (yes/${bold}no${normal}): " del && echo ""
-      if [ ! ${del} = "yes" ]; then continue ; fi
-      git branch -D ${i} ; unset del
+      read -r -n3 -p "Remove it? (yes/${bold}no${normal}): " del && echo ""
+      if [ ! "${del}" = "yes" ]; then continue ; fi
+      git branch -D "${i}" ; unset del
     done
     echo "Doing garbage collection ..." && git gc
   else
