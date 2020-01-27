@@ -10,7 +10,8 @@ alias locate='locate -i'
 alias ls='ls -h --color=auto'
 alias mv='mv -i'
 alias rm='rm -i'
-alias free="free -h"
+alias free='free -h'
+alias tailf='tail -f'
 
 # Kernel specific
 alias dmesg='dmesg -T'

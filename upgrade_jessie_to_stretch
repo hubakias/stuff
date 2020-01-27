@@ -8,6 +8,8 @@ apt-get upgrade
 dpkg -C                    # Check the database for consistency.
 apt-mark showhold          # List packages on hold.
 
+rm -Rf /var/cache/app-info /var/lib/apt
+
 # Update the repos - Custom repos may not yet have packages for Stretch.
 sed -i "s#jessie#stretch#g" /etc/apt/sources.list.d/*.list
 sed -i "s#jessie#stretch#g" /etc/apt/sources.list
