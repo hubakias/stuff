@@ -3,7 +3,7 @@ chromium yakuake krusader kdegraphics-thumbnailers kdiff3 krename fonts-freefont
 #solaar pandoc(+ tex dependencies) exiv2 mediainfo bpython
 
 # Generic - tools
-shellcheck bash zsh nmap zmap ldnsutils urlview needrestart debian-goodies whois bzip2 p7zip fdupes mlocate vim git tig curl deborphan bc rdesktop expect
+shellcheck bash zsh nmap zmap ldnsutils urlview needrestart debian-goodies whois bzip2 p7zip fdupes mlocate vim git tig curl deborphan bc rdesktop expect bash-completion python-optcomplete python-argcomplete python3-argcomplete
 
 # Network tools
 tcpdump ethtool mtr-tiny iptraf-ng bwm-ng

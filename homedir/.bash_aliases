@@ -13,12 +13,14 @@ alias rm='rm -i'
 alias free='free -h'
 alias tailf='tail -f'
 
+
 # Kernel specific
 alias dmesg='dmesg -T'
 
 # Package specific
 alias bwm-ng='bwm-ng -d'
 alias fdupes='fdupes -r -S -H'
+alias whois='whois -Bd'
 
 # Git specific
 #alias git-data="git for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads"
