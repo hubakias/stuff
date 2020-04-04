@@ -1,0 +1,25 @@
+ check process apache with pidfile /var/run/apache2/apache2.pid
+   group www
+   start program = "/etc/init.d/apache2 start"
+   stop program  = "/etc/init.d/apache2 stop"
+   if 4 restarts within 20 cycles then timeout
+   if failed host localhost port 80 with protocol http and request "/server-status" with timeout 25 seconds for 4 times within 5 cycles then restart
+   depend apache_bin
+   depend apache_rc
+   if cpu > 60% for 2 cycles then alert
+   if cpu > 80% for 5 cycles then restart
+   if totalmem > 384.0 MB for 5 cycles then restart
+   if children > 100 then restart
+   if loadavg(5min) greater than 4 for 8 cycles then stop
+   if failed host ${virtual host name} port 80 protocol http then alert
+   if failed host ${virtual host name} port 443 type tcpssl protocol http
+   with timeout 5 seconds then alert
+   if 3 restarts within 5 cycles then timeout
+
+ check file apache_bin with path /usr/sbin/apache2
+   group apache
+   include /etc/monit/templates/rootbin
+
+ check file apache_rc with path /etc/init.d/apache2
+   group apache
+   include /etc/monit/templates/rootbin

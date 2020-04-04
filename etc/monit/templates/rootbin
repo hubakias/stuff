@@ -1,8 +1,4 @@
-# if failed checksum       then unmonitor
-# if failed permission 755 then unmonitor
-# if failed uid root       then unmonitor
-# if failed gid root       then unmonitor
- if failed checksum       then alert
- if failed permission 755 then alert
- if failed uid root       then alert
- if failed gid root       then alert
+ if failed checksum       then unmonitor
+ if failed permission 755 then unmonitor
+ if failed uid root       then unmonitor
+ if failed gid root       then unmonitor
