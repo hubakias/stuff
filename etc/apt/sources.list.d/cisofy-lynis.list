@@ -1,2 +1,4 @@
-deb https://packages.cisofy.com/community/lynis/deb/ stable main
 # curl -s https://packages.cisofy.com/keys/cisofy-software-public.key | apt-key add -
+# echo 'Acquire::Languages "none";' | tee /etc/apt/apt.conf.d/99disable-translations
+deb https://packages.cisofy.com/community/lynis/deb/ stable main
+
