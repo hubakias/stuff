@@ -12,7 +12,7 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias free='free -h'
 alias tailf='tail -f'
-
+alias vi='vim'
 
 # Kernel specific
 alias dmesg='dmesg -T'
