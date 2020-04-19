@@ -1,35 +1,50 @@
 #!/bin/sh
 
-# Version 0.01 - Bad hosts
+# Version 0.02 - Bad hosts
 # GPL v2
 
 # Script to gather various hostnames from various locations and generate an
 # aggregated list which can be used in bind, squid, /etc/hosts, ...
 
 # Set a random tmp file
-tmp_file="/tmp/$(date +%s%N | sha256sum | cut -d ' ' -f1).tmp"
+tmp_file="/tmp/hosts_$(date +%s).tmp"
 
-dl_lists="
-https://raw.githubusercontent.com/Free-Software-for-Android/AdAway/master/hosts/hosts.txt
-https://raw.githubusercontent.com/StevenBlack/hosts/master/data/StevenBlack/hosts
+dl_lists_txt="
+https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts
+https://adaway.org/hosts.txt
+https://hosts-file.net/ad_servers.txt
+https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext
 http://winhelp2002.mvps.org/hosts.txt
-http://www.malwaredomainlist.com/hostslist/hosts.txt
-http://someonewhocares.org/hosts/zero/hosts
-http://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext
+http://sysctl.org/cameleon/hosts
+https://www.malwaredomainlist.com/hostslist/hosts.txt
+https://someonewhocares.org/hosts/zero/hosts
+"
+dl_lists_7z="
+http://rlwpx.free.fr/WPFF/hblc.7z
+http://rlwpx.free.fr/WPFF/htrc.7z
+http://rlwpx.free.fr/WPFF/hpub.7z
+http://rlwpx.free.fr/WPFF/hrsk.7z
+http://rlwpx.free.fr/WPFF/hsex.7z
+http://rlwpx.free.fr/WPFF/hmis.7z
 "
 
-for i in $dl_lists ; do
+for i in $dl_lists_txt ; do
     curl -s "$i" >>"$tmp_file"
 done
 
-# For use in squid (blocked domains) - look for my squid conf/etc
-grep -E "^127.0.0.1 |^0.0.0.0 " "$tmp_file" | sed -e "s/^127.0.0.1 //" -e "s/^0.0.0.0 //" | awk '{print $NF}' | sort | uniq
+for i in $dl_lists_7z ; do
+    curl -s "$i" --output - | p7zip -d >>"$tmp_file"
+done
 
-## For use in /etc/hosts file (either use 127.0.0.1 or 0.0.0.0 - your choice) - I do not recommend it.
-#grep -E "^127.0.0.1 |^0.0.0.0 " "$tmp_file" | sed -e "s/^127.0.0.1 //" -e "s/^0.0.0.0 //" | awk '{print $NF}' | sort | uniq  | sed "s/^/127.0.0.1 /"
+# For use in Squid (blocked domains) - look for my squid conf/etc
+grep -E "^[0-9]" "$tmp_file" | grep -Ev "^255.255" | awk '{print $2}' | sort | uniq > /tmp/squid.xxx
+
+## For use in /etc/hosts file
+#grep -E "^[0-9]" "$tmp_file" | grep -Ev "^255.255" | awk '{print $2}' | sort | uniq | sed "s/^/127.0.0.1       /" > /tmp/hosts.xxx
+sed "s/^/127.0.0.1 /" /tmp/squid.xxx > /tmp/hosts.xxx
 
 # Cleanup
-rm -f "$tmp_file"
+#rm -f "$tmp_file"
 
 
 # Add custom entries
