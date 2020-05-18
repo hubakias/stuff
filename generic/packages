@@ -22,3 +22,9 @@ logcheck logwatch
 
 # Desktop - low prio
 dosage atom gpick kolourpaint fzf ack
+
+# Docker
+docker-ce ctop vim-syntax-docker
+
+# Serial port
+minicom
