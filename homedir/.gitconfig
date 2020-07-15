@@ -13,6 +13,9 @@
   pager = less
   excludesfile = ~/.gitignore
 
+[pull]
+  rebase = false
+
 [push]
   default = current
 #  default = upstream
