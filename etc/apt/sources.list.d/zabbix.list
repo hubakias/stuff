@@ -1,0 +1,6 @@
+deb https://repo.zabbix.com/zabbix/5.0/debian buster main contrib non-free
+
+# Currently in alpha state
+#deb https://repo.zabbix.com/zabbix/5.2/debian buster main contrib non-free
+
+# curl -s https://repo.zabbix.com/zabbix-official-repo.key | apt-key add -
