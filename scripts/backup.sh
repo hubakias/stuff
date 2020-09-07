@@ -8,7 +8,7 @@ remote_host="$1"
 # Backup directory - currently the location of the script
 bkp_dir="$(dirname "$0")/${remote_host}"
 
-touch "$(dirname $0)"/exclusions_"${remote_host}"
+touch "$(dirname "$0")"/exclusions_"${remote_host}"
 
 rsync -aADXhvz --delete --delete-excluded -e "ssh" --rsync-path="sudo rsync" \
   "${remote_host}":/ "${bkp_dir}" --exclude-from "./exclusions_${remote_host}"

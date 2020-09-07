@@ -51,7 +51,7 @@ apply () {
     done
     echo "Doing garbage collection ..." && git gc
   else
-    echo -e "\nNothing to do ..."
+    echo -e "\\nNothing to do ..."
   fi
 }
 
