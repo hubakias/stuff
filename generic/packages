@@ -3,7 +3,7 @@ chromium yakuake krusader kdegraphics-thumbnailers kdiff3 krename fonts-freefont
 #solaar pandoc(+ tex dependencies) exiv2 mediainfo bpython
 
 # Generic tools
-shellcheck bash zsh nmap zmap ldnsutils urlview needrestart debian-goodies whois bzip2 p7zip fdupes mlocate vim vim-scripts vim-syntastic tig curl deborphan bc rdesktop expect bash-completion less facter mutt
+shellcheck bash zsh nmap zmap ldnsutils urlview needrestart debian-goodies whois bzip2 p7zip fdupes mlocate vim vim-scripts vim-syntastic tig curl deborphan bc rdesktop expect bash-completion less facter mutt uchardet
 
 # Network tools
 tcpdump ethtool mtr-tiny iptraf-ng bwm-ng
@@ -49,6 +49,9 @@ puppet-lint
 
 # Python
 pylint3 python3-pylint-plugin-utils python3-pylint-django python3-flake8 python3-pep8 pyflakes3 python-optcomplete python-argcomplete python3-argcomplete
+
+# Pythos extras
+python3-numpy python3-pandas python3-geopandas python3-virtualenv python3-chardet python3-pypandoc python3-pandocfilter pypy3
 
 # Debian
 lintian

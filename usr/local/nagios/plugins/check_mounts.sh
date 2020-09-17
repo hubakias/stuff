@@ -9,28 +9,14 @@
 # perform any kind of check (mount related).
 
 # Get the minimum necessary information.
-max_devs="$(grep ^dev /proc/mounts 2>/dev/null)"
-output="$(grep "^dev.*\sro[\s,]" /proc/mounts 2>/dev/null)"
+output="$(grep "^/dev.* ro[ ,]" /proc/mounts 2>/dev/null | cut -d' ' -f1)"
+
 
 # Some sanity checks
 
 # Check if the output was properly set.
-if [ $? -ne 0 ] ; then
-    echo "Check failed with exit code $?"
-    exit 3
-fi
-
-# Check that the wanted devices were detected.
-if [ -z "$max_devs" ] ; then
-    echo "Something went wrong. Requested devices to check were not found."
-    exit 3
-fi
-
-# Check that the numbers of max and ro devices make sense.
-num_output="$(wc -l <<< "$output")"
-num_max_devs="$(wc -l <<< "$max_devs")"
-if [ "$num_output" -gt "$num_max_devs" ] ; then
-    echo "Something went wrong. Please check ..."
+if [ -n "$output" ] ; then
+    echo "Check failed with exit code $?."
     exit 3
 fi
 
@@ -45,22 +31,8 @@ if [ -z "$output" ] ; then
     fi
     echo "OK - No read only partitions on block devices found."
     exit 0
-fi
+else
+  echo "WARNING - Read only mounted devices were detected."
 
-# All devices are mounted read only.
-if [ "$num_output" -eq "$num_max_devs" ] ; then
-    echo "Critical - All devices are mounted read only."
-    exit 2
-fi
 
-# A few, not all, devices are mounted read only.
-if [ "$num_output" -lt "$num_max_devs" ] ; then
-    check_root="$(grep "rootfs.*\sro[\s,]" /proc/mounts 2>/dev/null)"
-    if [ -z "$check_root" ]; then
-      echo "WARNING - Some devices are mounted read only."
-      exit 1
-    fi
-    echo "Critical - Root partition is mounted read only."
-    exit 2
 fi
-
