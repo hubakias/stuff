@@ -1,0 +1,14 @@
+[generic]
+  user = root
+  group = root
+#  includedir = /etc/nbd-server/conf.d
+#  allowlist = 1
+  listenaddr = 127.0.0.1
+#  port = 20809
+
+[nbd0]
+    exportname = /dev/vdb
+    authfile = /etc/nbd-server/allow
+#    maxconnections = 2
+    timeout = 120
+
