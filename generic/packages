@@ -21,7 +21,7 @@ psad lynis rkhunter chkrootkit libpam-passwdqc libpam-cracklib debsums
 logcheck logwatch
 
 # Desktop - low prio
-dosage atom gpick kolourpaint fzf ack
+dosage atom gpick kolourpaint fzf ack bash-doc
 
 # Docker
 docker-ce ctop vim-syntax-docker
@@ -51,7 +51,7 @@ puppet-lint
 pylint3 python3-pylint-plugin-utils python3-pylint-django python3-flake8 python3-pep8 pyflakes3 python-optcomplete python-argcomplete python3-argcomplete
 
 # Pythos extras
-python3-numpy python3-pandas python3-geopandas python3-virtualenv python3-chardet python3-pypandoc python3-pandocfilter pypy3
+python3-numpy python3-pandas python3-geopandas python3-virtualenv python3-chardet python3-pypandoc python3-pandocfilter pypy3 python3-sphinx
 
 # Debian
 lintian
