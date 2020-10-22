@@ -6,10 +6,10 @@ chromium yakuake krusader kdegraphics-thumbnailers kdiff3 krename fonts-freefont
 shellcheck bash zsh nmap zmap ldnsutils urlview needrestart debian-goodies whois bzip2 p7zip fdupes mlocate vim vim-scripts vim-syntastic tig curl deborphan bc rdesktop expect bash-completion less facter mutt uchardet
 
 # Network tools
-tcpdump ethtool mtr-tiny iptraf-ng bwm-ng
+tcpdump ethtool mtr-tiny iptraf-ng bwm-ng etherpuppet
 
 # Nice/handy tools
-pv termsaver bsdmainutils ssh-agent-filter iperf iperf3 ldapvi netperf netperfmeter subnetcalc
+pv termsaver bsdmainutils ssh-agent-filter iperf iperf3 ldapvi netperf netperfmeter subnetcalc ldap-utils
 
 # When isolated in a Windows domain, consider the below
 # cntlm
