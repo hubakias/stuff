@@ -1,4 +1,5 @@
-# Get the first word of a non empty line in /etc/clusters and uses it as an available argument.
+# Get the first word starting with an alphanumeric character
+# from /etc/clusters and $HOME/.clusterssh/clusters.
 _cssh()
 {
         local cur prev
@@ -9,7 +10,7 @@ _cssh()
 
         case "${prev}" in
             *)
-                COMPREPLY=( $(compgen -W "$(egrep -o '^[^ ]+' /etc/clusters | grep -v ^# | tr '\n' ' ')" -- ${cur}) )
+                COMPREPLY=( $(compgen -W "$(grep -E -o -h "^[a-zA-Z0-9]* " /etc/clusters $HOME/.clusterssh/clusters  2>/dev/null | tr '\n' ' ')" -- ${cur}) )
                 return 0
             ;;
         esac

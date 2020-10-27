@@ -1,0 +1,18 @@
+# Simple autocomplete for packer
+_packer()
+{
+        local cur prev
+
+        COMPREPLY=()
+        cur="${COMP_WORDS[COMP_CWORD]}"
+        prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+        case "${prev}" in
+            *)
+                COMPREPLY=( $(compgen -W "build console fix hcl2_upgrade inspect validate version" -- ${cur}) )
+# Just add the entries provided by "packer --help". Avoid executing every time.
+                return 0
+            ;;
+        esac
+}
+complete -o default -F _packer packer
