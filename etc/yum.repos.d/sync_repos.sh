@@ -22,5 +22,5 @@ for i in ${centos6} ${centos7} ${centos8} ${docker}; do
 done | grep -v "Skipping existing Packages"
 
 #mount -o loop "${l_dir}"/rhel-server-6.10-x86_64-dvd.iso "${l_dir}"/rhel6
-#mount -o loop "${l_dir}"/rhel-server-7.7-x86_64-dvd.iso "${l_dir}"/rhel7
-#mount -o loop "${l_dir}"/rhel-8.1-x86_64-dvd.iso "${l_dir}"/rhel8/
+#mount -o loop "${l_dir}"/rhel-server-7.9-x86_64-dvd.iso "${l_dir}"/rhel7
+#mount -o loop "${l_dir}"/rhel-8.2-x86_64-dvd.iso "${l_dir}"/rhel8/
