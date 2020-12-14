@@ -10,7 +10,7 @@
    if cpu > 80% for 5 cycles then restart
    if totalmem > 384.0 MB for 5 cycles then restart
    if children > 100 then restart
-   if loadavg(5min) greater than 4 for 8 cycles then stop
+# no longer applies for apache -   if loadavg(5min) greater than 4 for 8 cycles then stop
    if failed host ${virtual host name} port 80 protocol http then alert
    if failed host ${virtual host name} port 443 type tcpssl protocol http
    with timeout 5 seconds then alert
