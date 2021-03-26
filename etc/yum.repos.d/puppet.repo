@@ -1,0 +1,5 @@
+[Puppet7]
+name=Puppet 7 - $basearch
+baseurl=https://yum.puppetlabs.com/puppet/el/7/x86_64/
+#baseurl=https://yum.puppetlabs.com/puppet/el/8/x86_64/
+gpgkey=https://yum.puppetlabs.com/RPM-GPG-KEY-puppet
