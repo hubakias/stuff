@@ -1,9 +1,9 @@
 # Desktop/Laptop
-chromium yakuake krusader kdegraphics-thumbnailers kdiff3 krename fonts-freefont-ttf audacious gkrellm gkrellm-leds gkrellshoot kompare xxdiff md5deep lhasa arj rpm unrar-free unace pavucontrol ssvnc exif pdftk barrier
+chromium yakuake krusader kdegraphics-thumbnailers kdiff3 krename fonts-freefont-ttf audacious gkrellm gkrellm-leds gkrellshoot kompare xxdiff md5deep lhasa arj rpm unrar-free unace pavucontrol ssvnc exif pdftk barrier dos2unix
 #solaar pandoc(+ tex dependencies) exiv2 mediainfo bpython
 
 # Generic tools
-shellcheck bash zsh nmap zmap ldnsutils urlview needrestart debian-goodies whois bzip2 p7zip fdupes mlocate vim vim-scripts vim-syntastic tig curl deborphan bc rdesktop expect bash-completion less facter mutt uchardet nfs-common hexedit molly-guard acpi acpitail flashrom exiftool colordiff
+shellcheck bash zsh nmap zmap ldnsutils urlview needrestart debian-goodies whois bzip2 p7zip fdupes mlocate vim vim-scripts vim-syntastic tig curl deborphan bc rdesktop expect bash-completion less facter mutt uchardet nfs-common hexedit molly-guard acpi acpitail flashrom exiftool colordiff util-linux
 
 # Network tools
 tcpdump ethtool mtr-tiny iptraf-ng bwm-ng etherpuppet
