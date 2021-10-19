@@ -56,4 +56,10 @@ set encoding=utf-8
 highlight ExtraWhitespace ctermbg=yellow guibg=yellow
 match ExtraWhitespace /\s\+$/
 
-"colorscheme 
+"colorscheme
+
+set noswapfile
+set cryptmethod=blowfish2
+set nobackup
+set nowritebackup
+set viminfo=
