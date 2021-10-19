@@ -154,6 +154,7 @@ fi
 
 #echo "Week number: $(date +%V)"
 
+export TMOUT="600"
 export EDITOR='vim'
 export PAGER='less'
 
