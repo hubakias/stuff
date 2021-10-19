@@ -8,7 +8,7 @@ apt-get upgrade
 dpkg -C                    # Check the database for consistency.
 apt-mark showhold          # List packages on hold.
 
-rm -Rf /var/cache/app-info /var/lib/apt
+rm -Rf /var/{cache,lib}/apt
 
 # Update the repos - Custom repos may not yet have packages for Bullseye.
 sed -i "s#buster#bullseye#g" /etc/apt/sources.list.d/*.list
