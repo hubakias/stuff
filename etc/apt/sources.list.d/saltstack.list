@@ -1,2 +1,1 @@
-# curl -s https://repo.saltstack.com/py3/debian/10/amd64/latest/SALTSTACK-GPG-KEY.pub | apt-key add -
-deb https://repo.saltstack.com/py3/debian/10/amd64/latest buster main
+# Bullseye has it in the official repos

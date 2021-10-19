@@ -1,2 +1,2 @@
-deb [arch=amd64] https://download.docker.com/linux/debian buster stable
-# curl -s https://download.docker.com/linux/debian/gpg | apt-key add -
+deb [arch=amd64] https://download.docker.com/linux/debian bullseye stable
+# curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -

@@ -1,3 +1,2 @@
-# curl -s https://download.ceph.com/keys/release.asc | apt-key add -
-
-deb https://download.ceph.com/debian-octopus/ buster main
+# curl -fsSL https://download.ceph.com/keys/release.asc | apt-key add -
+deb https://download.ceph.com/debian-pacific/ bullseye main

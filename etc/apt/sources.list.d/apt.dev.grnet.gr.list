@@ -1,2 +1,2 @@
+#curl -fsSL https://dev.grnet.gr/files/apt-grnetdev.pub | apt-key add -
 deb http://apt.dev.grnet.gr stretch/
-#curl -s https://dev.grnet.gr/files/apt-grnetdev.pub|apt-key add -

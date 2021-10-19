@@ -1,6 +1,6 @@
-deb [trusted=yes] http://ftp.deb-multimedia.org buster main non-free
-deb [trusted=yes] http://ftp.deb-multimedia.org buster-backports main
 # apt-get update && apt-get install deb-multimedia-keyring
 # Then remove [trusted=yes]
-deb [trusted=yes] http://ftp.deb-multimedia.org bullseye main non-free
-deb [trusted=yes] http://ftp.deb-multimedia.org bullseye-backports main
+#deb [trusted=yes] http://ftp.deb-multimedia.org bullseye main non-free
+#deb [trusted=yes] http://ftp.deb-multimedia.org bullseye-backports main
+deb http://ftp.deb-multimedia.org bullseye main non-free
+deb http://ftp.deb-multimedia.org bullseye-backports main
