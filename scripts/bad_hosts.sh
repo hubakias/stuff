@@ -12,13 +12,13 @@ tmp_file="/tmp/hosts_$(date +%s).tmp"
 dl_lists_txt="
 https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts
 https://adaway.org/hosts.txt
-https://hosts-file.net/ad_servers.txt
 https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext
 http://winhelp2002.mvps.org/hosts.txt
 http://sysctl.org/cameleon/hosts
-https://www.malwaredomainlist.com/hostslist/hosts.txt
 https://someonewhocares.org/hosts/zero/hosts
+https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt
 "
+
 dl_lists_7z="
 http://rlwpx.free.fr/WPFF/hblc.7z
 http://rlwpx.free.fr/WPFF/htrc.7z
@@ -29,11 +29,11 @@ http://rlwpx.free.fr/WPFF/hmis.7z
 "
 
 for i in $dl_lists_txt ; do
-    curl -s "$i" >>"$tmp_file"
+    curl -s "$i" >>"$tmp_file" || echo "Error with: $i" >> "$tmp_file".err
 done
 
 for i in $dl_lists_7z ; do
-    curl -s "$i" --output - | p7zip -d >>"$tmp_file"
+    curl -s "$i" --output - | p7zip -d >>"$tmp_file" || echo "Error with: $i" >> "$tmp_file".err
 done
 
 # For use in Squid (blocked domains) - look for my squid conf/etc
