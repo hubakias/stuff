@@ -70,3 +70,6 @@ nginx-extras
 
 # Support old versions
 debian-archive-keyring apt-transport-https
+
+# Data recovery tools
+testdisk scalpel
