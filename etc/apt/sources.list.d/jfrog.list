@@ -1,0 +1,2 @@
+#curl -fsSL https://releases.jfrog.io/artifactory/api/gpg/key/public | apt-key add -
+deb https://releases.jfrog.io/artifactory/artifactory-pro-debs buster main
