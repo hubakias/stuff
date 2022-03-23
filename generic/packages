@@ -1,5 +1,5 @@
 # Desktop/Laptop
-chromium yakuake krusader kdegraphics-thumbnailers kdiff3 krename fonts-freefont-ttf audacious gkrellm gkrellm-leds gkrellshoot kompare xxdiff md5deep lhasa arj rpm unrar-free unace pavucontrol ssvnc exif pdftk barrier dos2unix novnc
+chromium yakuake krusader kdegraphics-thumbnailers kdiff3 krename fonts-freefont-ttf audacious gkrellm gkrellm-leds gkrellshoot kompare xxdiff md5deep lhasa arj rpm unrar-free unace pavucontrol ssvnc exif pdftk barrier dos2unix novnc tty-clock binclock
 #solaar pandoc(+ tex dependencies) exiv2 mediainfo bpython
 
 # Generic tools
