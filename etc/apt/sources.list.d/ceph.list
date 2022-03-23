@@ -1,2 +1,3 @@
 # curl -fsSL https://download.ceph.com/keys/release.asc | apt-key add -
 deb https://download.ceph.com/debian-pacific/ bullseye main
+#deb https://download.ceph.com/debian-quincy/ bullseye main
