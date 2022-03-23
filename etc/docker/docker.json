@@ -1,0 +1,1 @@
+{ "insecure-registries" : ["localhost:443", "tst1.com:5000", "tst2.org:8443"] }
