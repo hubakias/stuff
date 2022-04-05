@@ -1,3 +1,2 @@
-# Repository for Opera https://www.opera.com
-deb http://deb.opera.com/opera-stable/ stable non-free
 # curl -fsSL http://deb.opera.com/archive.key | apt-key add -
+deb http://deb.opera.com/opera-stable/ stable non-free

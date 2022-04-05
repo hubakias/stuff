@@ -1,4 +1,2 @@
-#curl -fsSL https://bintray.com/user/downloadSubjectPublicKey?username=bintray | apt-key add -
-deb https://dl.bintray.com/celestia/releases-deb buster main
-
-
+#curl -fsSL https://celestia.space/packages/celestia.key | apt-key add -
+deb https://celestia.space/packages buster main

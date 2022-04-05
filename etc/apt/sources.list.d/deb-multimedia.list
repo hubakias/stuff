@@ -2,5 +2,7 @@
 # Then remove [trusted=yes]
 #deb [trusted=yes] http://ftp.deb-multimedia.org bullseye main non-free
 #deb [trusted=yes] http://ftp.deb-multimedia.org bullseye-backports main
-deb http://ftp.deb-multimedia.org bullseye main non-free
-deb http://ftp.deb-multimedia.org bullseye-backports main
+deb http://ftp.deb-multimedia.org bullseye contrib main non-free
+deb http://ftp.deb-multimedia.org bullseye-backports contrib main non-free
+
+# deb http://ftp.deb-multimedia.org bookworm contrib main non-free
