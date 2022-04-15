@@ -145,12 +145,12 @@ fi
 
 
 
-#export http_proxy=http://127.0.0.1:3128/
-#export https_proxy=$http_proxy
-#export ftp_proxy=$http_proxy
-#export rsync_proxy=$http_proxy
-
-#export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+# proxy="http://127.0.0.1:3128"
+# export http{,s}_proxy="${proxy}"
+# export ftp{,s}_proxy="${proxy}"
+# export {rsync,pop3,imap,smtp,ldap,...}_proxy="${proxy}"
+# export all_proxy="${proxy}" # For protocols not explicitly mentioned
+# export no_proxy="localhost,127/8,10/8,192.168/16,172.16/12"
 
 #echo "Week number: $(date +%V)"
 
