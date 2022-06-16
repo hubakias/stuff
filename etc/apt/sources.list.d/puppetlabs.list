@@ -1,0 +1,2 @@
+#curl -fsSL https://apt.puppetlabs.com/pubkey.gpg | apt-key add -
+deb https://apt.puppetlabs.com bullseye puppet
