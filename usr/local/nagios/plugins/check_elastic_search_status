@@ -10,24 +10,24 @@ done > $tmp_file
 
 unique_answers="$(sort $tmp_file | uniq | wc -l)"
 
-if [ $unique_answers = "1" ]; then
+if [ "$unique_answers" = "1" ]; then
     master=$(sort $tmp_file | uniq | awk '{print $NF}')
-    if [ $(cat $tmp_file | wc -l) = "$all" ]; then
+    if [ "$(wc -l < $tmp_file)" = "$all" ]; then
         echo "OK : $0 - ElasticSearch has only one master ($master)."
         exit 0
     else
-        up=$(cat $tmp_file | wc -l)
-        echo "Warning : $0 - Not all nodes responded ($(($all-$up))). The rest ($up) have only one master ($master)."
+        up="$(wc -l < $tmp_file)"
+        echo "Warning : $0 - Not all nodes responded ($((all-up))). The rest ($up) have only one master ($master)."
         exit 1
     fi
 fi
 
-if [ $unique_answers = "0" ]; then
+if [ "$unique_answers" = "0" ]; then
     echo "UNKNOWN : $0 - No response from any ElasticSearch nodes"
     exit 3
 fi
 
-if [ $unique_answers -gt "1" ]; then
+if [ "$unique_answers" -gt "1" ]; then
     masters=$(sort $tmp_file | uniq -c | awk '{print "("$1")"$NF}'| tr '\n' ' ')
     echo "Critical : $0 - More than one masters ($masters)"
     exit 2

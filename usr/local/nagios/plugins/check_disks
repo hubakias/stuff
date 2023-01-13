@@ -11,12 +11,12 @@ warning_disks=""
 critical_disks=""
 
 for disk in $(df -h | grep ^/dev | awk '{print $1}' | awk -F"/" '{print $NF}') ; do
-    usage="$(df -h | grep $disk | sed "s/%//" | awk '{print $5}')"
-    if [ $usage -ge $critical ]; then
+    usage="$(df -h | grep "$disk" | sed "s/%//" | awk '{print $5}')"
+    if [ "$usage" -ge $critical ]; then
       critical_disks+="$disk($usage%) "
     fi
 
-    if [ $usage -ge $warning ] && [ $usage -lt $critical ]; then
+    if [ "$usage" -ge $warning ] && [ "$usage" -lt $critical ]; then
       warning_disks+="$disk($usage%) "
     fi
 done

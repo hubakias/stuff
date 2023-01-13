@@ -2,7 +2,7 @@
 #
 # Munin plugin to monitor hdd temp
 #
-# Author: Konstantinos Tompoulidis (kostikas@gmail.com) on 5th of April 2016
+# Author: Konstantinos (kostikas@gmail.com) on 5th of April 2016
 #
 # Licenced under GPL v2.
 #
@@ -36,7 +36,7 @@ if [ "$1" = "suggest" ] ; then
 
     blkid=$(which blkid)
 
-    disks="$($blkid  | egrep -v "mapper|drbd" | cut -d ":" -f 1 | sed \
+    disks="$($blkid  | grep -E -v "mapper|drbd" | cut -d ":" -f 1 | sed \
         "s/[0-9]$//" | sort | uniq | sed "s/\/dev\///" | tr '\n' ' ')"
 
     if [ "$disks" ] ; then
