@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Author Konstantinos Tompoulidis - 22/12/2016
+# Author Konstantinos <kostikas@gmail.com> - 22/12/2016
 #
 
 #site="${site_url}"
@@ -12,7 +12,7 @@ total_timeout="$((max_timeout+1))"
 code="$(timeout "${total_timeout}"s curl -m "${max_timeout}" -L -s -o /dev/null -I -w "%{http_code}" "${site}")"
 
 
-if [ $? -gt 0 ] ; then
+if [ $? -ne 0 ] ; then
     echo "the command failed"
     exit 3
 fi

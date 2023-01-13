@@ -52,7 +52,7 @@ curl --connect-timeout 3 -m 10 -s -o "$tmp_file" $url
 
 # Parse the content of the file (above) and provide an easier to use file.
 cut -d '"' -f4,6 "$tmp_file" | grep ^- | sed "s/^..//" | cut -d "/" -f1 | \
-cut -d ":" -f1 | sort | uniq > "/tmp/$(date +%F)_bad_IPs"
+cut -d ":" -f1 | sort | uniq > "/tmp/"$(date +%F)"_bad_IPs"
 cut -d '"' -f4,6 "$tmp_file" | grep -v ^- | sed "s/\/.*//" | cut -d '"' -f1 | \
 grep -v ^$ | sort | uniq | sed "s/^/127.0.0.1 /" > "$tmp_file".dom.md # domains
 
@@ -61,7 +61,7 @@ rm -f "$tmp_file"
 rm -f "$tmp_file".csv
 
 # Concatenate the files that contain domain names only
-cat "$tmp_file".[gd]* | sort | uniq > "/tmp/$(date +%F)_bad_domains"
+cat "$tmp_file".[gd]* | sort | uniq > "/tmp/"$(date +%F)"_bad_domains"
 
 # Results
 #echo -e "\nOutput file of Gaming commission gov gr : ""$tmp_file"".gc"
