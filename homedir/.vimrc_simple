@@ -1,0 +1,45 @@
+syntax on
+filetype plugin indent on
+
+set nocompatible
+set backspace=indent,eol,start
+set history=30
+set ruler
+set modeline
+set showcmd
+set showmatch
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set autowrite
+set hidden
+set cindent
+set background=dark
+set mouse=a
+set textwidth=80
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set cm=blowfish2
+set colorcolumn=81
+set encoding=utf-8
+set number
+
+au BufRead,BufNewFile *.sieve set filetype=sieve
+au BufRead,BufNewFile *.py set filetype=python
+
+"map j :%!python -m json.tool
+"map g :%s/to_be_replaced/replaced/
+
+" Show trailing whitespace:
+highlight ExtraWhitespace ctermbg=yellow guibg=yellow
+match ExtraWhitespace /\s\+$/
+
+"colorscheme
+
+set noswapfile
+set cryptmethod=blowfish2
+set nobackup
+set nowritebackup
+set viminfo=

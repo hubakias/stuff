@@ -37,6 +37,7 @@ set expandtab
 set cm=blowfish2
 
 au BufRead,BufNewFile *.sieve set filetype=sieve
+au BufRead,BufNewFile *.py set filetype=python
 
 "map j :%!python -m json.tool
 "map g :%s/to_be_replaced/replaced/
