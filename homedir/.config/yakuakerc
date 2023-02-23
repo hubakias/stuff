@@ -1,0 +1,17 @@
+[Animation]
+Frames=20
+
+[Appearance]
+Skin=Micro
+
+[Desktop Entry]
+DefaultProfile=base.profile
+
+[Dialogs]
+FirstRun=false
+
+[Window]
+Height=100
+ShowSystrayIcon=false
+ShowTabBar=false
+Width=100
