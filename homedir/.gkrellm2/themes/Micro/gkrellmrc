@@ -1,0 +1,41 @@
+Micro = Kostikas <kostikas@gmail.com>
+
+chart_in_color               = green
+chart_in_color_grid          = black
+chart_out_color              = green
+chart_out_color_grid         = black
+
+bg_grid_mode                 = 0
+
+rx_led_x                     = 2
+rx_led_y                     = 1
+tx_led_x                     = -2
+tx_led_y                     = 1
+
+timer_time_x                 = 2
+timer_button_x               = -2
+
+krell_slider_depth           = 1
+krell_slider_x_hot           = 1
+
+StyleChart *.border          = 3,3,3,3
+StyleChart *.textcolor       = green black black
+StyleChart *.transparency    = 0
+
+StylePanel *.border          = 3,3,3,3
+StylePanel *.textcolor       = green black black
+StylePanel *.label_position  = 50
+StylePanel *.krell_depth     = 0
+StylePanel  *.transparency   = 0
+
+StyleMeter *.border          = 3,3,3,3
+StyleMeter *.textcolor       = green black black
+StyleMeter *.label_position  = 50
+StyleMeter fs.label_position = 0
+StyleMeter cal.font          = large_font
+StyleMeter clock.font        = large_font
+StyleMeter *.transparency    = 0
+
+large_font  = "-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-7"
+normal_font = "-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-7"
+small_font  = "-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-7"
