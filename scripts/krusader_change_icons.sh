@@ -30,7 +30,8 @@ done
 
 # Invasive ... but low/no value to make it smarter.
 # Cleanup cache and rebuild cache where possible. Advise otherwise.
-rm -Rf /home/*/.cache/ksycoca*
-rm -Rf /root/.cache/ksycoca5*
+rm -Rf /home/*/.cache/{ksycoca*,icon-cache.kcache}
+rm -Rf /root/.cache/{ksycoca*,icon-cache.kcache}
+
 kbuildsycoca5 --noincremental
 echo 'Run "kbuildsycoca5 --noincremental" as a user.'
