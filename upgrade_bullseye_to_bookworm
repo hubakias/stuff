@@ -1,6 +1,12 @@
 #cat /etc/debian_version    # Current release
 #lsb_release -a             # Current release
 
+# Ensure the below work in raspberry
+apt-get install facter aptitude
+if [ $(facter os.architecture) == aarch64 ]; then
+  apt-get install raspi-utils rng-tools pkgconf
+fi
+
 # Ensure that the the system is updated before proceeding with the upgrade.
 apt-get update
 apt-get upgrade
