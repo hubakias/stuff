@@ -1,8 +1,10 @@
 #cat /etc/debian_version    # Current release
 #lsb_release -a             # Current release
 
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E98404D386FA1D9 6ED0E7B82643E131 54404762BBB6E853 BDE6D2B9216EC7A8
+
 # Ensure the below work in raspberry
-apt-get install facter aptitude
+apt-get install facter aptitude deborphan
 if [ $(facter os.architecture) == aarch64 ]; then
   apt-get install raspi-utils rng-tools pkgconf
 fi
@@ -32,7 +34,7 @@ apt-get -f dist-upgrade    # Upgrade
 # Purge stale/unneeded/orphan packages
 aptitude purge '~c'        # Purge packages that were removed but not purged.
 apt-get -f autoremove --purge
-apt-get -f remove --purge $(dpkg -l | grep linux-image-amd64 | head -n -2 | awk '{print $2}')
+apt-get -f remove --purge $(dpkg -l | grep linux-image- | head -n -2 | awk '{print $2}')
 while [ "$(deborphan -n)" ] ; do apt-get purge $(deborphan -n); done
 # There may be circular dependencies. Triplecheck the above.
 
