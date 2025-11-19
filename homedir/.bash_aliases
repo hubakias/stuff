@@ -1,4 +1,4 @@
-alias df='df -h'
+alias df='df -h -l'
 alias du='du -h'
 alias egrep='egrep -i --color=auto'
 alias fgrep='fgrep -i --color=auto'
