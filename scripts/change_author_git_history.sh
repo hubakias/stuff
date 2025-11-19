@@ -17,4 +17,4 @@ fi
 ' --tag-name-filter cat -- --branches --tags
 
 # git push --force --tags origin 'refs/heads/*' # Force push changes
-# git update-ref -d refs/original/refs/heads/master # Remove git backup
+# git update-ref -d refs/original/refs/heads/main # Remove git backup
