@@ -1,0 +1,2 @@
+# curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc > /etc/apt/trusted.gpg.d/postgresql.asc
+deb https://apt.postgresql.org/pub/repos/apt bookworm-pgdg main
