@@ -1,0 +1,8 @@
+gpg --full-generate-key
+gpg --list-secret-keys --keyid-format=long
+git config --global/local user.signingkey YOUR_16_CHARACTER_KEY_ID
+git config --global/local commit.gpgsign true # sign by default
+gpg --armor --export YOUR_16_CHARACTER_KEY_ID
+# Upload the public key to Github/GitLab/...
+# export GPG_TTY=$(tty) # Ideally set it in .bashrc
+

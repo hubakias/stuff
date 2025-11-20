@@ -1,0 +1,27 @@
+nohup ffprobe output-audio.m4a | grep stream
+
+# to encode (3/2025)
+ffmpeg -i fname.ext -c:v libx265 -c:a copy output.mkv # copy audio - video x265
+ffmpeg -i fname.ext -c:v hevc_videotoolbox -c:a copy output.mkv # copy audio - video x265 in Apple silicon
+ffmpeg -i fname.ext -c:v libvpx-vp9 -c:a aac output.mkv # most common
+ffmpeg -i fname.ext -c:v libvpx-vp9 -c:a flac output.mkv # lossless audio
+
+# Join multiple files
+ffmpeg -f concat -i input.txt -c:v libx265 -c:a aac out.mp4 && rm *.ts input.txt
+
+# Only convert video to x265 and select specific audio, subtitle, video streams
+ffmpeg -i in.avi -c:v libx265 -c:a -map 0:v:0 -map 0:a:1 -map 0:s:0 copy out.mp4
+
+# Add the below flags to convert Avi files
+# (AVI does not have internal timestamps to convert - the below adds them)
+-fflags +genpts
+
+# To remove the title from the media file info:
+ffmpeg -loglevel quiet -i ${in_file} -codec copy -metadata title='${new_metadata} ${out_file}
+
+
+# start from 1minute 30 seconds
+ffmpeg -ss 00:01:00 -i example.mp4 -to 00:01:30 -c:v copy -c:a copy trimmed_example.mp4
+
+# Convert wmv to mp4 - good quality - for x264 0 is best, 51 worst, 23 default
+ffmpeg -i example.wmv -c:v libx264 -crf 18 -c:a aac -q:a 100 example.mp4

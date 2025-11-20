@@ -1,0 +1,2 @@
+# For Greek encoding
+mkfs.vfat -F 32 -n xxxx --codepage=869 /dev/sdX
