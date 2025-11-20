@@ -125,14 +125,18 @@ extract () {
      fi
 }
 
-# Check if ssh-agent is running.
-# If so, make sure the respective vars are set.
-if [ "$(pgrep ssh-agent)" ]; then
-    if [ ! $SSH_AGENT_PID ] || [ ! $SSH_AUTH_SOCK ]; then
-        eval $(ssh-agent)
+# If ssh-agent is installed, ensure only one instance is running per user.
+if [ "$(type ssh-agent 2>/dev/null)" ]; then
+    if [ "$(pgrep -u "${USER}" ssh-agent | wc -l)" -eq "1" ]; then
+        if [ ! $SSH_AGENT_PID ] || [ ! $SSH_AUTH_SOCK ]; then
+            export SSH_AUTH_SOCK=$(find /tmp/ssh-* -type s)
+            export SSH_AGENT_PID=$(pgrep -x ssh-agent)
+	fi
+    else
+        pkill -U "${USER}" -x ssh-agent
+        eval $(ssh-agent) 1>/dev/null
     fi
 fi
-
 
 # PS1 - Default interation prompt
 # PS2 - Continuation interactive prompt ( what will appear on a multiline
@@ -143,7 +147,7 @@ fi
 # PROMPT_COMMAND will prepend the output of the command (at first run) to PS1
 # export PROMPT_COMMAND="echo -n [$(date +%k:%m:%S)]"
 
-
+export GPG_TTY=$(tty)
 
 # proxy="http://127.0.0.1:3128"
 # export http{,s}_proxy="${proxy}"
@@ -160,3 +164,4 @@ export PAGER='less'
 
 # Make sure the user ends up in the homedir (if set ...).
 cd ${HOME}
+
