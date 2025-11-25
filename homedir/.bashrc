@@ -129,8 +129,8 @@ extract () {
 if [ "$(type ssh-agent 2>/dev/null)" ]; then
     if [ "$(pgrep -u "${USER}" ssh-agent | wc -l)" -eq "1" ]; then
         if [ ! $SSH_AGENT_PID ] || [ ! $SSH_AUTH_SOCK ]; then
-            export SSH_AUTH_SOCK=$(find /tmp/ssh-* -type s)
-            export SSH_AGENT_PID=$(pgrep -x ssh-agent)
+            export SSH_AUTH_SOCK=$(find /tmp/ssh-* -type s 2>/dev/null)
+            export SSH_AGENT_PID=$(pgrep -x ssh-agent -u "${USER}")
 	fi
     else
         pkill -U "${USER}" -x ssh-agent
